@@ -1,0 +1,385 @@
+
+# ==================================================================================================================================
+# START >> FILE INFO
+# ==================================================================================================================================
+# File        : traffic_light_classifier/template_subpkg/plots.py
+# Author      : Shashank Kumbhare
+# Date        : 09/22/2022
+# email       : shashankkumbhare8@gmail.com
+# Description : This file is a python submodule for python subpackage
+#               'traffic_light_classifier.plots_subpkg'.
+# ==================================================================================================================================
+# END << FILE INFO
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> SUBMODULE >> traffic_light_classifier.plots_subpkg.plots
+# ==================================================================================================================================
+# >>
+"""
+This submodule is created for the visualization and analyzsis of the image-dataset.
+"""
+
+_name_subpkg_ = __name__.partition(".")[-2]
+_name_submod_ = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod_}'...")
+
+# ==================================================================================
+# START >> IMPORTS
+# ==================================================================================
+from ..__auxil_subpkg__ import *
+# ==================================================================================
+# END >> IMPORTS
+# ==================================================================================
+
+
+# ==================================================================================================================================
+# START >> FUNCTION >> plot_images
+# ==================================================================================================================================
+# >>
+def plot_images( images
+               , title_enabled = True
+               , figsizeScale  = 1
+               , enable_grid   = False
+               , cmap          = None
+               ) :
+    
+    """
+    ================================================================================
+    START >> DOC >> plot_images
+    ================================================================================
+        
+        GENERAL INFO
+        ============
+            
+            Plots the input images.
+        
+        PARAMETERS
+        ==========
+            
+            images <list>
+                
+                A list of images or a single image to plot.
+            
+            title_enabled <bool>
+                
+                When enabled sets title/s to the plot/s.
+            
+            figsizeScale <float>
+                
+                A float to scale the size of the output image.
+            
+            enable_grid <bool>
+                
+                When enabled draws mesh/grid on plot.
+        
+        RETURNS
+        =======
+            
+            None
+    
+    ================================================================================
+    END << DOC << plot_images
+    ================================================================================
+    """
+    
+    # Plotting images >>
+    if type(images) == tuple or type(images) == np.ndarray:
+        
+        # If input is a single image either as a tuple(rgb,label) or as an array >>
+        f, axes = plt.subplots( 1, 1, figsize = (3.33*figsizeScale, 3.33*figsizeScale) )
+        
+        if type(images) == np.ndarray:
+            image   = images
+        elif type(images) == tuple:
+            image   = images[0]
+            if title_enabled:
+                title = helpers.get_title(images)
+                axes.set_title(title)
+        axes.imshow(image, cmap = cmap)
+    
+    else:
+        
+        # Deciding the no. of rows and columns of the grid plot >>
+        len_images = len(images)
+        if len_images < 6:
+            n_col = len_images
+        else:
+            n_col = int( np.ceil(np.sqrt(len_images)) )
+        n_row     = int( np.ceil(len_images/n_col) )
+
+        # Creating plot axes >>
+        figsize    = (n_col*3.33*figsizeScale, n_row*3.33*figsizeScale)
+        f, axes    = plt.subplots(n_row, n_col, figsize = figsize)
+        
+        # Loop for all images along a grid >>
+        i_image = 0
+        for i in range(n_row):
+            
+            if n_col == 1:
+                ax = axes
+            else:
+                ax = axes[i] if n_row != 1 else axes
+            
+            for j in range(n_col):
+                
+                if len(images) == 1:
+                    ax_curr = ax
+                else:
+                    ax_curr = ax[j]
+                
+                if type(images[0]) == tuple:
+                    image = images[i_image][0]
+                else:
+                    image = images[i_image]
+                
+                if title_enabled:
+                    title = helpers.get_title(images[i_image])
+                    ax_curr.set_title(title)
+                
+                if enable_grid:
+                    ax_curr.set_xticks( np.arange(-.5, len(image[0]), 1), minor = True )
+                    ax_curr.set_yticks( np.arange(-.5, len(image)   , 1), minor = True )
+                    ax_curr.grid( which = 'minor', color = 'k', linestyle = '-', linewidth = 0.5)
+                
+                ax_curr.imshow(image, cmap = cmap)
+                
+                i_image = i_image + 1
+                if i_image >= len_images:
+                    break
+    
+    return None
+# <<
+# ==================================================================================================================================
+# END << FUNCTION << plot_images
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> FUNCTION >> plot_channels
+# ==================================================================================================================================
+# >>
+def plot_channels( image
+                 , channels     = "rgb"
+                 , cmap         = "gray"
+                 , titles       = ("Image", "R channel", "G channel", "B channel")
+                 , figsizeScale = 1
+                 ) :
+    
+    """
+    ================================================================================
+    START >> DOC >> plot_channels
+    ================================================================================
+        
+        GENERAL INFO
+        ============
+            
+            Plots individual channels of input image.
+        
+        PARAMETERS
+        ==========
+            
+            image <np.array>
+                
+                Numpy array of image of shape (n_row, n_col, 3).
+            
+            channels <str>
+            
+                A string indicating channels type either 'rgb' or 'hsv'.
+            
+            cmap <str>
+                
+                Possible value: None or "gray"
+            
+            figsizeScale <float>
+                
+                A float to scale the size of the output image.
+        
+        RETURNS
+        =======
+            
+            None
+    
+    ================================================================================
+    END << DOC << plot_channels
+    ================================================================================
+    """
+    
+    image_original = np.copy(image)
+    
+    if channels == "hsv":
+        # Converting image to HSV if hsv channels requested >>
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+    
+    # Channels >>
+    ch1 = image[:,:,0]
+    ch2 = image[:,:,1]
+    ch3 = image[:,:,2]
+
+    # Plot the original image and the three channels >>
+    f, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize = (4*3.33*figsizeScale, 4*3.33*figsizeScale))
+    ax1.set_title(titles[0])
+    ax1.imshow(image_original)
+    ax2.set_title(titles[1])
+    ax2.imshow(ch1, cmap = cmap)
+    ax3.set_title(titles[2])
+    ax3.imshow(ch2, cmap = cmap)
+    ax4.set_title(titles[3])
+    ax4.imshow(ch3, cmap = cmap)
+
+    return None
+# <<
+# ==================================================================================================================================
+# END << FUNCTION << plot_channels
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> FUNCTION >> plot_bar
+# ==================================================================================================================================
+# >>
+def plot_bar( Y
+            , n_row        = 1
+            , figsizeScale = 1
+            ) :
+    
+    """
+    ================================================================================
+    START >> DOC >> plot_bar
+    ================================================================================
+        
+        GENERAL INFO
+        ============
+            
+            Plots bar plot/s for the input data.
+        
+        PARAMETERS
+        ==========
+            
+            Y <list or np.array>
+                
+                Data to be ploted.
+                Could ne np.array or list of np.array for multiple plot data.
+            
+            n_row <int>
+                
+                No. of rows for the plots.
+        
+        RETURNS
+        =======
+            
+            None
+    
+    ================================================================================
+    END << DOC << plot_bar
+    ================================================================================
+    """
+    
+    len_Y = len(Y)
+    
+    if type(Y) == np.ndarray:
+        
+        f, axes = plt.subplots(1, 1, figsize = (3.33*figsizeScale, 3.33*figsizeScale))
+        x = list(range(len(Y)))
+        axes.bar(x,Y)
+        
+    else:
+        
+        n_col   = int(len_Y/n_row)
+        figsize = (n_col*3.33*figsizeScale, n_row*3.33*figsizeScale)
+        f, axes = plt.subplots(n_row, n_col, figsize = figsize)
+        
+        if n_col == 1:
+            
+            y = Y[0]
+            x = list(range(len(y)))
+            axes.bar(x,y)
+            
+        else:
+            
+            x   = list(range(len(Y[0])))
+            i_Y = 0
+            for i in range(n_row):
+                axes_x = axes[i] if n_row != 1 else axes
+                for j in range(n_col):
+                    ax_curr = axes_x[j] if n_col != 1 else axes
+                    y = Y[i_Y]
+                    ax_curr.bar(x,y)
+                    i_Y = i_Y + 1
+                    if i_Y >= len_Y:
+                        plt.show()
+                        break
+        plt.show()
+        
+    return None
+# <<
+# ==================================================================================================================================
+# END << FUNCTION << plot_bar
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> FUNCTION >> template_submod_func
+# ==================================================================================================================================
+# >>
+def template_submod_func    ( p_p_p_p_1 = ""
+                            , p_p_p_p_2 = ""
+                            ) :
+    
+    """
+    ================================================================================
+    START >> DOC >> template_submod_func
+    ================================================================================
+        
+        GENERAL INFO
+        ============
+            
+            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+        
+        PARAMETERS
+        ==========
+            
+            p_p_p_p_1 <type>
+                
+                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+            
+            p_p_p_p_2 <type>
+                
+                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+        
+        RETURNS
+        =======
+            
+            r_r_r_r <type>
+                
+                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+    
+    ================================================================================
+    END << DOC << template_submod_func
+    ================================================================================
+    """
+    
+    _name_func_ = inspect.stack()[0][3]
+    print(f"This is a print from '{_name_subpkg_}.{_name_submod_}.{_name_func_}'{p_p_p_p_1}{p_p_p_p_2}.")
+    
+    return None
+# <<
+# ==================================================================================================================================
+# END << FUNCTION << template_submod_func
+# ==================================================================================================================================
+
+print("   - Done!")
+
+# <<
+# ==================================================================================================================================
+# END << SUBMODULE << traffic_light_classifier.plots_subpkg.plots
+# ==================================================================================================================================

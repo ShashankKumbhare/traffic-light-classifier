@@ -2,11 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/__init__.py
+# File        : traffic_light_classifier/__constants_subpkg__/__init__.py
 # Author      : Shashank Kumbhare
 # Date        : 09/20/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a __init__ file for python package 'traffic_light_classifier'.
+# Description : This file is a __init__ file for python subpackage
+#               'traffic_light_classifier.__constants_subpkg__'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -14,51 +15,32 @@
 
 
 # ==================================================================================================================================
-# START >> PACKAGE >> traffic_light_classifier
+# START >> SUBPACKAGE >> traffic_light_classifier.__constants_subpkg__
 # ==================================================================================================================================
 # >>
 """
-This package is a part of a computer vision project 'Traffic Light Classification'.
-The project was the final project of the online nanodegree program 'Intro to Self
-Driving Cars' offered by 'udacity.com'.
-This package has utilised the knowledge of computer vision and machine learning
-techniques to classify the traffic signal light images as either red, green, or
-yellow.
+This subpackage is created to store constants required for the package.
+These constants will be shared across all the package modules & submodules.
 """
 
-_name_pkg_ = __name__.partition(".")[0]
+_name_subpkg_ = __name__.partition(".")[-1]
 print("")
-print(f"==========================================================================")
-print(f"Importing package '{_name_pkg_}'...")
-print(f"==========================================================================")
+print(f" + Adding subpackage '{_name_subpkg_}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-# SUBPACKAGES >>
-# from .__dependencies_subpkg__ import *
-# from .__constants_subpkg__ import *
-# from .__auxil_subpkg__ import *
-# from .__tests_subpkg__ import *
-from .plots_subpkg import *
-from .modify_images_subpkg import *
-from .extract_feature_subpkg import *
-# from .template_subpkg import *
-# MODULES >>
-# from .template_mod import template_mod_func
+# SUBMODULES >>
+from .constants_submod import *
 # <<
 # ==================================================================================
 # END >> IMPORTS
 # ==================================================================================
 
-print("")
-print(f"==========================================================================")
-print(f"Package '{_name_pkg_}' imported sucessfully !!")
-print(f"==========================================================================")
-print("")
+print(" - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << PACKAGE << traffic_light_classifier
+# END << SUBPACKAGE << traffic_light_classifier.__constants_subpkg__
 # ==================================================================================================================================
