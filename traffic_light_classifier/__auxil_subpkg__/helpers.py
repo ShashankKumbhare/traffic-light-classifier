@@ -22,15 +22,18 @@
 This module contain some helper functions.
 """
 
-_name_subpkg_ = __name__.partition(".")[-2]
-_name_submod_ = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod_}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from .auxil_submod import *
-# from ..__auxil_subpkg__ import *
+# >>
+# from ..__dependencies_subpkg__ import _dependencies_submod as _
+from ..__dependencies_subpkg__ import _dependencies_submod as _dps
+# from ..__auxil_subpkg__ import _auxil_submod as _auxil
+# <<
 # ==================================================================================
 # END >> IMPORTS
 # ==================================================================================
@@ -84,10 +87,10 @@ def load_dataset ( image_dir ) :
         
         # Iterate through each image file in each image_type folder
         # glob reads in any image with the extension "image_dir/im_type/*"
-        for file in glob.glob(os.path.join(image_dir, im_type, "*")):
+        for file in _dps.glob.glob(_dps.os.path.join(image_dir, im_type, "*")):
             
             # Read in the image
-            im = mpimg.imread(file)
+            im = _dps.mpimg.imread(file)
             
             # Check if the image exists/if it's been correctly read-in
             if not im is None:
@@ -276,16 +279,16 @@ def get_title( image ) :
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> template_submod_func
+# START >> FUNCTION >> _template_submod_func
 # ==================================================================================================================================
 # >>
-def template_submod_func    ( p_p_p_p_1 = ""
+def _template_submod_func   ( p_p_p_p_1 = ""
                             , p_p_p_p_2 = ""
                             ) :
     
     """
     ================================================================================
-    START >> DOC >> template_submod_func
+    START >> DOC >> _template_submod_func
     ================================================================================
         
         GENERAL INFO
@@ -316,17 +319,17 @@ def template_submod_func    ( p_p_p_p_1 = ""
                 t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
     
     ================================================================================
-    END << DOC << template_submod_func
+    END << DOC << _template_submod_func
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg_}.{_name_submod_}.{_name_func_}'{p_p_p_p_1}{p_p_p_p_2}.")
+    _name_func = _dps.inspect.stack()[0][3]
+    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << template_submod_func
+# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 print("   - Done!")

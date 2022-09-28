@@ -23,17 +23,16 @@ This subpackage is created to manupulate or modify traffic light training & test
 images for pre-processing of images.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
+_name_subpkg = __name__.partition(".")[-1]
 print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+print(f" + Adding subpackage '{_name_subpkg}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from .modify_images import standardize_image, standardize_images, convert_rgb_to_hsv,\
-                           convert_hsv_to_rgb
+from . import modify_images
 # <<
 # ==================================================================================
 # END >> IMPORTS

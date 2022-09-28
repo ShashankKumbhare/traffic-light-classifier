@@ -2,11 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/template_mod.py
+# File        : traffic_light_classifier/_template_subpkg/_template_submod.py
 # Author      : Shashank Kumbhare
-# Date        : 09/20/2022
+# Date        : --/--/----
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a python module for python package 'traffic_light_classifier'.
+# Description : This file is a python submodule for python subpackage
+#               'traffic_light_classifier._template_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -14,26 +15,25 @@
 
 
 # ==================================================================================================================================
-# START >> MODULE >> traffic_light_classifier.template_mod
+# START >> SUBMODULE >> traffic_light_classifier._template_subpkg._template_submod
 # ==================================================================================================================================
 # >>
 """
-This module is created/used for/to.
-MODULE description MODULE description MODULE description MODULE description
-MODULE description MODULE description MODULE description MODULE description
-MODULE description MODULE description.
+This submodule is created/used for/to
+SUBMODULE description SUBMODULE description SUBMODULE
+SUBMODULE description SUBMODULE description SUBMODULE description SUBMODULE
+SUBMODULE description SUBMODULE description.
 """
 
-_name_mod_ = __name__.partition(".")[-1]
-print("")
-print(f" + Adding module '{_name_mod_}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-from .__auxil_subpkg__ import *
-from .template_subpkg import *
+from ..__auxil_subpkg__ import *
 # <<
 # ==================================================================================
 # END >> IMPORTS
@@ -41,16 +41,16 @@ from .template_subpkg import *
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> template_mod_func
+# START >> FUNCTION >> _template_submod_func
 # ==================================================================================================================================
 # >>
-def template_mod_func   ( p_p_p_p_1 = ""
-                        , p_p_p_p_2 = ""
-                        ) :
+def _template_submod_func   ( p_p_p_p_1 = ""
+                            , p_p_p_p_2 = ""
+                            ) :
     
     """
     ================================================================================
-    START >> DOC >> template_mod_func
+    START >> DOC >> _template_submod_func
     ================================================================================
         
         GENERAL INFO
@@ -81,24 +81,22 @@ def template_mod_func   ( p_p_p_p_1 = ""
                 t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
     
     ================================================================================
-    END << DOC << template_mod_func
+    END << DOC << _template_submod_func
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_mod_}.{_name_func_}'{p_p_p_p_1}{p_p_p_p_2}.")
-    print("The following line will print from template_subpkg.template_submod")
-    template_submod_func()
+    _name_func = inspect.stack()[0][3]
+    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << template_mod_func
+# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
-print(" - Done!")
+print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << MODULE << traffic_light_classifier.template_mod
+# END << SUBMODULE << traffic_light_classifier._template_subpkg._template_submod
 # ==================================================================================================================================

@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/extract_feature_subpkg/__init__.py
+# File        : traffic_light_classifier/_template_subpkg/__init__.py
 # Author      : Shashank Kumbhare
-# Date        : 09/23/2022
+# Date        : --/--/----
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a __init__ file for python subpackage
-#               'traffic_light_classifier.extract_feature_subpkg'.
+#               'traffic_light_classifier._template_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,25 +15,26 @@
 
 
 # ==================================================================================================================================
-# START >> SUBPACKAGE >> traffic_light_classifier.extract_feature_subpkg
+# START >> SUBPACKAGE >> traffic_light_classifier._template_subpkg
 # ==================================================================================================================================
 # >>
 """
-This subpackage is created to extract features from traffic light image dataset.
+This subpackage is created/used for/to
+SUBPACKAGE description SUBPACKAGE description SUBPACKAGE description SUBPACKAGE
+SUBPACKAGE description SUBPACKAGE description SUBPACKAGE description SUBPACKAGE
+SUBPACKAGE description SUBPACKAGE description.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
+_name_subpkg = __name__.partition(".")[-1]
 print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+print(f" + Adding subpackage '{_name_subpkg}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from .extract_feature import get_average_channel, get_average_channel_along_axis, \
-                             get_range_of_high_average_channel_along_axis, \
-                             get_range_of_high_average_channel, get_average_image
+from ._template_submod import _template_submod_func
 # <<
 # ==================================================================================
 # END >> IMPORTS
@@ -43,5 +44,5 @@ print(" - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBPACKAGE << traffic_light_classifier.extract_feature_subpkg
+# END << SUBPACKAGE << traffic_light_classifier._template_subpkg
 # ==================================================================================================================================

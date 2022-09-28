@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/__tests_subpkg__/__init__.py
+# File        : traffic_light_classifier/__dependencies_subpkg__/_dependencies_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/20/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a __init__ file for python subpackage
-#               'traffic_light_classifier.__tests_subpkg__'.
+# Description : This file is a python submodule for python subpackage
+#               'traffic_light_classifier.__dependencies_subpkg__'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,32 +15,47 @@
 
 
 # ==================================================================================================================================
-# START >> SUBPACKAGE >> traffic_light_classifier.__tests_subpkg__
+# START >> SUBMODULE >> traffic_light_classifier.__dependencies_subpkg__._dependencies_submod
 # ==================================================================================================================================
 # >>
 """
-This subpackage is created to perform unittests on the functionalities of the package.
+This submodule imports all the required 3rd party dependency packages/libraries for
+the package which are then shared across all the package modules & submodules. All
+the 3rd party dependency packages are imported here at one place and any other
+dependencies are not to be imported in any module or submodule other than this
+submodule.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-# SUBMODULES >>
-# from .test_functions import Tests
-from . import test_functions
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.style as style
+style.use('classic')
+style.use('seaborn-white')
+import math
+import os
+import sys
+import inspect
+from progressbar import ProgressBar
+import glob                                 # library for loading images from a directory
+import matplotlib.image as mpimg
+import cv2
+import unittest
+from IPython.display import Markdown, display
 # <<
 # ==================================================================================
 # END >> IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBPACKAGE << traffic_light_classifier.__tests_subpkg__
+# END << SUBMODULE << traffic_light_classifier.__dependencies_subpkg__._dependencies_submod
 # ==================================================================================================================================

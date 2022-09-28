@@ -23,14 +23,16 @@ This submodule contains tools to perform unittests on the functionalities of the
 package.
 """
 
-_name_subpkg_ = __name__.partition(".")[-2]
-_name_submod_ = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod_}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__auxil_subpkg__ import *
+# >>
+from ..__dependencies_subpkg__ import _dependencies_submod as _dps
+# <<
 # ==================================================================================
 # END >> IMPORTS
 # ==================================================================================
@@ -41,16 +43,16 @@ from ..__auxil_subpkg__ import *
 # ==================================================================================================================================
 # >>
 # Helper functions for printing markdown text (text in color/bold/etc)
-def printmd(string):
-    display(Markdown(string))
+def _printmd(string):
+    _dps.display(_dps.Markdown(string))
 
 # Print a test failed message, given an error
-def print_fail():
-    printmd('**<span style="color: red;">TEST FAILED</span>**')
+def _print_fail():
+    _printmd('**<span style="color: red;">TEST FAILED</span>**')
     
 # Print a test passed message
-def print_pass():
-    printmd('**<span style="color: green;">TEST PASSED</span>**')
+def _print_pass():
+    _printmd('**<span style="color: green;">TEST PASSED</span>**')
 # <<
 # ==================================================================================================================================
 # END << FUNCTIONS
@@ -62,7 +64,7 @@ def print_pass():
 # START >> CLASS >> Tests
 # ==================================================================================================================================
 # >>
-class Tests(unittest.TestCase):
+class Tests(_dps.unittest.TestCase):
     
     """
     A class holding all tests.
@@ -81,13 +83,13 @@ class Tests(unittest.TestCase):
         # If the function does *not* pass all 3 tests above, it enters this exception
         except self.failureException as e:
             # Print out an error message
-            print_fail()
+            _print_fail()
             print("Your function did not return the expected one-hot label.")
             print('\n'+str(e))
             return
         
         # Print out a "test passed" message
-        print_pass()
+        _print_pass()
     
     # Tests if any misclassified images are red but mistakenly classified as green
     def test_red_as_green(self, misclassified_images):
@@ -102,13 +104,13 @@ class Tests(unittest.TestCase):
                     self.assertNotEqual(predicted_label, [0, 0, 1])
                 except self.failureException as e:
                     # Print out an error message
-                    print_fail()
+                    _print_fail()
                     print("Warning: A red light is classified as green.")
                     print('\n'+str(e))
                     return
         
         # No red lights are classified as green; test passed
-        print_pass()
+        _print_pass()
 # <<
 # ==================================================================================================================================
 # END << CLASS << Tests

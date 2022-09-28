@@ -23,17 +23,17 @@ This subpackage contains some auxiliary functionality useful for the package
 development.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
+_name_subpkg = __name__.partition(".")[-1]
 print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+print(f" + Adding subpackage '{_name_subpkg}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from .auxil_submod import *
-from .helpers import load_dataset, one_hot_encode, one_hot_encode_reverse, get_title
+from . import _auxil_submod as auxil
+from . import helpers
 # <<
 # ==================================================================================
 # END >> IMPORTS

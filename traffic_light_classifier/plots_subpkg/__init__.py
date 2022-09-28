@@ -22,16 +22,17 @@
 This subpackage contains the visualization tools for the image-dataset.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
+_name_subpkg = __name__.partition(".")[-1]
 print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+print(f" + Adding subpackage '{_name_subpkg}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from .plots import plot_images, plot_channels, plot_bar
+# from .plots import plot_images, plot_channels, plot_bar
+from . import plots
 # <<
 # ==================================================================================
 # END >> IMPORTS

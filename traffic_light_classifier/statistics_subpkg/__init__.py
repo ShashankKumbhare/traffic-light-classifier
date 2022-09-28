@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/probability_subpkg/__init__.py
+# File        : traffic_light_classifier/statistics_subpkgstatistics_subpkg/__init__.py
 # Author      : Shashank Kumbhare
 # Date        : 09/24/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a __init__ file for python subpackage
-#               'traffic_light_classifier.probability_subpkg'.
+#               'traffic_light_classifier.statistics_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,23 +15,23 @@
 
 
 # ==================================================================================================================================
-# START >> SUBPACKAGE >> traffic_light_classifier.probability_subpkg
+# START >> SUBPACKAGE >> traffic_light_classifier.statistics_subpkg
 # ==================================================================================================================================
 # >>
 """
 This subpackage is created for calculating probabilities and likelihood values.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
+_name_subpkg = __name__.partition(".")[-1]
 print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+print(f" + Adding subpackage '{_name_subpkg}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
 # SUBMODULES >>
-# from .probability import
+from .statistics import get_distribution_of_channel
 # <<
 # ==================================================================================
 # END >> IMPORTS
@@ -41,5 +41,5 @@ print(" - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBPACKAGE << traffic_light_classifier.probability_subpkg
+# END << SUBPACKAGE << traffic_light_classifier.statistics_subpkg
 # ==================================================================================================================================

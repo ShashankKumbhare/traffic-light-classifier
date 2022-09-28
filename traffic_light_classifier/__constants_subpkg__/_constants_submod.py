@@ -2,7 +2,7 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/__constants_subpkg__/constants_submod.py
+# File        : traffic_light_classifier/__constants_subpkg__/_constants_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/20/2022
 # email       : shashankkumbhare8@gmail.com
@@ -15,7 +15,7 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier.__constants_subpkg__.constants_submod
+# START >> SUBMODULE >> traffic_light_classifier.__constants_subpkg__._constants_submod
 # ==================================================================================================================================
 # >>
 """
@@ -23,14 +23,14 @@ This submodule stores all the required constants for the package.
 These constants will then be shared across all the package modules & submodules.
 """
 
-_name_submod_ = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod_}'...")
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-from ..__dependencies_subpkg__ import *
+from ..__dependencies_subpkg__ import _dependencies_submod as _dps
 # <<
 # ==================================================================================
 # END >> IMPORTS
@@ -38,19 +38,32 @@ from ..__dependencies_subpkg__ import *
 
 
 # ==================================================================================================================================
-# START >> CONSTANTS
+# START >> CONSTANTS >> plots_subpkg related
 # ==================================================================================================================================
 # >>
-CONSTANT1 = 1
-CONSTANT2 = 2
+DEFAULT_FIGSIZESCALE = 1
+DEFAULT_NAME_IMAGE   = "image"
+DEFAULT_CMAP         = "viridis"
 # <<
 # ==================================================================================================================================
-# END >> CONSTANTS
+# END << CONSTANTS << plots_subpkg related
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> CONSTANTS >> modify_images_subpkg related
+# ==================================================================================================================================
+# >>
+DEFAULT_STANDARDIZATION_SIZE = 32
+# <<
+# ==================================================================================================================================
+# END << CONSTANTS << modify_images_subpkg related
 # ==================================================================================================================================
 
 print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier.__constants_subpkg__.constants_submod
+# END << SUBMODULE << traffic_light_classifier.__constants_subpkg__._constants_submod
 # ==================================================================================================================================

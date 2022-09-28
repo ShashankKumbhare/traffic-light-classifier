@@ -2,7 +2,7 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/template_subpkg/plots.py
+# File        : traffic_light_classifier/plots_subpkg/plots.py
 # Author      : Shashank Kumbhare
 # Date        : 09/22/2022
 # email       : shashankkumbhare8@gmail.com
@@ -22,14 +22,15 @@
 This submodule is created for the visualization and analyzsis of the image-dataset.
 """
 
-_name_subpkg_ = __name__.partition(".")[-2]
-_name_submod_ = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod_}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__auxil_subpkg__ import *
+from ..__constants_subpkg__ import _constants_submod as _CONSTANTS
+from ..__auxil_subpkg__ import _auxil_submod as _auxil
 # ==================================================================================
 # END >> IMPORTS
 # ==================================================================================
@@ -41,7 +42,7 @@ from ..__auxil_subpkg__ import *
 # >>
 def plot_images( images
                , title_enabled = True
-               , figsizeScale  = 1
+               , figsizeScale  = _CONSTANTS.DEFAULT_FIGSIZESCALE
                , enable_grid   = False
                , cmap          = None
                ) :
@@ -74,6 +75,10 @@ def plot_images( images
             enable_grid <bool>
                 
                 When enabled draws mesh/grid on plot.
+            
+            cmap <str>
+                
+                Colormap for plot. Possible value: "viridis", "gray", etc.
         
         RETURNS
         =======
@@ -162,12 +167,12 @@ def plot_images( images
 # START >> FUNCTION >> plot_channels
 # ==================================================================================================================================
 # >>
-def plot_channels( image
-                 , channels     = "rgb"
-                 , cmap         = "gray"
-                 , titles       = ("Image", "R channel", "G channel", "B channel")
-                 , figsizeScale = 1
-                 ) :
+def plot_channels   ( image
+                    , type_channels = ""
+                    , name_image    = _CONSTANTS.DEFAULT_NAME_IMAGE
+                    , cmap          = _CONSTANTS.DEFAULT_CMAP
+                    , figsizeScale  = _CONSTANTS.DEFAULT_FIGSIZESCALE
+                    ) :
     
     """
     ================================================================================
@@ -186,13 +191,18 @@ def plot_channels( image
                 
                 Numpy array of image of shape (n_row, n_col, 3).
             
-            channels <str>
+            type_channels <str>
+                
+                A string indicating the type of channels either 'rgb' or 'hsv'.
+                Default is "" for unknown.
             
-                A string indicating channels type either 'rgb' or 'hsv'.
+            name_image <str>
+                
+                A string for name of the image.
             
             cmap <str>
                 
-                Possible value: None or "gray"
+                Colormap for plot. Possible value: "viridis", "gray", etc.
             
             figsizeScale <float>
                 
@@ -208,27 +218,34 @@ def plot_channels( image
     ================================================================================
     """
     
-    image_original = np.copy(image)
+    # Getting channels >>
+    image_ch0 = image[:,:,0]
+    image_ch1 = image[:,:,1]
+    image_ch2 = image[:,:,2]
     
-    if channels == "hsv":
-        # Converting image to HSV if hsv channels requested >>
-        image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-    
-    # Channels >>
-    ch1 = image[:,:,0]
-    ch2 = image[:,:,1]
-    ch3 = image[:,:,2]
-
-    # Plot the original image and the three channels >>
+    # Creating plot axes for plots >>
     f, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize = (4*3.33*figsizeScale, 4*3.33*figsizeScale))
+    
+    # Setting titles for plots >>
+    if type(type_channels) != str or len(type_channels) == 0 or type_channels is None or type_channels not in ["rgb", "hsv"]:
+        type_channels = "012"
+    type_channels = type_channels.upper()
+    titles = ( f"{name_image}"
+             , f"{type_channels[0]} of {name_image}"
+             , f"{type_channels[1]} of {name_image}"
+             , f"{type_channels[2]} of {name_image}" )
+    
+    # Plotting the original image and the three channels >>
+    if type(cmap) != str or len(cmap) == 0 or cmap is None:
+        cmap = DEFAULT_CMAP
     ax1.set_title(titles[0])
-    ax1.imshow(image_original)
+    ax1.imshow(image,     cmap = cmap)
     ax2.set_title(titles[1])
-    ax2.imshow(ch1, cmap = cmap)
+    ax2.imshow(image_ch0, cmap = cmap)
     ax3.set_title(titles[2])
-    ax3.imshow(ch2, cmap = cmap)
+    ax3.imshow(image_ch1, cmap = cmap)
     ax4.set_title(titles[3])
-    ax4.imshow(ch3, cmap = cmap)
+    ax4.imshow(image_ch2, cmap = cmap)
 
     return None
 # <<
@@ -324,16 +341,16 @@ def plot_bar( Y
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> template_submod_func
+# START >> FUNCTION >> _template_submod_func
 # ==================================================================================================================================
 # >>
-def template_submod_func    ( p_p_p_p_1 = ""
+def _template_submod_func   ( p_p_p_p_1 = ""
                             , p_p_p_p_2 = ""
                             ) :
     
     """
     ================================================================================
-    START >> DOC >> template_submod_func
+    START >> DOC >> _template_submod_func
     ================================================================================
         
         GENERAL INFO
@@ -364,17 +381,17 @@ def template_submod_func    ( p_p_p_p_1 = ""
                 t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
     
     ================================================================================
-    END << DOC << template_submod_func
+    END << DOC << _template_submod_func
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg_}.{_name_submod_}.{_name_func_}'{p_p_p_p_1}{p_p_p_p_2}.")
+    _name_func = _dps.inspect.stack()[0][3]
+    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << template_submod_func
+# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 print("   - Done!")

@@ -22,18 +22,16 @@
 This subpackage is created to extract features from traffic light image dataset.
 """
 
-_name_subpkg_ = __name__.partition(".")[-1]
+_name_subpkg = __name__.partition(".")[-1]
 print("")
-print(f" + Adding subpackage '{_name_subpkg_}'...")
+print(f" + Adding subpackage '{_name_subpkg}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from .extract_feature import get_average_channel, get_average_channel_along_axis, \
-                             get_range_of_high_average_channel_along_axis, \
-                             get_range_of_high_average_channel, get_average_image
+from . import extract_feature
 # <<
 # ==================================================================================
 # END >> IMPORTS

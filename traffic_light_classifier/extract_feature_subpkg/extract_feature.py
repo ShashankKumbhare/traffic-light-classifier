@@ -23,16 +23,18 @@ This submodule contains functionalities to extract features from traffic light
 image dataset.
 """
 
-_name_subpkg_ = __name__.partition(".")[-2]
-_name_submod_ = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod_}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__auxil_subpkg__ import *
-from ..plots_subpkg import *
-from ..modify_images_subpkg import *
+from ..__dependencies_subpkg__ import _dependencies_submod as _dps
+from ..__constants_subpkg__ import _constants_submod as _CONSTANTS
+# from ..__auxil_subpkg__ import _auxil_submod as _auxil
+from ..plots_subpkg import plots as _plots
+from ..modify_images_subpkg import modify_images as _modify_images
 # ==================================================================================
 # END >> IMPORTS
 # ==================================================================================
@@ -84,7 +86,7 @@ def get_average_channel( image_rgb
     # Setting channel number >>
     if channel in ("h", "s", "v"):
         # Converting image to HSV if channel h/s/v requested >>
-        im = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2HSV)
+        im = _dps.cv2.cvtColor(image_rgb, _dps.cv2.COLOR_RGB2HSV)
         if channel == "h":
             channel_num = 0
         elif channel == "s":
@@ -101,7 +103,7 @@ def get_average_channel( image_rgb
             channel_num = 2
     
     # Taking mean >>
-    avg_channel = np.mean( im[:,:,channel_num] )
+    avg_channel = _dps.np.mean( im[:,:,channel_num] )
     
     return avg_channel
 # <<
@@ -164,7 +166,7 @@ def get_average_channel_along_axis( im_rgb
     # Setting channel number >>
     if channel in ("h", "s", "v"):
         # Converting image to HSV if channel h/s/v requested >>
-        im = cv2.cvtColor(im_rgb, cv2.COLOR_RGB2HSV)
+        im = _dps.cv2.cvtColor(im_rgb, _dps.cv2.COLOR_RGB2HSV)
         if channel == "h":
             channel_num = 0
         elif channel == "s":
@@ -250,19 +252,36 @@ def get_range_of_high_average_channel_along_axis( im_rgb
     ================================================================================
     """
     
+    # avg_channel_along_axis = get_average_channel_along_axis(im_rgb, channel, axis)
+    #
+    # sums_along_axis = []
+    # for i in range( len(avg_channel_along_axis) - len_range ):
+    #     sum_along_axis = np.sum( avg_channel_along_axis[i:i+len_range] )
+    #     sums_along_axis.append(sum_along_axis)
+    #
+    # i_sum_max = np.argmax(sums_along_axis)
+    # # i_sum_max = np.argpartition(sums_along_axis, len(sums_along_axis) // 2)[len(sums_along_axis) // 2]
+    #
+    # range_of_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
+    #
+    # if plot_enabled:
+    #     plots.plot_bar( avg_channel_along_axis )
+    #
+    # return range_of_high_average_channel_along_axis, avg_channel_along_axis
+    
     avg_channel_along_axis = get_average_channel_along_axis(im_rgb, channel, axis)
     
     sums_along_axis = []
     for i in range( len(avg_channel_along_axis) - len_range ):
-        sum_along_axis = np.sum( avg_channel_along_axis[i:i+len_range] )
+        sum_along_axis = _dps.np.sum( avg_channel_along_axis[i:i+len_range] )
         sums_along_axis.append(sum_along_axis)
     
-    i_sum_max = np.argmax(sums_along_axis)
+    i_sum_max = _dps.np.argmax(sums_along_axis)
     
     range_of_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
     
     if plot_enabled:
-        plots.plot_bar( avg_channel_along_axis )
+        _plots.plot_bar( avg_channel_along_axis )
     
     return range_of_high_average_channel_along_axis, avg_channel_along_axis
 # <<
@@ -329,20 +348,20 @@ def get_range_of_high_average_channel( im_rgb
     ================================================================================
     """
     
-    range_X, sums_channel_along_X = get_range_of_high_average_channel_along_axis( im_rgb, channel, 0, len_range, plot_enabled=False)
-    range_Y, sums_channel_along_Y = get_range_of_high_average_channel_along_axis( im_rgb, channel, 1, len_range, plot_enabled=False)
+    range_X, sums_channel_along_X = get_range_of_high_average_channel_along_axis( im_rgb, channel, 0, len_range[0], plot_enabled=False)
+    range_Y, sums_channel_along_Y = get_range_of_high_average_channel_along_axis( im_rgb, channel, 1, len_range[1], plot_enabled=False)
     
     rangeXY_of_high_average_channel = [ range_X, range_Y ]
     sums_channel_along_XY           = [sums_channel_along_X, sums_channel_along_Y]
     
     if plot_enabled:
         
-        fig, axes = plt.subplots(1, 4, figsize = (4*3.33, 3.33))
+        fig, axes = _dps.plt.subplots(1, 4, figsize = (4*3.33, 3.33))
         
         axes[0].imshow( im_rgb )
         axes[0].set_title( "rgb image" )
         
-        axes[1].imshow( convert_rgb_to_hsv(im_rgb)[:,:,1], cmap = "gray" )
+        axes[1].imshow( _modify_images.convert_rgb_to_hsv(im_rgb)[:,:,2], cmap = "gray" )
         axes[1].set_title( "S channel" )
         
         x = list(range(len(sums_channel_along_X)))
@@ -353,7 +372,7 @@ def get_range_of_high_average_channel( im_rgb
         axes[3].bar( y, sums_channel_along_XY[1])
         axes[3].set_title( "saturation along Y" )
         
-        plt.show()
+        _dps.plt.show()
     
     return rangeXY_of_high_average_channel, sums_channel_along_XY
 # <<
@@ -367,9 +386,12 @@ def get_range_of_high_average_channel( im_rgb
 # START >> FUNCTION >> get_average_image
 # ==================================================================================================================================
 # >>
-def get_average_image( images_rgb
-                     , channels = "rgb"
-                     ) :
+def get_average_image   ( images
+                        , plot_enabled  = False
+                        , type_channels = ""
+                        , name_image    = _CONSTANTS.DEFAULT_NAME_IMAGE
+                        , is_images_npArrays = False
+                        ) :
     
     """
     ================================================================================
@@ -384,40 +406,52 @@ def get_average_image( images_rgb
         PARAMETERS
         ==========
             
-            images_rgb <list>
+            images <list>
                 
-                A list of numpy array of rgb image of shape (n_row, n_col, 3).
+                A list of numpy array of images of shape (n_row, n_col, 3).
+                Default is "" for unknown.
             
-            channels <str>
+            plot_enabled <bool>
+                
+                If enabled plot a bar chart of the average channel along an axis.
             
-                A string indicating channels type either 'rgb' or 'hsv'.
+            type_channels <str>
+                
+                A string indicating the type of channels either 'rgb' or 'hsv'.
+            
+            cmap <str>
+                
+                Colormap for plot. Possible value: "viridis", "gray", etc.
         
         RETURNS
         =======
             
             image_average <np.array>
                 
-                Numpy array of of shape (n_row, n_col, 3).
+                Numpy array of shape (n_row, n_col, 3).
     
     ================================================================================
     END << DOC << get_average_image
     ================================================================================
     """
     
-    if channels == "hsv":
-        images = np.array( [ cv2.cvtColor(image_rgb[0], cv2.COLOR_RGB2HSV) for image_rgb in images_rgb ] )
-    else:
-        images = np.array( [ image_rgb[0] for image_rgb in images_rgb ] )
+    # Making a 4d array to hold all images >>
+    if not is_images_npArrays:
+        images = _dps.np.array( [ image[0] for image in images ] )
     
-    average_channels = np.mean(images, axis = 0)
-    average_channels = [ average_channels[:,:,i] for i in range(3) ]
+    # Taking average of all images (i.e. average along axis 0) >>
+    image_average = _dps.np.mean(images, axis = 0)
     
-    ch0 = average_channels[0]
-    ch1 = average_channels[1]
-    ch2 = average_channels[2]
-    image_average = cv2.merge([ch0, ch1, ch2])
-    image_average = np.uint8(image_average)
+    # Converting dtype from 'float64' to "uint8" >>
+    image_average = _dps.np.uint8(image_average)
     
+    # Plotting if requested >>
+    if plot_enabled:
+        _plots.plot_channels( image_average
+                            , type_channels = type_channels
+                            , name_image    = name_image
+                            , cmap          = "gray" )
+        
     return image_average
 # <<
 # ==================================================================================================================================
@@ -427,16 +461,16 @@ def get_average_image( images_rgb
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> template_submod_func
+# START >> FUNCTION >> _template_submod_func
 # ==================================================================================================================================
 # >>
-def template_submod_func    ( p_p_p_p_1 = ""
+def _template_submod_func   ( p_p_p_p_1 = ""
                             , p_p_p_p_2 = ""
                             ) :
     
     """
     ================================================================================
-    START >> DOC >> template_submod_func
+    START >> DOC >> _template_submod_func
     ================================================================================
         
         GENERAL INFO
@@ -467,17 +501,17 @@ def template_submod_func    ( p_p_p_p_1 = ""
                 t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
     
     ================================================================================
-    END << DOC << template_submod_func
+    END << DOC << _template_submod_func
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg_}.{_name_submod_}.{_name_func_}'{p_p_p_p_1}{p_p_p_p_2}.")
+    _name_func = _dps.inspect.stack()[0][3]
+    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << template_submod_func
+# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 print("   - Done!")
