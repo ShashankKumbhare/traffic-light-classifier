@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/plots_subpkg/__init__.py
+# File        : traffic_light_classifier/_statistics_subpkg/statistics.py
 # Author      : Shashank Kumbhare
-# Date        : 09/22/2022
+# Date        : 09/24/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a __init__ file for python subpackage
-#               'traffic_light_classifier.plots_subpkg'.
+# Description : This file is a python submodule for python subpackage
+#               'traffic_light_classifier._statistics_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,32 +15,28 @@
 
 
 # ==================================================================================================================================
-# START >> SUBPACKAGE >> traffic_light_classifier.plots_subpkg
+# START >> SUBMODULE >> traffic_light_classifier._statistics_subpkg.statistics
 # ==================================================================================================================================
 # >>
 """
-This subpackage contains the visualization tools for the image-dataset.
+This submodule contains functionalities to calculate probabilities and likelihood values.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-# >>
-# SUBMODULES >>
-# from .plots import plot_images, plot_channels, plot_bar
-from . import plots
-# <<
+from ._statistics_submod import *
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBPACKAGE << traffic_light_classifier.plots_subpkg
+# END << SUBMODULE << traffic_light_classifier._statistics_subpkg.statistics
 # ==================================================================================================================================

@@ -37,7 +37,7 @@ print(f" + Adding subpackage '{_name_subpkg}'...")
 from ._template_submod import _template_submod_func
 # <<
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
 # ==================================================================================
 
 print(" - Done!")

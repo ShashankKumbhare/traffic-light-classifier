@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/modify_images_subpkg/modify_images.py
+# File        : traffic_light_classifier/_modify_images_subpkg/_modify_images_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/23/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python submodule for python subpackage
-#               'traffic_light_classifier.modify_images_subpkg'.
+#               'traffic_light_classifier._modify_images_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,7 +15,7 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier.modify_images_subpkg.modify_images
+# START >> SUBMODULE >> traffic_light_classifier._modify_images_subpkg._modify_images_submod
 # ==================================================================================================================================
 # >>
 """
@@ -30,11 +30,23 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__constants_subpkg__ import _constants_submod as _CONSTANTS
-from ..__auxil_subpkg__ import _auxil_submod as _auxil
-from ..plots_subpkg import plots as _plots
+from ..__dependencies_subpkg__ import *
+from ..__constants_subpkg__    import *
+from ..__auxil_subpkg__        import *
+from ..__data_subpkg__         import *
+from .._plots_subpkg           import *
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
+# ==================================================================================
+
+
+# ==================================================================================
+# START >> EXPORTS
+# ==================================================================================
+__all__ =   [ "standardize_image", "standardize_images", "convert_rgb_to_hsv"
+            , "convert_hsv_to_rgb", "mask_image", "crop_image" ]
+# ==================================================================================
+# END << EXPORTS
 # ==================================================================================
 
 
@@ -43,7 +55,7 @@ from ..plots_subpkg import plots as _plots
 # ==================================================================================================================================
 # >>
 def standardize_image( image
-                     , size = _CONSTANTS.DEFAULT_STANDARDIZATION_SIZE
+                     , size = DEFAULT_STANDARDIZATION_SIZE
                      ) :
     
     """
@@ -96,7 +108,7 @@ def standardize_image( image
 # ==================================================================================================================================
 # >>
 def standardize_images( images
-                      , size = _CONSTANTS.DEFAULT_STANDARDIZATION_SIZE
+                      , size = DEFAULT_STANDARDIZATION_SIZE
                       ) :
     
     """
@@ -134,7 +146,7 @@ def standardize_images( images
     """
     
     ims_std        = [ standardize_image(image[0], size = size)        for image in images ]
-    one_hot_labels = [ helpers.one_hot_encode(image[1])    for image in images ]
+    one_hot_labels = [ one_hot_encode(image[1])    for image in images ]
     images_std     = [ (im_std, one_hot_label) for im_std, one_hot_label in zip(ims_std, one_hot_labels) ]
     
     return images_std
@@ -152,7 +164,7 @@ def standardize_images( images
 def convert_rgb_to_hsv( image_rgb
                       , plot_enabled = False
                       , name_image   = "converrted hsv"
-                      , cmap         = _CONSTANTS.DEFAULT_CMAP
+                      , cmap         = DEFAULT_CMAP
                       ) :
     
     """
@@ -221,7 +233,7 @@ def convert_rgb_to_hsv( image_rgb
 # >>
 def convert_hsv_to_rgb( image_hsv
                       , plot_enabled = False
-                      , cmap         = _CONSTANTS.DEFAULT_CMAP
+                      , cmap         = DEFAULT_CMAP
                       ) :
     
     """
@@ -348,7 +360,7 @@ def mask_image( image
     image_masked[ y_bottom:height,        :       , : ] = (0,0,0)
 
     if plot_enabled:
-        plots.plot_images( [image, image_masked], enable_grid = False )
+        plot_images( [image, image_masked], enable_grid = False )
     
     # # NEW >>
     # image  = np.copy(image)
@@ -393,7 +405,7 @@ def crop_image( image
               , range_crop_x
               , range_crop_y
               , plot_enabled = False
-              , cmap         = _CONSTANTS.DEFAULT_CMAP
+              , cmap         = DEFAULT_CMAP
               ) :
     
     """
@@ -445,7 +457,7 @@ def crop_image( image
     image_cropped = image[ y_top:y_bottom, x_left:x_right ]
     
     if plot_enabled:
-        plots.plot_images( [image, image_cropped], enable_grid = True, cmap = cmap )
+        plot_images( [image, image_cropped], enable_grid = True, cmap = cmap )
     
     return image_cropped
 # <<
@@ -513,5 +525,5 @@ print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier.modify_images_subpkg.modify_images
+# END << SUBMODULE << traffic_light_classifier._modify_images_subpkg._modify_images_submod
 # ==================================================================================================================================

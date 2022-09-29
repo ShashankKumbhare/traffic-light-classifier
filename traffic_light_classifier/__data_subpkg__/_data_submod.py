@@ -19,10 +19,7 @@
 # ==================================================================================================================================
 # >>
 """
-This submodule is created/used for/to
-SUBMODULE description SUBMODULE description SUBMODULE
-SUBMODULE description SUBMODULE description SUBMODULE description SUBMODULE
-SUBMODULE description SUBMODULE description.
+This submodule is created to manage all the datasets related variables.
 """
 
 _name_subpkg = __name__.partition(".")[-2]
@@ -33,7 +30,9 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # START >> IMPORTS
 # ==================================================================================
 # >>
-from ..__auxil_subpkg__ import *
+from ..__dependencies_subpkg__ import *
+from ..__constants_subpkg__    import *
+from ..__auxil_subpkg__        import *
 # <<
 # ==================================================================================
 # END << IMPORTS

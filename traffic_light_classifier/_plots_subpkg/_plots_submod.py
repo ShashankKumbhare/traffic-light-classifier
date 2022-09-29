@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/plots_subpkg/plots.py
+# File        : traffic_light_classifier/_plots_subpkg/_plots_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/22/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python submodule for python subpackage
-#               'traffic_light_classifier.plots_subpkg'.
+#               'traffic_light_classifier._plots_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,7 +15,7 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier.plots_subpkg.plots
+# START >> SUBMODULE >> traffic_light_classifier._plots_subpkg._plots_submod
 # ==================================================================================================================================
 # >>
 """
@@ -29,10 +29,25 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__constants_subpkg__ import _constants_submod as _CONSTANTS
-from ..__auxil_subpkg__ import _auxil_submod as _auxil
+# >>
+from ..__dependencies_subpkg__ import *
+from ..__constants_subpkg__    import *
+from ..__auxil_subpkg__        import *
+from ..__data_subpkg__         import *
+# <<
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
+# ==================================================================================
+
+
+# ==================================================================================
+# START >> EXPORTS
+# ==================================================================================
+# >>
+__all__ = ["plot_images", "plot_channels", "plot_bar", ]
+# <<
+# ==================================================================================
+# END << EXPORTS
 # ==================================================================================
 
 
@@ -42,7 +57,7 @@ from ..__auxil_subpkg__ import _auxil_submod as _auxil
 # >>
 def plot_images( images
                , title_enabled = True
-               , figsizeScale  = _CONSTANTS.DEFAULT_FIGSIZESCALE
+               , figsizeScale  = DEFAULT_FIGSIZESCALE
                , enable_grid   = False
                , cmap          = None
                ) :
@@ -101,7 +116,7 @@ def plot_images( images
         elif type(images) == tuple:
             image   = images[0]
             if title_enabled:
-                title = helpers.get_title(images)
+                title = get_title(images)
                 axes.set_title(title)
         axes.imshow(image, cmap = cmap)
     
@@ -141,7 +156,7 @@ def plot_images( images
                     image = images[i_image]
                 
                 if title_enabled:
-                    title = helpers.get_title(images[i_image])
+                    title = get_title(images[i_image])
                     ax_curr.set_title(title)
                 
                 if enable_grid:
@@ -169,9 +184,9 @@ def plot_images( images
 # >>
 def plot_channels   ( image
                     , type_channels = ""
-                    , name_image    = _CONSTANTS.DEFAULT_NAME_IMAGE
-                    , cmap          = _CONSTANTS.DEFAULT_CMAP
-                    , figsizeScale  = _CONSTANTS.DEFAULT_FIGSIZESCALE
+                    , name_image    = DEFAULT_NAME_IMAGE
+                    , cmap          = DEFAULT_CMAP
+                    , figsizeScale  = DEFAULT_FIGSIZESCALE
                     ) :
     
     """
@@ -385,7 +400,7 @@ def _template_submod_func   ( p_p_p_p_1 = ""
     ================================================================================
     """
     
-    _name_func = _dps.inspect.stack()[0][3]
+    _name_func = inspect.stack()[0][3]
     print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
@@ -398,5 +413,5 @@ print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier.plots_subpkg.plots
+# END << SUBMODULE << traffic_light_classifier._plots_subpkg._plots_submod
 # ==================================================================================================================================

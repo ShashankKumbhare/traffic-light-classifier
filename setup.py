@@ -1,4 +1,18 @@
+
 from setuptools import setup
+
+# ==================================================================================
+# START >> NOTE
+# ==================================================================================
+# >>
+# If you have setup.py in your project and you use find_packages() within it, it is
+# necessary to have an __init__.py file in every directory for packages to be
+# automatically found.
+# Packages are only recognized if they include an __init__.py file
+# <<
+# ==================================================================================
+# END << NOTE
+# ==================================================================================
 
 setup(
     name         = 'traffic_light_classifier',

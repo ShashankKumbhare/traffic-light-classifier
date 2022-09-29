@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/statistics_subpkgstatistics_subpkg/__init__.py
+# File        : traffic_light_classifier/_extract_feature_subpkg/extract_feature.py
 # Author      : Shashank Kumbhare
-# Date        : 09/24/2022
+# Date        : 09/23/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a __init__ file for python subpackage
-#               'traffic_light_classifier.statistics_subpkg'.
+# Description : This file is a python submodule for python subpackage
+#               'traffic_light_classifier._extract_feature_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,31 +15,29 @@
 
 
 # ==================================================================================================================================
-# START >> SUBPACKAGE >> traffic_light_classifier.statistics_subpkg
+# START >> SUBMODULE >> traffic_light_classifier._extract_feature_subpkg.extract_feature
 # ==================================================================================================================================
 # >>
 """
-This subpackage is created for calculating probabilities and likelihood values.
+This submodule contains functionalities to extract features from traffic light
+image dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-# >>
-# SUBMODULES >>
-from .statistics import get_distribution_of_channel
-# <<
+from ._extract_feature_submod import *
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBPACKAGE << traffic_light_classifier.statistics_subpkg
+# END << SUBMODULE << traffic_light_classifier._extract_feature_subpkg.extract_feature
 # ==================================================================================================================================

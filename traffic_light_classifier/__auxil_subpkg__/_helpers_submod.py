@@ -2,7 +2,7 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/__auxil_subpkg__/_auxil_submod.py
+# File        : traffic_light_classifier/__auxil_subpkg__/_helpers_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/20/2022
 # email       : shashankkumbhare8@gmail.com
@@ -15,13 +15,11 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier.__auxil_subpkg__._auxil_submod
+# START >> SUBMODULE >> traffic_light_classifier.__auxil_subpkg__._helpers_submod
 # ==================================================================================================================================
-
 # >>
 """
-This submodule contains some auxiliary functions being used in rest of the modules
-and submodules.
+This module contain some helper functions.
 """
 
 _name_subpkg = __name__.partition(".")[-2]
@@ -34,6 +32,7 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # >>
 from ..__dependencies_subpkg__ import *
 from ..__constants_subpkg__    import *
+from ._auxil_submod            import *
 # <<
 # ==================================================================================
 # END << IMPORTS
@@ -293,7 +292,7 @@ def get_title( image ) :
 # START >> FUNCTION >> _template_submod_func
 # ==================================================================================================================================
 # >>
-def template_submod_func    ( p_p_p_p_1 = ""
+def _template_submod_func   ( p_p_p_p_1 = ""
                             , p_p_p_p_2 = ""
                             ) :
     
@@ -333,6 +332,7 @@ def template_submod_func    ( p_p_p_p_1 = ""
     END << DOC << _template_submod_func
     ================================================================================
     """
+    
     _name_func = inspect.stack()[0][3]
     print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
@@ -346,5 +346,5 @@ print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier.__auxil_subpkg__._auxil_submod
+# END << SUBMODULE << traffic_light_classifier.__auxil_subpkg__._helpers_submod
 # ==================================================================================================================================

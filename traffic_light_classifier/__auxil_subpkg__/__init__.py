@@ -32,11 +32,11 @@ print(f" + Adding subpackage '{_name_subpkg}'...")
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from . import _auxil_submod as auxil
-from . import helpers
+from ._auxil_submod   import *
+from ._helpers_submod import *
 # <<
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
 # ==================================================================================
 
 print(" - Done!")

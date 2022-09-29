@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/modify_images_subpkg/__init__.py
+# File        : traffic_light_classifier/_plots_subpkg/plots.py
 # Author      : Shashank Kumbhare
-# Date        : 09/23/2022
+# Date        : 09/22/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a __init__ file for python subpackage
-#               'traffic_light_classifier.modify_images_subpkg'.
+# Description : This file is a python submodule for python subpackage
+#               'traffic_light_classifier._plots_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,32 +15,30 @@
 
 
 # ==================================================================================================================================
-# START >> SUBPACKAGE >> traffic_light_classifier.modify_images_subpkg
+# START >> SUBMODULE >> traffic_light_classifier._plots_subpkg.plots
 # ==================================================================================================================================
 # >>
 """
-This subpackage is created to manupulate or modify traffic light training & test
-images for pre-processing of images.
+This submodule is created for the visualization and analyzsis of the image-dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+_name_subpkg = __name__.partition(".")[-2]
+_name_submod = __name__.partition(".")[-1]
+print(f"   + Adding submodule '{_name_submod}'...")
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-# SUBMODULES >>
-from . import modify_images
+from ._plots_submod import *
 # <<
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBPACKAGE << traffic_light_classifier.modify_images_subpkg
+# END << SUBMODULE << traffic_light_classifier._plots_subpkg.plots
 # ==================================================================================================================================

@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/extract_feature_subpkg/extract_feature.py
+# File        : traffic_light_classifier/_extract_feature_subpkg/_extract_feature_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/23/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python submodule for python subpackage
-#               'traffic_light_classifier.extract_feature_subpkg'.
+#               'traffic_light_classifier._extract_feature_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,7 +15,7 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier.extract_feature_subpkg.extract_feature
+# START >> SUBMODULE >> traffic_light_classifier._extract_feature_subpkg._extract_feature_submod
 # ==================================================================================================================================
 # >>
 """
@@ -30,13 +30,29 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__dependencies_subpkg__ import _dependencies_submod as _dps
-from ..__constants_subpkg__ import _constants_submod as _CONSTANTS
-# from ..__auxil_subpkg__ import _auxil_submod as _auxil
-from ..plots_subpkg import plots as _plots
-from ..modify_images_subpkg import modify_images as _modify_images
+# >>
+from ..__dependencies_subpkg__ import *
+from ..__constants_subpkg__    import *
+from ..__auxil_subpkg__        import *
+from ..__data_subpkg__         import *
+from .._plots_subpkg           import *
+from .._modify_images_subpkg   import *
+# <<
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
+# ==================================================================================
+
+
+# ==================================================================================
+# START >> IMPORTS
+# ==================================================================================
+# >>
+__all__ =   [ "get_average_channel", "get_average_channel_along_axis"
+            , "get_range_of_high_average_channel_along_axis"
+            , "get_range_of_high_average_channel", "get_average_image" ]
+# <<
+# ==================================================================================
+# END << IMPORTS
 # ==================================================================================
 
 
@@ -86,7 +102,7 @@ def get_average_channel( image_rgb
     # Setting channel number >>
     if channel in ("h", "s", "v"):
         # Converting image to HSV if channel h/s/v requested >>
-        im = _dps.cv2.cvtColor(image_rgb, _dps.cv2.COLOR_RGB2HSV)
+        im = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2HSV)
         if channel == "h":
             channel_num = 0
         elif channel == "s":
@@ -103,7 +119,7 @@ def get_average_channel( image_rgb
             channel_num = 2
     
     # Taking mean >>
-    avg_channel = _dps.np.mean( im[:,:,channel_num] )
+    avg_channel = np.mean( im[:,:,channel_num] )
     
     return avg_channel
 # <<
@@ -166,7 +182,7 @@ def get_average_channel_along_axis( im_rgb
     # Setting channel number >>
     if channel in ("h", "s", "v"):
         # Converting image to HSV if channel h/s/v requested >>
-        im = _dps.cv2.cvtColor(im_rgb, _dps.cv2.COLOR_RGB2HSV)
+        im = cv2.cvtColor(im_rgb, cv2.COLOR_RGB2HSV)
         if channel == "h":
             channel_num = 0
         elif channel == "s":
@@ -273,15 +289,15 @@ def get_range_of_high_average_channel_along_axis( im_rgb
     
     sums_along_axis = []
     for i in range( len(avg_channel_along_axis) - len_range ):
-        sum_along_axis = _dps.np.sum( avg_channel_along_axis[i:i+len_range] )
+        sum_along_axis = sum( avg_channel_along_axis[i:i+len_range] )
         sums_along_axis.append(sum_along_axis)
     
-    i_sum_max = _dps.np.argmax(sums_along_axis)
+    i_sum_max = np.argmax(sums_along_axis)
     
     range_of_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
     
     if plot_enabled:
-        _plots.plot_bar( avg_channel_along_axis )
+        plot_bar( avg_channel_along_axis )
     
     return range_of_high_average_channel_along_axis, avg_channel_along_axis
 # <<
@@ -356,12 +372,12 @@ def get_range_of_high_average_channel( im_rgb
     
     if plot_enabled:
         
-        fig, axes = _dps.plt.subplots(1, 4, figsize = (4*3.33, 3.33))
+        fig, axes = plt.subplots(1, 4, figsize = (4*3.33, 3.33))
         
         axes[0].imshow( im_rgb )
         axes[0].set_title( "rgb image" )
         
-        axes[1].imshow( _modify_images.convert_rgb_to_hsv(im_rgb)[:,:,2], cmap = "gray" )
+        axes[1].imshow( convert_rgb_to_hsv(im_rgb)[:,:,2], cmap = "gray" )
         axes[1].set_title( "S channel" )
         
         x = list(range(len(sums_channel_along_X)))
@@ -372,7 +388,7 @@ def get_range_of_high_average_channel( im_rgb
         axes[3].bar( y, sums_channel_along_XY[1])
         axes[3].set_title( "saturation along Y" )
         
-        _dps.plt.show()
+        plt.show()
     
     return rangeXY_of_high_average_channel, sums_channel_along_XY
 # <<
@@ -389,7 +405,7 @@ def get_range_of_high_average_channel( im_rgb
 def get_average_image   ( images
                         , plot_enabled  = False
                         , type_channels = ""
-                        , name_image    = _CONSTANTS.DEFAULT_NAME_IMAGE
+                        , name_image    = DEFAULT_NAME_IMAGE
                         , is_images_npArrays = False
                         ) :
     
@@ -437,17 +453,17 @@ def get_average_image   ( images
     
     # Making a 4d array to hold all images >>
     if not is_images_npArrays:
-        images = _dps.np.array( [ image[0] for image in images ] )
+        images = np.array( [ image[0] for image in images ] )
     
     # Taking average of all images (i.e. average along axis 0) >>
-    image_average = _dps.np.mean(images, axis = 0)
+    image_average = np.mean(images, axis = 0)
     
     # Converting dtype from 'float64' to "uint8" >>
-    image_average = _dps.np.uint8(image_average)
+    image_average = np.uint8(image_average)
     
     # Plotting if requested >>
     if plot_enabled:
-        _plots.plot_channels( image_average
+        plot_channels( image_average
                             , type_channels = type_channels
                             , name_image    = name_image
                             , cmap          = "gray" )
@@ -505,7 +521,7 @@ def _template_submod_func   ( p_p_p_p_1 = ""
     ================================================================================
     """
     
-    _name_func = _dps.inspect.stack()[0][3]
+    _name_func = inspect.stack()[0][3]
     print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
@@ -518,5 +534,5 @@ print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier.extract_feature_subpkg.extract_feature
+# END << SUBMODULE << traffic_light_classifier._extract_feature_subpkg._extract_feature_submod
 # ==================================================================================================================================

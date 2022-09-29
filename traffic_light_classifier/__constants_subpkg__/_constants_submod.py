@@ -30,10 +30,10 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # START >> IMPORTS
 # ==================================================================================
 # >>
-from ..__dependencies_subpkg__ import _dependencies_submod as _dps
+from ..__dependencies_subpkg__ import *
 # <<
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
 # ==================================================================================
 
 
@@ -43,7 +43,7 @@ from ..__dependencies_subpkg__ import _dependencies_submod as _dps
 # >>
 DEFAULT_FIGSIZESCALE = 1
 DEFAULT_NAME_IMAGE   = "image"
-DEFAULT_CMAP         = "viridis"
+DEFAULT_CMAP         = "gray" # "viridis"
 # <<
 # ==================================================================================================================================
 # END << CONSTANTS << plots_subpkg related

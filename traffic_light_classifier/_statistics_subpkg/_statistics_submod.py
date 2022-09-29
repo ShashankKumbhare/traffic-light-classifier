@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/statistics_subpkg/statistics.py
+# File        : traffic_light_classifier/_statistics_subpkg/_statistics_submod.py
 # Author      : Shashank Kumbhare
 # Date        : 09/24/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python submodule for python subpackage
-#               'traffic_light_classifier.statistics_subpkg'.
+#               'traffic_light_classifier._statistics_subpkg'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,7 +15,7 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier.statistics_subpkg.statistics
+# START >> SUBMODULE >> traffic_light_classifier._statistics_subpkg._statistics_submod
 # ==================================================================================================================================
 # >>
 """
@@ -29,9 +29,24 @@ print(f"   + Adding submodule '{_name_submod}'...")
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
-from ..__auxil_subpkg__ import *
+from ..__dependencies_subpkg__ import *
+from ..__constants_subpkg__    import *
+from ..__auxil_subpkg__        import *
+from ..__data_subpkg__         import *
+from .._plots_subpkg           import *
+from .._modify_images_subpkg   import *
+from .._extract_feature_subpkg import *
 # ==================================================================================
-# END >> IMPORTS
+# END << IMPORTS
+# ==================================================================================
+
+
+# ==================================================================================
+# START >> EXPORTS
+# ==================================================================================
+__all__ = [ "get_distribution_of_channel" ]
+# ==================================================================================
+# END << EXPORTS
 # ==================================================================================
 
 
@@ -315,5 +330,5 @@ print("   - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier.statistics_subpkg.statistics
+# END << SUBMODULE << traffic_light_classifier._statistics_subpkg._statistics_submod
 # ==================================================================================================================================
