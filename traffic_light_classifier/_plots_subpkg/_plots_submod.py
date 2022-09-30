@@ -57,6 +57,7 @@ __all__ = ["plot_images", "plot_channels", "plot_bar", ]
 # >>
 def plot_images( images
                , title_enabled = True
+               , name_image    = DEFAULT_NAME_IMAGE
                , figsizeScale  = DEFAULT_FIGSIZESCALE
                , enable_grid   = False
                , cmap          = None
@@ -113,6 +114,8 @@ def plot_images( images
         
         if type(images) == np.ndarray:
             image   = images
+            if title_enabled:
+                axes.set_title(name_image)
         elif type(images) == tuple:
             image   = images[0]
             if title_enabled:
@@ -156,7 +159,10 @@ def plot_images( images
                     image = images[i_image]
                 
                 if title_enabled:
-                    title = get_title(images[i_image])
+                    if type(images[0]) == tuple:
+                        title = get_title(images[i_image])
+                    else:
+                        title = name_image[i_image]
                     ax_curr.set_title(title)
                 
                 if enable_grid:
@@ -182,7 +188,7 @@ def plot_images( images
 # START >> FUNCTION >> plot_channels
 # ==================================================================================================================================
 # >>
-def plot_channels   ( image
+def plot_channels   ( image_rgb
                     , type_channels = ""
                     , name_image    = DEFAULT_NAME_IMAGE
                     , cmap          = DEFAULT_CMAP
@@ -202,9 +208,9 @@ def plot_channels   ( image
         PARAMETERS
         ==========
             
-            image <np.array>
+            image_rgb <np.array>
                 
-                Numpy array of image of shape (n_row, n_col, 3).
+                Numpy array of rgb image of shape (n_row, n_col, 3).
             
             type_channels <str>
                 
@@ -233,6 +239,12 @@ def plot_channels   ( image
     ================================================================================
     """
     
+    if type_channels == "hsv":
+        image = np.copy(image_rgb)
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+    else:
+        image = image_rgb
+    
     # Getting channels >>
     image_ch0 = image[:,:,0]
     image_ch1 = image[:,:,1]
@@ -246,15 +258,15 @@ def plot_channels   ( image
         type_channels = "012"
     type_channels = type_channels.upper()
     titles = ( f"{name_image}"
-             , f"{type_channels[0]} of {name_image}"
-             , f"{type_channels[1]} of {name_image}"
-             , f"{type_channels[2]} of {name_image}" )
+             , f"{type_channels[0]} ch. of {name_image}"
+             , f"{type_channels[1]} ch. of {name_image}"
+             , f"{type_channels[2]} ch. of {name_image}" )
     
     # Plotting the original image and the three channels >>
     if type(cmap) != str or len(cmap) == 0 or cmap is None:
         cmap = DEFAULT_CMAP
     ax1.set_title(titles[0])
-    ax1.imshow(image,     cmap = cmap)
+    ax1.imshow(image_rgb, cmap = cmap)
     ax2.set_title(titles[1])
     ax2.imshow(image_ch0, cmap = cmap)
     ax3.set_title(titles[2])

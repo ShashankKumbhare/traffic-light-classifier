@@ -163,7 +163,7 @@ def standardize_images( images
 # >>
 def convert_rgb_to_hsv( image_rgb
                       , plot_enabled = False
-                      , name_image   = "converrted hsv"
+                      , name_image   = DEFAULT_NAME_IMAGE
                       , cmap         = DEFAULT_CMAP
                       ) :
     
@@ -209,15 +209,14 @@ def convert_rgb_to_hsv( image_rgb
     ================================================================================
     """
     
-    image = np.copy(image_rgb)
-    
-    image_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-    
     if plot_enabled:
-        plot_channels   ( image_hsv
+        plot_channels   ( image_rgb
                         , type_channels = "hsv"
                         , name_image    = name_image
                         , cmap          = cmap )
+    
+    image     = np.copy(image_rgb)
+    image_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
     
     return image_hsv
 # <<
@@ -299,6 +298,7 @@ def mask_image( image
               , range_mask_x
               , range_mask_y
               , plot_enabled = False
+              , name_image    = DEFAULT_NAME_IMAGE
               ) :
     
     """
@@ -360,34 +360,8 @@ def mask_image( image
     image_masked[ y_bottom:height,        :       , : ] = (0,0,0)
 
     if plot_enabled:
-        plot_images( [image, image_masked], enable_grid = False )
-    
-    # # NEW >>
-    # image  = np.copy(image)
-    # width  = len(image[0])
-    # height = len(image)
-    # color     = (0, 0, 0)
-    # thickness = -1    # (thickness = -1 means black color)
-    #
-    # # Start & End coordinate i.e. the top-left corner & bottom-right >>
-    # start_point = (0, 0)
-    # end_point   = (range_mask_x[0], height)
-    # imageNew    = cv2.rectangle(image, start_point, end_point, color, thickness)
-    #
-    # # Start coordinate i.e. the top left corner of rectangle >>
-    # start_point = (range_mask_x[1], 0)
-    # end_point   = (width, height)
-    # imageNew    = cv2.rectangle(imageNew, start_point, end_point, color, thickness)
-    #
-    # # Start coordinate i.e. the top left corner of rectangle >>
-    # start_point = (0, 0)
-    # end_point   = (width, range_mask_y[0])
-    # imageNew    = cv2.rectangle(imageNew, start_point, end_point, color, thickness)
-    #
-    # # Start coordinate i.e. the top left corner of rectangle >>
-    # start_point = (0, range_mask_y[1])
-    # end_point   = (width, height)
-    # imageNew    = cv2.rectangle(imageNew, start_point, end_point, color, thickness)
+        name_image_cropped = "masked " + name_image
+        plot_images( [image, image_masked], enable_grid = False, name_image = [name_image, name_image_cropped] )
     
     return image_masked
 # <<

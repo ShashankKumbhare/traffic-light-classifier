@@ -49,7 +49,8 @@ from .._modify_images_subpkg   import *
 # >>
 __all__ =   [ "get_average_channel", "get_average_channel_along_axis"
             , "get_range_of_high_average_channel_along_axis"
-            , "get_range_of_high_average_channel", "get_average_image" ]
+            , "get_range_of_high_average_channel", "get_average_image"
+            , "get_location_of_light" ]
 # <<
 # ==================================================================================
 # END << IMPORTS
@@ -199,11 +200,11 @@ def get_average_channel_along_axis( im_rgb
             channel_num = 2
     
     im_channel                = im[:,:,channel_num]
-    sum_im_channel_along_axis = im_channel.sum(axis=axis)
-    n_col                     = len(sum_im_channel_along_axis)
-    avg_im_channel_along_axis = sum_im_channel_along_axis / n_col
+    sums_im_channel_along_axis = im_channel.sum(axis=axis)
+    n_col                     = len(sums_im_channel_along_axis)
+    avgs_im_channel_along_axis = sums_im_channel_along_axis / n_col
     
-    return avg_im_channel_along_axis
+    return avgs_im_channel_along_axis
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_average_channel_along_axis
@@ -219,7 +220,8 @@ def get_range_of_high_average_channel_along_axis( im_rgb
                                                 , channel
                                                 , axis
                                                 , len_range
-                                                , plot_enabled = False
+                                                , extra_channel = None
+                                                , plot_enabled  = False
                                                 ) :
     
     """
@@ -268,38 +270,24 @@ def get_range_of_high_average_channel_along_axis( im_rgb
     ================================================================================
     """
     
-    # avg_channel_along_axis = get_average_channel_along_axis(im_rgb, channel, axis)
-    #
-    # sums_along_axis = []
-    # for i in range( len(avg_channel_along_axis) - len_range ):
-    #     sum_along_axis = np.sum( avg_channel_along_axis[i:i+len_range] )
-    #     sums_along_axis.append(sum_along_axis)
-    #
-    # i_sum_max = np.argmax(sums_along_axis)
-    # # i_sum_max = np.argpartition(sums_along_axis, len(sums_along_axis) // 2)[len(sums_along_axis) // 2]
-    #
-    # range_of_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
-    #
-    # if plot_enabled:
-    #     plots.plot_bar( avg_channel_along_axis )
-    #
-    # return range_of_high_average_channel_along_axis, avg_channel_along_axis
+    avgs_channel_along_axis = get_average_channel_along_axis(im_rgb, channel, axis)
     
-    avg_channel_along_axis = get_average_channel_along_axis(im_rgb, channel, axis)
+    if extra_channel is not None:
+        avgs_extra_channel_along_axis = get_average_channel_along_axis(im_rgb, extra_channel, axis)
+        avgs_channel_along_axis       = np.array(avgs_channel_along_axis) * np.array(avgs_extra_channel_along_axis)
     
     sums_along_axis = []
-    for i in range( len(avg_channel_along_axis) - len_range ):
-        sum_along_axis = sum( avg_channel_along_axis[i:i+len_range] )
+    for i in range( len(avgs_channel_along_axis) - len_range ):
+        sum_along_axis = sum( avgs_channel_along_axis[i:i+len_range] )
         sums_along_axis.append(sum_along_axis)
     
     i_sum_max = np.argmax(sums_along_axis)
-    
     range_of_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
     
     if plot_enabled:
-        plot_bar( avg_channel_along_axis )
+        plot_bar( avgs_channel_along_axis )
     
-    return range_of_high_average_channel_along_axis, avg_channel_along_axis
+    return range_of_high_average_channel_along_axis, avgs_channel_along_axis
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_range_of_high_average_channel_along_axis
@@ -311,10 +299,12 @@ def get_range_of_high_average_channel_along_axis( im_rgb
 # START >> FUNCTION >> get_range_of_high_average_channel
 # ==================================================================================================================================
 # >>
-def get_range_of_high_average_channel( im_rgb
+def get_range_of_high_average_channel( image_rgb
                                      , channel
-                                     , len_range
-                                     , plot_enabled = False
+                                     , shape_area_search = DEFAULT_SHAPE_AREA_SEARCH
+                                     , extra_channel = None
+                                     , plot_enabled  = False
+                                     , name_image    = DEFAULT_NAME_IMAGE
                                      ) :
     
     """
@@ -364,36 +354,133 @@ def get_range_of_high_average_channel( im_rgb
     ================================================================================
     """
     
-    range_X, sums_channel_along_X = get_range_of_high_average_channel_along_axis( im_rgb, channel, 0, len_range[0], plot_enabled=False)
-    range_Y, sums_channel_along_Y = get_range_of_high_average_channel_along_axis( im_rgb, channel, 1, len_range[1], plot_enabled=False)
+    range_X, avgs_ch_along_X = get_range_of_high_average_channel_along_axis(
+                                image_rgb, channel, 0, shape_area_search[0], extra_channel, False )
+    range_Y, avgs_ch_along_Y = get_range_of_high_average_channel_along_axis(
+                                image_rgb, channel, 1, shape_area_search[1], extra_channel, False )
     
     rangeXY_of_high_average_channel = [ range_X, range_Y ]
-    sums_channel_along_XY           = [sums_channel_along_X, sums_channel_along_Y]
+    avgs_ch_along_XY                = [avgs_ch_along_X, avgs_ch_along_Y]
     
     if plot_enabled:
         
-        fig, axes = plt.subplots(1, 4, figsize = (4*3.33, 3.33))
+        fig, axes = plt.subplots(1, 5, figsize = (5*3.33, 3.33))
         
-        axes[0].imshow( im_rgb )
+        axes[0].imshow( image_rgb )
         axes[0].set_title( "rgb image" )
         
-        axes[1].imshow( convert_rgb_to_hsv(im_rgb)[:,:,2], cmap = "gray" )
+        axes[1].imshow( convert_rgb_to_hsv(image_rgb)[:,:,2], cmap = "gray" )
         axes[1].set_title( "S channel" )
         
-        x = list(range(len(sums_channel_along_X)))
-        axes[2].bar( x, sums_channel_along_XY[0])
-        axes[2].set_title( "saturation along X" )
+        x = list(range(len(avgs_ch_along_X)))
+        axes[3].bar( x, avgs_ch_along_XY[0])
+        axes[3].set_title( "saturation along X" )
         
-        y = list(range(len(sums_channel_along_Y)))
-        axes[3].bar( y, sums_channel_along_XY[1])
-        axes[3].set_title( "saturation along Y" )
+        axes[2].imshow( mask_image( image_rgb, range_X, range_Y ) )
+        axes[2].set_title( "masked " + name_image )
+        
+        y = list(range(len(avgs_ch_along_Y)))
+        axes[4].bar( y, avgs_ch_along_XY[1])
+        axes[4].set_title( "saturation along Y" )
         
         plt.show()
     
-    return rangeXY_of_high_average_channel, sums_channel_along_XY
+    return rangeXY_of_high_average_channel, avgs_ch_along_XY
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_range_of_high_average_channel
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> FUNCTION >> get_location_of_light
+# ==================================================================================================================================
+# >>
+def get_location_of_light   ( image_rgb
+                            , shape_area_search = DEFAULT_SHAPE_AREA_SEARCH
+                            , plot_enabled = False
+                            , name_image    = DEFAULT_NAME_IMAGE
+                            ) :
+    
+    """
+    ================================================================================
+    START >> DOC >> get_location_of_light
+    ================================================================================
+        
+        GENERAL INFO
+        ============
+            
+            Finds the location of the light in the input rgb image by extracting the
+            X & Y range of the region of high saturation and brightness channel
+            values along both the axis.
+        
+        PARAMETERS
+        ==========
+            
+            image_rgb <np.array>
+                
+                Numpy array of rgb image of shape (n_row, n_col, 3).
+            
+            shape_area_search <tuple>
+                
+                A tuple of length 2 indicating height & width of the search area.
+            
+            plot_enabled <bool>
+                
+                If enabled plot a bar chart of the average channel along an axis.
+        
+        RETURNS
+        =======
+            
+            corners_location <list<list<tuple>>>
+                
+                A list of list of tuples where each tuple element is the location of
+                the corners of the rectangular area of the light found in the order
+                top-left, top-right, bot-left & bot-right.
+    
+    ================================================================================
+    END << DOC << get_location_of_light
+    ================================================================================
+    """
+    
+    # Getting range for high saturation region >>
+    range_s_X, avgs_s_along_X = get_range_of_high_average_channel_along_axis(
+                                                image_rgb, "s", 0, shape_area_search[0], "v", False )
+    range_s_Y, avgs_s_along_Y = get_range_of_high_average_channel_along_axis(
+                                                image_rgb, "s", 1, shape_area_search[1], "v", False )
+    
+    range_s_XY_of_high_average_s = [range_s_X, range_s_Y]
+    avgs_s_along_XY              = [avgs_s_along_X, avgs_s_along_Y]
+    
+    if plot_enabled:
+        
+        fig, axes = plt.subplots(1, 5, figsize = (5*3.33, 3.33))
+        
+        axes[0].imshow( image_rgb )
+        axes[0].set_title( name_image )
+        
+        axes[1].imshow( convert_rgb_to_hsv(image_rgb)[:,:,2], cmap = "gray" )
+        axes[1].set_title( "S ch. of " + name_image )
+        
+        axes[2].imshow( mask_image( image_rgb, range_s_X, range_s_Y ) )
+        axes[2].set_title( "masked " + name_image )
+        
+        x = list(range(len(avgs_s_along_X)))
+        axes[3].bar( x, avgs_s_along_XY[0])
+        axes[3].set_title( "saturation along X" )
+        
+        y = list(range(len(avgs_s_along_Y)))
+        axes[4].bar( y, avgs_s_along_XY[1])
+        axes[4].set_title( "saturation along Y" )
+        
+        plt.show()
+    
+    
+    return range_s_XY_of_high_average_s
+# <<
+# ==================================================================================================================================
+# END << FUNCTION << get_location_of_light
 # ==================================================================================================================================
 
 
@@ -463,10 +550,10 @@ def get_average_image   ( images
     
     # Plotting if requested >>
     if plot_enabled:
-        plot_channels( image_average
-                            , type_channels = type_channels
-                            , name_image    = name_image
-                            , cmap          = "gray" )
+        plot_channels   ( image_average
+                        , type_channels = type_channels
+                        , name_image    = name_image
+                        , cmap          = "gray" )
         
     return image_average
 # <<
