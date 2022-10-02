@@ -44,7 +44,7 @@ from ._modify_images_subpkg   import modify_images
 from ._extract_feature_subpkg import extract_feature
 from ._statistics_subpkg      import statistics
 # MODULES >>
-# from .template_mod            import *
+from .model                   import *
 # <<
 # ==================================================================================
 # END << IMPORTS

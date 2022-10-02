@@ -354,10 +354,10 @@ def mask_image( image
     width  = len(image[0])
     height = len(image)
 
-    image_masked[         :      ,       0:x_left , : ] = (0,0,0)
-    image_masked[         :      , x_right:width  , : ] = (0,0,0)
-    image_masked[        0:y_top ,        :       , : ] = (0,0,0)
-    image_masked[ y_bottom:height,        :       , : ] = (0,0,0)
+    image_masked[         :       ,       0:x_left , : ] = (0,0,0)
+    image_masked[         :       , x_right:width  , : ] = (0,0,0)
+    image_masked[        0:y_top  ,        :       , : ] = (0,0,0)
+    image_masked[ y_bottom:height ,        :       , : ] = (0,0,0)
 
     if plot_enabled:
         name_image_cropped = "masked " + name_image

@@ -73,6 +73,10 @@ DEFAULT_SHAPE_AREA_SEARCH = (18, 14)           #  99.72%, 85.71%, 95.34%, 0.9696
 # DEFAULT_SHAPE_AREA_SEARCH = (16, 12)           #  99.45%, 80.00%, 95.10%, 0.9629629629629629
 # DEFAULT_SHAPE_AREA_SEARCH = (12, 9)            #  99.59%, 80.00%, 94.87%, 0.9528619528619529
 # DEFAULT_SHAPE_AREA_SEARCH = (8, 6)             #  99.45%, 77.14%, 94.17%, 0.9562289562289562
+
+DEFAULT_SHAPE_AREA_SEARCH_AVG_IMAGE = (20, 16)
+DEFAULT_SHAPE_AREA_SEARCH_IND_IMAGE = (12,  9)
+
 # <<
 # ==================================================================================================================================
 # END << CONSTANTS << _extract_feature_subpkg related
