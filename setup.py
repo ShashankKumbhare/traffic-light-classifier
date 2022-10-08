@@ -1,13 +1,7 @@
 
-# from setuptools import setup
-# from setuptools import find_packages
+from setuptools import setup
+from setuptools import find_packages
 
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    from distutils.core import setup, find_packages
-
-# Loading the README.md file >>
 with open(file = "README.md", mode = "r") as readme_handle:
     long_description = readme_handle.read()
 
@@ -44,24 +38,4 @@ setup(
                         'Operating Syayerm :: OS Independent'
                         'Programming Labguage :: Python :: 3'
                        ]
-    # package_dir      = {
-    #                     'traffic_light_classifier'                        : 'traffic_light_classifier',
-    #                     'traffic_light_classifier.__dependencies_subpkg__': 'traffic_light_classifier/__dependencies_subpkg__',
-    #                     'traffic_light_classifier.__constants_subpkg__'   : 'traffic_light_classifier/__constants_subpkg__',
-    #                     'traffic_light_classifier.__auxil_subpkg__'       : 'traffic_light_classifier/__auxil_subpkg__',
-    #                     'traffic_light_classifier.__tests_subpkg__'       : 'traffic_light_classifier/__tests_subpkg__',
-    #                     'traffic_light_classifier.plots_subpkg'           : 'traffic_light_classifier/plots_subpkg',
-    #                     'traffic_light_classifier.modify_images_subpkg'   : 'traffic_light_classifier/modify_images_subpkg',
-    #                     'traffic_light_classifier.extract_feature_subpkg' : 'traffic_light_classifier/extract_feature_subpkg'
-    #                    }
-    # packages         = [
-    #                     'traffic_light_classifier',
-    #                     'traffic_light_classifier.__dependencies_subpkg__',
-    #                     'traffic_light_classifier.__constants_subpkg__',
-    #                     'traffic_light_classifier.__auxil_subpkg__',
-    #                     'traffic_light_classifier.__tests_subpkg__',
-    #                     'traffic_light_classifier.plots_subpkg',
-    #                     'traffic_light_classifier.modify_images_subpkg',
-    #                     'traffic_light_classifier.extract_feature_subpkg'
-    #                    ]
 )

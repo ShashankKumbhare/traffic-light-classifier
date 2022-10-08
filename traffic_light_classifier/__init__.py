@@ -26,6 +26,7 @@ techniques to classify the traffic signal light images as either red, green, or
 yellow.
 """
 
+__version__  = '1.0.0'
 _name_pkg = __name__.partition(".")[0]
 print("")
 print(f"==========================================================================")
