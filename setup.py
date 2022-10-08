@@ -1,6 +1,11 @@
 
-from setuptools import setup
-from setuptools import find_packages
+# from setuptools import setup
+# from setuptools import find_packages
+
+try:
+    from setuptools import setup, find_packages
+except ImportError:
+    from distutils.core import setup, find_packages
 
 # Loading the README.md file >>
 with open(file = "README.md", mode = "r") as readme_handle:
@@ -25,10 +30,19 @@ setup(
                         'scipy==1.7.3',
                         'IPython==8.2.0',
                        ],
-    packages         = find_packages( where = ['traffic_light_classifier'] ),
-    classifiers      = ['License              :: OSI Approved :: MIT',
-                        'Natural Language     :: English',
-                        'Operating Syayerm    :: OS Independent'
+    packages         = find_packages(),
+    package_data     = {
+                        'traffic_light_classifier' : ['__data_subpkg__/dataset_train/red/*',
+                                                      '__data_subpkg__/dataset_train/yellow/*',
+                                                      '__data_subpkg__/dataset_train/green/*',
+                                                      '__data_subpkg__/dataset_test/red/*',
+                                                      '__data_subpkg__/dataset_test/yellow/*',
+                                                      '__data_subpkg__/dataset_test/green/*']
+                       },
+    include_package_data = True,
+    classifiers      = ['License :: OSI Approved :: MIT',
+                        'Natural Language :: English',
+                        'Operating Syayerm :: OS Independent'
                         'Programming Labguage :: Python :: 3'
                        ]
     # package_dir      = {
