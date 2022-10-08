@@ -1,46 +1,54 @@
 
 from setuptools import setup
+from setuptools import find_packages
 
-# ==================================================================================
-# START >> NOTE
-# ==================================================================================
-# >>
-# If you have setup.py in your project, and you use find_packages() within it, it is
-# necessary to have an __init__.py file in every directory for packages to be
-# automatically found.
-# Packages are only recognized if they include an __init__.py file
-# <<
-# ==================================================================================
-# END << NOTE
-# ==================================================================================
+# Loading the README.md file >>
+with open(file = "README.md", mode = "r") as readme_handle:
+    long_description = readme_handle.read()
 
 setup(
-    name         = 'traffic_light_classifier',
-    version      = '1.0.0',
-    author       = 'Shashank Kumbhare',
-    author_email = 'shashankkumbhare8@gmail.com',
-    url          = 'https://github.com/ShashankKumbhare/traffic-light-classifier',
-    description  = 'A computer vision & probabilistic approach based traffic light classifier',
-    license      = 'MIT',
-    package_dir  = {
-                    'traffic_light_classifier'                        : 'traffic_light_classifier',
-                    'traffic_light_classifier.__dependencies_subpkg__': 'traffic_light_classifier/__dependencies_subpkg__',
-                    'traffic_light_classifier.__constants_subpkg__'   : 'traffic_light_classifier/__constants_subpkg__',
-                    'traffic_light_classifier.__auxil_subpkg__'       : 'traffic_light_classifier/__auxil_subpkg__',
-                    'traffic_light_classifier.__tests_subpkg__'       : 'traffic_light_classifier/__tests_subpkg__',
-                    'traffic_light_classifier.plots_subpkg'           : 'traffic_light_classifier/plots_subpkg',
-                    'traffic_light_classifier.modify_images_subpkg'   : 'traffic_light_classifier/modify_images_subpkg',
-                    'traffic_light_classifier.extract_feature_subpkg' : 'traffic_light_classifier/extract_feature_subpkg'
-                   },
-    packages     = [
-                    'traffic_light_classifier',
-                    'traffic_light_classifier.__dependencies_subpkg__',
-                    'traffic_light_classifier.__constants_subpkg__',
-                    'traffic_light_classifier.__auxil_subpkg__',
-                    'traffic_light_classifier.__tests_subpkg__',
-                    'traffic_light_classifier.plots_subpkg',
-                    'traffic_light_classifier.modify_images_subpkg',
-                    'traffic_light_classifier.extract_feature_subpkg'
-                   ],
-    keywords     = ['python', 'opencv', 'computer vision', 'ML', 'machine learning', 'traffic-light-classifier', 'AI', 'artificial intelligence']
+    name             = 'traffic_light_classifier',
+    version          = '1.0.0',
+    author           = 'Shashank Kumbhare',
+    author_email     = 'shashankkumbhare8@gmail.com',
+    url              = 'https://github.com/ShashankKumbhare/traffic-light-classifier',
+    description      = 'A computer vision & probabilistic approach based traffic light classifier',
+    long_description = long_description,
+    long_description_content_type = "text/markdown",
+    license          = 'MIT',
+    keywords         = ['python', 'opencv', 'computer vision', 'ML', 'machine learning', 'traffic-light-classifier',
+                        'self driving cars', 'AI', 'artificial intelligence'],
+    install_requires = [
+                        'numpy==1.21.5',
+                        'matplotlib==3.5.1',
+                        'opencv-python==4.6.0',
+                        'scipy==1.7.3',
+                        'IPython==8.2.0',
+                       ],
+    packages         = find_packages( where = ['traffic_light_classifier'] ),
+    classifiers      = ['License              :: OSI Approved :: MIT',
+                        'Natural Language     :: English',
+                        'Operating Syayerm    :: OS Independent'
+                        'Programming Labguage :: Python :: 3'
+                       ]
+    # package_dir      = {
+    #                     'traffic_light_classifier'                        : 'traffic_light_classifier',
+    #                     'traffic_light_classifier.__dependencies_subpkg__': 'traffic_light_classifier/__dependencies_subpkg__',
+    #                     'traffic_light_classifier.__constants_subpkg__'   : 'traffic_light_classifier/__constants_subpkg__',
+    #                     'traffic_light_classifier.__auxil_subpkg__'       : 'traffic_light_classifier/__auxil_subpkg__',
+    #                     'traffic_light_classifier.__tests_subpkg__'       : 'traffic_light_classifier/__tests_subpkg__',
+    #                     'traffic_light_classifier.plots_subpkg'           : 'traffic_light_classifier/plots_subpkg',
+    #                     'traffic_light_classifier.modify_images_subpkg'   : 'traffic_light_classifier/modify_images_subpkg',
+    #                     'traffic_light_classifier.extract_feature_subpkg' : 'traffic_light_classifier/extract_feature_subpkg'
+    #                    }
+    # packages         = [
+    #                     'traffic_light_classifier',
+    #                     'traffic_light_classifier.__dependencies_subpkg__',
+    #                     'traffic_light_classifier.__constants_subpkg__',
+    #                     'traffic_light_classifier.__auxil_subpkg__',
+    #                     'traffic_light_classifier.__tests_subpkg__',
+    #                     'traffic_light_classifier.plots_subpkg',
+    #                     'traffic_light_classifier.modify_images_subpkg',
+    #                     'traffic_light_classifier.extract_feature_subpkg'
+    #                    ]
 )

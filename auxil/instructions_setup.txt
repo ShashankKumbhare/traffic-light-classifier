@@ -1,0 +1,2 @@
+To build the python package run the following in git-bash:
+    'python setup.py sdist bdist_wheel'

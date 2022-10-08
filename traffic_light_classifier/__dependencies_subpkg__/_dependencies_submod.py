@@ -43,7 +43,6 @@ import math
 import os
 import sys
 import inspect
-from progressbar import ProgressBar
 import glob                                 # library for loading images from a directory
 import matplotlib.image as mpimg
 import cv2
