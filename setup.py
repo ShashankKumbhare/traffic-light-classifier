@@ -26,7 +26,6 @@ setup(
     install_requires = [
                         'numpy==1.21.5',
                         'matplotlib==3.5.1',
-                        'opencv-python==4.6.0',
                         'scipy==1.7.3',
                         'IPython==8.2.0',
                        ],
