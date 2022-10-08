@@ -287,7 +287,7 @@ class Model:
             "        mu_brt_red: mean brightness of red light region\n"+\
             "        a & b     : model's optimized parameters\n"+\
             "\n"+\
-            "The current compilation stage is optimizing parameters 'a' & 'b' for maximum accuracy.\n"+\
+            "The current compilation stage is optimizing parameters 'a' & 'b' for maximum accuracy of training dataset.\n"+\
             "Please wait..."+\
             "\n"
             print(text)
