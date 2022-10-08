@@ -37,14 +37,16 @@ print(f"========================================================================
 # ==================================================================================
 # >>
 # SUBPACKAGES >>
-from .__auxil_subpkg__        import helpers
-from .__tests_subpkg__        import test_functions
-from ._plots_subpkg           import plots
-from ._modify_images_subpkg   import modify_images
-from ._extract_feature_subpkg import extract_feature
-from ._statistics_subpkg      import statistics
 # MODULES >>
-from .model                   import *
+from .                        import helpers
+from .                        import plots
+from .                        import modify_images
+from .                        import extract_feature
+from .                        import statistics
+from .Model                   import Model
+# ELEMENTS >>
+from .__data_subpkg__         import datasets
+from .__tests_subpkg__        import Tests
 # <<
 # ==================================================================================
 # END << IMPORTS

@@ -33,7 +33,6 @@ print(f"   + Adding submodule '{_name_submod}'...")
 from ..__dependencies_subpkg__ import *
 from ..__constants_subpkg__    import *
 from ..__auxil_subpkg__        import *
-from ..__data_subpkg__         import *
 from .._plots_subpkg           import *
 # ==================================================================================
 # END << IMPORTS
@@ -83,7 +82,7 @@ def standardize_image( image
         RETURNS
         =======
             
-            image_std <type>
+            image_std <np.array>
                 
                 A standardized version of image of dimension (size, size, 3).
     
@@ -107,7 +106,7 @@ def standardize_image( image
 # START >> FUNCTION >> standardize_images
 # ==================================================================================================================================
 # >>
-def standardize_images( images
+def standardize_images( images_and_labels
                       , size = DEFAULT_STANDARDIZATION_SIZE
                       ) :
     
@@ -136,7 +135,7 @@ def standardize_images( images
         RETURNS
         =======
             
-            images_std <type>
+            images_std <np.array>
                 
                 A list of standardized version of images of dimension (size, size, 3).
     
@@ -145,9 +144,9 @@ def standardize_images( images
     ================================================================================
     """
     
-    ims_std        = [ standardize_image(image[0], size = size)        for image in images ]
-    one_hot_labels = [ one_hot_encode(image[1])    for image in images ]
-    images_std     = [ (im_std, one_hot_label) for im_std, one_hot_label in zip(ims_std, one_hot_labels) ]
+    images_std     = [ standardize_image(image_and_label[0], size = size) for image_and_label in images_and_labels ]
+    one_hot_labels = [ one_hot_encode(image_and_label[1])                 for image_and_label in images_and_labels ]
+    images_std     = [ (im_std, one_hot_label) for im_std, one_hot_label in zip(images_std, one_hot_labels) ]
     
     return images_std
 # <<
@@ -379,7 +378,7 @@ def crop_image( image
               , range_crop_x
               , range_crop_y
               , plot_enabled = False
-              , cmap         = DEFAULT_CMAP
+              , titles = (DEFAULT_NAME_IMAGE, "cropped " + DEFAULT_NAME_IMAGE)
               ) :
     
     """
@@ -431,7 +430,16 @@ def crop_image( image
     image_cropped = image[ y_top:y_bottom, x_left:x_right ]
     
     if plot_enabled:
-        plot_images( [image, image_cropped], enable_grid = True, cmap = cmap )
+        
+        fig, axes = plt.subplots(1, 2, figsize = (2*DEFAULT_FIGSIZE, DEFAULT_FIGSIZE))
+        
+        axes[0].imshow( image )
+        axes[0].set_title( titles[0] )
+        
+        axes[1].imshow( image_cropped )
+        axes[1].set_title( titles[1] )
+        
+        plt.show()
     
     return image_cropped
 # <<

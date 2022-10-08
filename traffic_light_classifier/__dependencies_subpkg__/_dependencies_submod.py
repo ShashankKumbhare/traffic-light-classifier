@@ -36,6 +36,7 @@ print(f"   + Adding submodule '{_name_submod}'...")
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.style as style
+from matplotlib.ticker import MultipleLocator
 style.use('classic')
 style.use('seaborn-white')
 import math
@@ -47,7 +48,13 @@ import glob                                 # library for loading images from a 
 import matplotlib.image as mpimg
 import cv2
 import unittest
+from scipy.stats import norm, lognorm, truncnorm
+from scipy.stats import poisson
+from scipy.special import logsumexp
+from scipy import optimize
 from IPython.display import Markdown, display
+from textwrap import wrap
+import random
 # <<
 # ==================================================================================
 # END << IMPORTS

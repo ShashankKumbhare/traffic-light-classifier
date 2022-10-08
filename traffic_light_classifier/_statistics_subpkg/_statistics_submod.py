@@ -44,7 +44,7 @@ from .._extract_feature_subpkg import *
 # ==================================================================================
 # START >> EXPORTS
 # ==================================================================================
-__all__ = [ "get_distribution_of_channel" ]
+__all__ = [ "get_distribution_of_channel", "get_logLikelihood" ]
 # ==================================================================================
 # END << EXPORTS
 # ==================================================================================
@@ -57,8 +57,8 @@ __all__ = [ "get_distribution_of_channel" ]
 def get_distribution_of_channel ( image_rgb
                                 , channels
                                 , ch
-                                , rangeX
-                                , rangeY
+                                , drop_zeros      = False
+                                , remove_outliers = False
                                 , plot_enabled = False
                                 ) :
     
@@ -118,11 +118,7 @@ def get_distribution_of_channel ( image_rgb
     else:
         image = image_rgb
     
-    # # Cropping image >>
-    # image_cropped    = crop_image(image, rangeX, rangeY)
-    # ch_image_cropped = image_cropped[:,:,ch]
-    
-    # Cropping image >>
+    # Separating channel >>
     image_cropped    = image
     ch_image_cropped = image_cropped[:,:,ch]
     
@@ -132,13 +128,19 @@ def get_distribution_of_channel ( image_rgb
     chVals = ch_image_cropped.reshape( (n_rows*n_cols) )
     chVals_float = np.array(chVals, dtype = float)
     
-    # if channels == "hsv" and ch == 0:
-    #     # for i, _ in enumerate( range(len(chVals_float)) ):
-    #     #     if chVals_float[i] >= 90:
-    #     #         chVals_float[i] = chVals_float[i] - 180
-    #     # Taking cosine of twice the h values (angles) >>
-    #     chVals_float = [ np.cos(2*h*np.pi/180) for h in chVals_float ]
-    #     # print(chVals_float)
+    # Dropping zeros >>
+    if drop_zeros:
+        chVals_float = chVals_float[chVals_float!=0]
+        if len(chVals_float) == 0:
+            chVals_float = [0]
+    
+    # Removing outliers >>
+    if remove_outliers:
+        Q1  = np.percentile(chVals_float, 10, interpolation = 'midpoint')
+        Q3  = np.percentile(chVals_float, 90, interpolation = 'midpoint')
+        IQR = Q3 - Q1
+        chVals_float = chVals_float[chVals_float<=(Q3+1.5*IQR)]
+        chVals_float = chVals_float[chVals_float>=(Q3-1.5*IQR)]
     
     # Getting mean and standard deviation >>
     mu    = np.mean(chVals_float)
@@ -150,7 +152,7 @@ def get_distribution_of_channel ( image_rgb
     if plot_enabled:
         _, axes = plt.subplots(1, 1, figsize = (3.33, 3.33))
         axes.hist(chVals_float)
-        axes.set_title(f"Histogram of ch {ch}\n mu = {mu:.3f}, sig = {sigma:.3f}")
+        axes.set_title(f"Histogram of ch {channels[ch]}\n mu = {mu:.3f}, sig = {sigma:.3f}")
     
     return distribution
 # <<
@@ -161,57 +163,67 @@ def get_distribution_of_channel ( image_rgb
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
+# START >> FUNCTION >> get_logLikelihood
 # ==================================================================================================================================
 # >>
-def _template_submod_fun2   ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
+def get_logLikelihood   ( mu
+                        , sigma
+                        , xa
+                        , xb
+                        , data_points
+                        ) :
     
     """
     ================================================================================
-    START >> DOC >> template_submod_func
+    START >> DOC >> get_logLikelihood
     ================================================================================
         
         GENERAL INFO
         ============
             
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+            Computes the log likelihood of the input distribution(mu, sigma) given
+            data points.
         
         PARAMETERS
         ==========
             
-            p_p_p_p_1 <type>
+            mu <float>
                 
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+                Mean of the input distribution.
             
-            p_p_p_p_2 <type>
+            sigma <float>
                 
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+                Standard deviation of the input distribution.
+                
+            data_points <list<floats>>
+                
+                Data points.
         
         RETURNS
         =======
             
-            r_r_r_r <type>
+            logLikelihood <float>
                 
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
+                Log likelihood of the input distribution(mu,sigma) given the data points.
     
     ================================================================================
-    END << DOC << _template_submod_func
+    END << DOC << get_logLikelihood
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
-    
-    return None
+    logLikelihood = 0
+    (a, b) = get_shape_params_truncnorm(xa, xb, mu, 0)
+    for data_point in data_points:
+        if data_point == 0:
+            llh = -100
+        else:
+            llh = truncnorm.logpdf(data_point, a, b, mu, sigma)
+        # llh = poisson.logpmf(data_point, mu)
+        logLikelihood = logLikelihood + llh
+    return logLikelihood
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
+# END << FUNCTION << get_logLikelihood
 # ==================================================================================================================================
 
 
@@ -261,7 +273,7 @@ def _template_submod_func3    ( p_p_p_p_1 = ""
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
+    _name_func = inspect.stack()[0][3]
     print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None
@@ -317,7 +329,7 @@ def _template_submod_func4  ( p_p_p_p_1 = ""
     ================================================================================
     """
     
-    _name_func_ = inspect.stack()[0][3]
+    _name_func = inspect.stack()[0][3]
     print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
     
     return None

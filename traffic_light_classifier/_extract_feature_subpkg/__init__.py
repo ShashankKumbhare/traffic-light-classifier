@@ -31,7 +31,7 @@ print(f" + Adding subpackage '{_name_subpkg}'...")
 # ==================================================================================
 # >>
 # SUBMODULES >>
-from .extract_feature import *
+from ._extract_feature_submod import *
 # <<
 # ==================================================================================
 # END << IMPORTS

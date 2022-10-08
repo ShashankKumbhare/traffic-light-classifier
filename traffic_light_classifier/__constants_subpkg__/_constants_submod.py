@@ -38,12 +38,31 @@ from ..__dependencies_subpkg__ import *
 
 
 # ==================================================================================================================================
+# START >> CLASS >> Struct
+# ==================================================================================================================================
+# >>
+class Struct:
+    def _set_attributes(self, attributes):
+        if type(attributes) == "str":
+            self.__setattr__(attributes, None)
+        else:
+            for attribute in attributes:
+                self.__setattr__(attribute, None)
+# <<
+# ==================================================================================================================================
+# END << CLASS << Struct
+# ==================================================================================================================================
+
+
+# ==================================================================================================================================
 # START >> CONSTANTS >> _plots_subpkg related
 # ==================================================================================================================================
 # >>
+DEFAULT_FIGSIZE      = 3.33
 DEFAULT_FIGSIZESCALE = 1
 DEFAULT_NAME_IMAGE   = "image"
 DEFAULT_CMAP         = "gray" # "viridis"
+DEFAULT_ALPHA        = 0.4
 # <<
 # ==================================================================================================================================
 # END << CONSTANTS << _plots_subpkg related
@@ -67,19 +86,37 @@ DEFAULT_STANDARDIZATION_SIZE = 32
 # START >> CONSTANTS >> _extract_feature_subpkg related
 # ==================================================================================================================================
 # >>
-# DEFAULT_SHAPE_AREA_SEARCH = (31, 31)           # 100.00%, 80.00%, 94.17%, 0.9663299663299664
-# DEFAULT_SHAPE_AREA_SEARCH = (20, 16)           #  99.59%, 88.57%, 96.27%, 0.9764309764309764
-DEFAULT_SHAPE_AREA_SEARCH = (18, 14)           #  99.72%, 85.71%, 95.34%, 0.9696969696969697
-# DEFAULT_SHAPE_AREA_SEARCH = (16, 12)           #  99.45%, 80.00%, 95.10%, 0.9629629629629629
-# DEFAULT_SHAPE_AREA_SEARCH = (12, 9)            #  99.59%, 80.00%, 94.87%, 0.9528619528619529
-# DEFAULT_SHAPE_AREA_SEARCH = (8, 6)             #  99.45%, 77.14%, 94.17%, 0.9562289562289562
-
-DEFAULT_SHAPE_AREA_SEARCH_AVG_IMAGE = (20, 16)
-DEFAULT_SHAPE_AREA_SEARCH_IND_IMAGE = (12,  9)
-
+DEFAULT_NAME_IMAGE_INPUT            = "input image"
+DEFAULT_NAME_IMAGE_AVG_RED          = "avg red image"
+DEFAULT_NAME_IMAGE_AVG_YELLOW       = "avg yellow image"
+DEFAULT_NAME_IMAGE_AVG_GREEN        = "avg green image"
+DEFAULT_NAME_IMAGE_AVG_LIGHT_RED    = "avg red image"
+DEFAULT_NAME_IMAGE_AVG_LIGHT_YELLOW = "avg yellow image"
+DEFAULT_NAME_IMAGE_AVG_LIGHT_GREEN  = "avg green image"
+DEFAULT_SHAPE_AREA_SEARCH           = (18, 14)
+# DEFAULT_SHAPE_AREA_SEARCH_AVG_IMAGE = (20, 14)
+DEFAULT_SHAPE_AREA_SEARCH_AVG_IMAGE = (20, 12)
+DEFAULT_SHAPE_AREA_SEARCH_LIGHT     = (12,  9)
 # <<
 # ==================================================================================================================================
 # END << CONSTANTS << _extract_feature_subpkg related
+# ==================================================================================================================================
+
+
+# ==================================================================================================================================
+# START >> CONSTANTS >> Model related
+# ==================================================================================================================================
+# >>
+DEFAULT_NAME_LOCATED_LIGHT  = "light located"
+DEFAULT_COLOR_RED           = "red"
+DEFAULT_COLOR_YELLOW        = "orange"
+DEFAULT_COLOR_GREEN         = "mediumspringgreen"
+DEFAULT_LABEL_LIGHTS_RED    = "red lights"
+DEFAULT_LABEL_LIGHTS_YELLOW = "yellow lights"
+DEFAULT_LABEL_LIGHTS_GREEN  = "green lights"
+# <<
+# ==================================================================================================================================
+# END << CONSTANTS << Model related
 # ==================================================================================================================================
 
 print("   - Done!")

@@ -33,7 +33,6 @@ print(f"   + Adding submodule '{_name_submod}'...")
 from ..__dependencies_subpkg__ import *
 from ..__constants_subpkg__    import *
 from ..__auxil_subpkg__        import *
-from ..__data_subpkg__         import *
 # <<
 # ==================================================================================
 # END << IMPORTS
@@ -127,7 +126,7 @@ def plot_images( images
         
         # Deciding the no. of rows and columns of the grid plot >>
         len_images = len(images)
-        if len_images < 6:
+        if len_images < 11:
             n_col = len_images
         else:
             n_col = int( np.ceil(np.sqrt(len_images)) )
@@ -159,11 +158,9 @@ def plot_images( images
                     image = images[i_image]
                 
                 if title_enabled:
-                    if type(images[0]) == tuple:
+                    if not type(images[0]) == tuple:
                         title = get_title(images[i_image])
-                    else:
-                        title = name_image[i_image]
-                    ax_curr.set_title(title)
+                        ax_curr.set_title(title)
                 
                 if enable_grid:
                     ax_curr.set_xticks( np.arange(-.5, len(image[0]), 1), minor = True )
@@ -175,6 +172,7 @@ def plot_images( images
                 i_image = i_image + 1
                 if i_image >= len_images:
                     break
+    plt.show()
     
     return None
 # <<
@@ -273,6 +271,8 @@ def plot_channels   ( image_rgb
     ax3.imshow(image_ch1, cmap = cmap)
     ax4.set_title(titles[3])
     ax4.imshow(image_ch2, cmap = cmap)
+    
+    plt.show()
 
     return None
 # <<
@@ -357,7 +357,7 @@ def plot_bar( Y
                     if i_Y >= len_Y:
                         plt.show()
                         break
-        plt.show()
+    plt.show()
         
     return None
 # <<

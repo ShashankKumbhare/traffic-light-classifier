@@ -48,9 +48,9 @@ from .._modify_images_subpkg   import *
 # ==================================================================================
 # >>
 __all__ =   [ "get_average_channel", "get_average_channel_along_axis"
-            , "get_range_of_high_average_channel_along_axis"
-            , "get_range_of_high_average_channel", "get_average_image"
-            , "get_location_of_light" ]
+            , "get_region_high_avg_channel_along_axis"
+            , "get_region_high_avg_channel", "get_average_image"
+            , "get_colors_from_image" ]
 # <<
 # ==================================================================================
 # END << IMPORTS
@@ -213,22 +213,22 @@ def get_average_channel_along_axis( im_rgb
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> get_range_of_high_average_channel_along_axis
+# START >> FUNCTION >> get_region_high_avg_channel_along_axis
 # ==================================================================================================================================
 # >>
-def get_range_of_high_average_channel_along_axis( im_rgb
-                                                , channel
-                                                , axis
-                                                , len_range
-                                                , extra_channel = None
-                                                , plot_enabled  = False
-                                                , i = 1
-                                                , j = 1
-                                                ) :
+def get_region_high_avg_channel_along_axis  ( im_rgb
+                                            , channel
+                                            , axis
+                                            , len_range
+                                            , extra_channel = None
+                                            , plot_enabled  = False
+                                            , i = 1
+                                            , j = 1
+                                            ) :
     
     """
     ================================================================================
-    START >> DOC >> get_range_of_high_average_channel_along_axis
+    START >> DOC >> get_region_high_avg_channel_along_axis
     ================================================================================
         
         GENERAL INFO
@@ -263,12 +263,17 @@ def get_range_of_high_average_channel_along_axis( im_rgb
         RETURNS
         =======
             
-            range_of_high_average_channel_along_axis <tuple>
+            region_high_average_channel_along_axis <tuple>
                 
                 A tuple of size 2 indicating lower and upper limit.
+            
+            avgs_channel_along_axis <np.array>
+            
+                Numpy array of length n_row if axis = 0 requested or
+                Numpy array of length n_col if axis = 1 requested.
     
     ================================================================================
-    END << DOC << get_range_of_high_average_channel_along_axis
+    END << DOC << get_region_high_avg_channel_along_axis
     ================================================================================
     """
     
@@ -284,36 +289,36 @@ def get_range_of_high_average_channel_along_axis( im_rgb
         sums_along_axis.append(sum_along_axis)
     
     i_sum_max = np.argmax(sums_along_axis)
-    range_of_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
+    region_high_average_channel_along_axis = (i_sum_max, i_sum_max+len_range)
     
     if plot_enabled:
         plot_bar( avgs_channel_along_axis )
     
-    return range_of_high_average_channel_along_axis, avgs_channel_along_axis
+    return region_high_average_channel_along_axis, avgs_channel_along_axis
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << get_range_of_high_average_channel_along_axis
+# END << FUNCTION << get_region_high_avg_channel_along_axis
 # ==================================================================================================================================
 
 
 
 # ==================================================================================================================================
-# START >> FUNCTION >> get_range_of_high_average_channel
+# START >> FUNCTION >> get_region_high_avg_channel
 # ==================================================================================================================================
 # >>
-def get_range_of_high_average_channel( image_rgb
-                                     , channel
-                                     , shape_area_search = DEFAULT_SHAPE_AREA_SEARCH
-                                     , extra_channel = None
-                                     , plot_enabled  = False
-                                     , name_image    = DEFAULT_NAME_IMAGE
-                                     , i = 1
-                                     , j = 1
-                                     ) :
+def get_region_high_avg_channel ( image_rgb
+                                , channel
+                                , extra_channel     = None
+                                , shape_area_search = DEFAULT_SHAPE_AREA_SEARCH
+                                , plot_enabled      = False
+                                , name_image        = DEFAULT_NAME_IMAGE
+                                , i = 1
+                                , j = 1
+                                ) :
     
     """
     ================================================================================
-    START >> DOC >> get_range_of_high_average_channel
+    START >> DOC >> get_region_high_avg_channel
     ================================================================================
         
         GENERAL INFO
@@ -345,158 +350,58 @@ def get_range_of_high_average_channel( image_rgb
         RETURNS
         =======
             
-            rangeXY_of_high_average_channel <list<tuple>>
+            region_high_avg_channel <tuple<tuple>>
                 
-                A list of tuples of length 2 indicating X & Y lower and upper limits.
+                A tuple of tuples of length 2 indicating X & Y lower and upper limits.
             
-            avgs_ch_along_XY <list>
-                
-                A list of length 2 indicating avgs_ch_along_X & avgs_ch_along_Y lower and upper limits.
+            image_masked_high_average_channel <list>
+            
+                A maksed input image at region of high avg channel of dimension (size, size, 3).
     
     ================================================================================
-    END << DOC << get_range_of_high_average_channel
+    END << DOC << get_region_high_avg_channel
     ================================================================================
     """
     
-    range_X, avgs_ch_along_X = get_range_of_high_average_channel_along_axis(
-                                image_rgb, channel, 0, shape_area_search[0], extra_channel, False, i, j )
-    range_Y, avgs_ch_along_Y = get_range_of_high_average_channel_along_axis(
-                                image_rgb, channel, 1, shape_area_search[1], extra_channel, False, i, j )
+    region_X, avgs_ch_along_X = get_region_high_avg_channel_along_axis( image_rgb, channel, 0, shape_area_search[0], extra_channel, False, i, j )
+    region_Y, avgs_ch_along_Y = get_region_high_avg_channel_along_axis( image_rgb, channel, 1, shape_area_search[1], extra_channel, False, i, j )
+    region_high_avg_channel   = (region_X, region_Y)
     
-    rangeXY_of_high_average_channel = [ range_X, range_Y ]
-    avgs_ch_along_XY                = [avgs_ch_along_X, avgs_ch_along_Y]
+    image_masked_high_average_channel = mask_image( image_rgb, region_X, region_Y )
     
     if plot_enabled:
         
-        fig, axes = plt.subplots(1, 7, figsize = (7*3.33, 3.33))
+        n_col = 6 if extra_channel else 5
+        fig, axes = plt.subplots(1, n_col, figsize = (n_col*3.33, 3.33))
         
         axes[0].imshow( image_rgb )
         axes[0].set_title( name_image )
         
-        axes[1].imshow( convert_rgb_to_hsv(image_rgb)[:,:,0], cmap = "gray" )
-        axes[1].set_title( "H channel" )
+        axes[1].imshow( convert_rgb_to_hsv(image_rgb)[:,:,1], cmap = "gray" )
+        axes[1].set_title( "S channel" )
         
-        axes[2].imshow( convert_rgb_to_hsv(image_rgb)[:,:,1], cmap = "gray" )
-        axes[2].set_title( "S channel" )
+        if extra_channel:
+            axes[2].imshow( convert_rgb_to_hsv(image_rgb)[:,:,2], cmap = "gray" )
+            axes[2].set_title( "V channel" )
         
-        axes[3].imshow( convert_rgb_to_hsv(image_rgb)[:,:,2], cmap = "gray" )
-        axes[3].set_title( "V channel" )
-        
-        axes[4].imshow( mask_image( image_rgb, range_X, range_Y ) )
-        axes[4].set_title( "masked " + name_image )
+        axes[-3].imshow(image_masked_high_average_channel)
+        axes[-3].set_title( "masked " + name_image )
         
         x = list(range(len(avgs_ch_along_X)))
-        axes[5].bar( x, avgs_ch_along_XY[0])
-        axes[5].set_title( "saturation along X" )
+        axes[-2].bar( x, avgs_ch_along_X)
+        axes[-2].set_title( "saturation along X" )
         
         y = list(range(len(avgs_ch_along_Y)))
-        axes[6].barh(y, avgs_ch_along_XY[1])
-        axes[6].invert_yaxis()
-        axes[6].set_title( "saturation along Y" )
+        axes[-1].barh(y, avgs_ch_along_Y)
+        axes[-1].invert_yaxis()
+        axes[-1].set_title( "saturation along Y" )
         
         plt.show()
     
-    return rangeXY_of_high_average_channel, avgs_ch_along_XY
+    return region_high_avg_channel, image_masked_high_average_channel
 # <<
 # ==================================================================================================================================
-# END << FUNCTION << get_range_of_high_average_channel
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> get_location_of_light
-# ==================================================================================================================================
-# >>
-def get_location_of_light   ( image_rgb
-                            , shape_area_search = DEFAULT_SHAPE_AREA_SEARCH
-                            , plot_enabled = False
-                            , name_image    = DEFAULT_NAME_IMAGE
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> get_location_of_light
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            Finds the location of the light in the input rgb image by extracting the
-            X & Y range of the region of high saturation and brightness channel
-            values along both the axis.
-        
-        PARAMETERS
-        ==========
-            
-            image_rgb <np.array>
-                
-                Numpy array of rgb image of shape (n_row, n_col, 3).
-            
-            shape_area_search <tuple>
-                
-                A tuple of length 2 indicating height & width of the search area.
-            
-            plot_enabled <bool>
-                
-                If enabled plot a bar chart of the average channel along an axis.
-        
-        RETURNS
-        =======
-            
-            corners_location <list<list<tuple>>>
-                
-                A list of list of tuples where each tuple element is the location of
-                the corners of the rectangular area of the light found in the order
-                top-left, top-right, bot-left & bot-right.
-    
-    ================================================================================
-    END << DOC << get_location_of_light
-    ================================================================================
-    """
-    
-    # Getting range for high saturation region >>
-    # range_s_X, avgs_s_along_X = get_range_of_high_average_channel_along_axis(
-    #                                             image_rgb, "s", 0, shape_area_search[0], "v", False )
-    # range_s_Y, avgs_s_along_Y = get_range_of_high_average_channel_along_axis(
-    #                                             image_rgb, "s", 1, shape_area_search[1], "v", False )
-    
-    range_s_X, avgs_s_along_X = get_range_of_high_average_channel_along_axis(
-                                                image_rgb, "s", 0, shape_area_search[0], None, False )
-    range_s_Y, avgs_s_along_Y = get_range_of_high_average_channel_along_axis(
-                                                image_rgb, "s", 1, shape_area_search[1], None, False )
-    
-    range_s_XY_of_high_average_s = [range_s_X, range_s_Y]
-    avgs_s_along_XY              = [avgs_s_along_X, avgs_s_along_Y]
-    
-    if plot_enabled:
-        
-        fig, axes = plt.subplots(1, 5, figsize = (5*3.33, 3.33))
-        
-        axes[0].imshow( image_rgb )
-        axes[0].set_title( name_image )
-        
-        axes[1].imshow( convert_rgb_to_hsv(image_rgb)[:,:,2], cmap = "gray" )
-        axes[1].set_title( "S ch. of " + name_image )
-        
-        axes[2].imshow( mask_image( image_rgb, range_s_X, range_s_Y ) )
-        axes[2].set_title( "masked " + name_image )
-        
-        x = list(range(len(avgs_s_along_X)))
-        axes[3].bar( x, avgs_s_along_XY[0])
-        axes[3].set_title( "saturation along X" )
-        
-        y = list(range(len(avgs_s_along_Y)))
-        axes[4].bar( y, avgs_s_along_XY[1])
-        axes[4].set_title( "saturation along Y" )
-        
-        plt.show()
-    
-    
-    return range_s_XY_of_high_average_s
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << get_location_of_light
+# END << FUNCTION << get_region_high_avg_channel
 # ==================================================================================================================================
 
 
@@ -509,7 +414,6 @@ def get_average_image   ( images
                         , plot_enabled  = False
                         , type_channels = ""
                         , name_image    = DEFAULT_NAME_IMAGE
-                        , is_images_npArrays = False
                         ) :
     
     """
@@ -554,10 +458,6 @@ def get_average_image   ( images
     ================================================================================
     """
     
-    # Making a 4d array to hold all images >>
-    if not is_images_npArrays:
-        images = np.array( [ image[0] for image in images ] )
-    
     # Taking average of all images (i.e. average along axis 0) >>
     image_average = np.mean(images, axis = 0)
     
@@ -575,6 +475,91 @@ def get_average_image   ( images
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_average_image
+# ==================================================================================================================================
+
+
+
+# ==================================================================================================================================
+# START >> FUNCTION >> get_colors_from_image
+# ==================================================================================================================================
+# >>
+def get_colors_from_image   ( image_rgb
+                            , range_hue
+                            , range_sat = (0, 255)
+                            , range_brt = (0, 255)
+                            , plot_enabled = False
+                            , titles = (DEFAULT_NAME_IMAGE, "colors extracted from \n" + DEFAULT_NAME_IMAGE)
+                            ) :
+    
+    """
+    ================================================================================
+    START >> DOC >> get_colors_from_image
+    ================================================================================
+        
+        GENERAL INFO
+        ============
+            
+            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+        
+        PARAMETERS
+        ==========
+            
+            image_rgb <np.array>
+                
+                Numpy array of rgb image of shape (n_row, n_col, 3).
+            
+            range_hue <tuple>
+                
+                A tuple of length 2 indicating lower and upper bound of hue.
+            
+            plot_enabled <bool>
+                
+                If enabled plot a bar chart of the average channel along an axis.
+        
+        RETURNS
+        =======
+            
+            image_color_rgb <np.array>
+                
+                Numpy array of rgb image of shape (n_row, n_col, 3).
+    
+    ================================================================================
+    END << DOC << get_colors_from_image
+    ================================================================================
+    """
+    
+    # Convert to HSV >>
+    # image_hsv = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2HSV)
+    image_hsv = convert_rgb_to_hsv(image_rgb)
+    
+    # Defining color selection boundaries in HSV values >>
+    lower = np.array([range_hue[0], range_sat[0], range_brt[0]])
+    upper = np.array([range_hue[1], range_sat[1], range_brt[1]])
+    
+    # Extracting colors from the input image >>
+    mask_color_hsv                     = cv2.inRange(image_hsv, lower, upper)
+    image_color_hsv                    = np.copy(image_hsv)
+    image_color_hsv[mask_color_hsv==0] = [0,0,0]
+    image_color_rgb                    = convert_hsv_to_rgb(image_color_hsv)
+    
+    if plot_enabled:
+        fig, axes = plt.subplots(1, 4, figsize = (4*DEFAULT_FIGSIZE, DEFAULT_FIGSIZE))
+        axes[0].imshow(image_rgb)
+        axes[0].set_title(titles[0])
+        axes[1].imshow(image_color_rgb)
+        axes[1].set_title(titles[1])
+        axes[2].imshow(image_color_hsv[:,:,1], cmap = "gray")
+        axes[2].set_title("S channel")
+        axes[3].imshow(image_color_hsv[:,:,2], cmap = "gray")
+        axes[3].set_title("V channel")
+        plt.show()
+    
+    return image_color_rgb
+# <<
+# ==================================================================================================================================
+# END << FUNCTION << get_colors_from_image
 # ==================================================================================================================================
 
 
