@@ -23,9 +23,7 @@ This submodule contains functionalities to extract features from traffic light
 image dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -389,12 +387,12 @@ def get_region_high_avg_channel ( image_rgb
         
         x = list(range(len(avgs_ch_along_X)))
         axes[-2].bar( x, avgs_ch_along_X)
-        axes[-2].set_title( "saturation along X" )
+        axes[-2].set_title( "light strength along X" )
         
         y = list(range(len(avgs_ch_along_Y)))
         axes[-1].barh(y, avgs_ch_along_Y)
         axes[-1].invert_yaxis()
-        axes[-1].set_title( "saturation along Y" )
+        axes[-1].set_title( "light strength along Y" )
         
         plt.show()
     
@@ -609,8 +607,7 @@ def _template_submod_func   ( p_p_p_p_1 = ""
     ================================================================================
     """
     
-    _name_func = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
+    
     
     return None
 # <<
@@ -618,7 +615,7 @@ def _template_submod_func   ( p_p_p_p_1 = ""
 # END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
-print("   - Done!")
+
 
 # <<
 # ==================================================================================================================================

@@ -22,19 +22,20 @@
 This submodule contains functionalities to calculate probabilities and likelihood values.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+_name_mod = __name__.partition(".")[-1]
+print(f"  + Adding module '{_name_mod}'...", )
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
+# >>
 from ._statistics_subpkg._statistics_submod import *
+# <<
 # ==================================================================================
 # END << IMPORTS
 # ==================================================================================
 
-print("   - Done!")
+print("  - Done!")
 
 # <<
 # ==================================================================================================================================

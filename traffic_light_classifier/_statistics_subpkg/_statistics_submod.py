@@ -22,9 +22,7 @@
 This submodule contains functionalities to calculate probabilities and likelihood values.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -329,8 +327,7 @@ def _template_submod_func4  ( p_p_p_p_1 = ""
     ================================================================================
     """
     
-    _name_func = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
+    
     
     return None
 # <<
@@ -338,7 +335,7 @@ def _template_submod_func4  ( p_p_p_p_1 = ""
 # END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
-print("   - Done!")
+
 
 # <<
 # ==================================================================================================================================

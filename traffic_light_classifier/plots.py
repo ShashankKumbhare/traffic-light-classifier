@@ -22,9 +22,8 @@
 This submodule is created for the visualization and analyzsis of the image-dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+_name_mod = __name__.partition(".")[-1]
+print(f"  + Adding module '{_name_mod}'...", )
 
 # ==================================================================================
 # START >> IMPORTS
@@ -36,7 +35,7 @@ from ._plots_subpkg._plots_submod import *
 # END << IMPORTS
 # ==================================================================================
 
-print("   - Done!")
+print("  - Done!")
 
 # <<
 # ==================================================================================================================================

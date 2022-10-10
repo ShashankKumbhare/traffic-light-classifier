@@ -25,9 +25,7 @@ SUBPACKAGE description SUBPACKAGE description SUBPACKAGE description SUBPACKAGE
 SUBPACKAGE description SUBPACKAGE description.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -40,7 +38,7 @@ from ._template_submod import _template_submod_func
 # END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+
 
 # <<
 # ==================================================================================================================================

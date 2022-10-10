@@ -23,19 +23,20 @@ This submodule contains functionalities to manupulate or modify traffic light
 training & test images.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+_name_mod = __name__.partition(".")[-1]
+print(f"  + Adding module '{_name_mod}'...", )
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
+# >>
 from ._modify_images_subpkg._modify_images_submod import *
+# <<
 # ==================================================================================
 # END << IMPORTS
 # ==================================================================================
 
-print("   - Done!")
+print("  - Done!")
 
 # <<
 # ==================================================================================================================================

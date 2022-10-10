@@ -27,7 +27,7 @@ yellow.
 """
 
 __version__  = '1.0.0'
-_name_pkg = __name__.partition(".")[0]
+_name_pkg    = __name__.partition(".")[0]
 print("")
 print(f"==========================================================================")
 print(f"Importing package '{_name_pkg}'...")
@@ -37,26 +37,25 @@ print(f"========================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-# SUBPACKAGES >>
 # MODULES >>
 from .                        import helpers
+from .                        import tests
 from .                        import plots
 from .                        import modify_images
 from .                        import extract_feature
 from .                        import statistics
-from .Model                   import Model
 # ELEMENTS >>
-from .__data_subpkg__         import datasets
-from .__tests_subpkg__        import Tests
+from .datasets                import datasets
+from .Model                   import Model
 # <<
 # ==================================================================================
 # END << IMPORTS
 # ==================================================================================
 
-print("")
 print(f"==========================================================================")
 print(f"Package '{_name_pkg}' imported sucessfully !!")
 print(f"==========================================================================")
+print(f"version {__version__}")
 print("")
 
 # <<

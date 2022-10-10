@@ -22,9 +22,7 @@
 This submodule is created to manage all the datasets related variables.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -105,7 +103,7 @@ datasets.test.images_std.green      = [ image for image, label in zip(datasets.t
 # END << DATASET
 # ==================================================================================================================================
 
-print("   - Done!")
+
 
 # <<
 # ==================================================================================================================================
