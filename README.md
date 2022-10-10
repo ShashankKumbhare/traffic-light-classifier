@@ -8,7 +8,7 @@
 
 - [**Project Overview**](#Project-Overview)
 - [**Data Description**](#Data-Description)
-- [**Technical Overview**](#Technical-Overview)
+- [**Methodology**](#Methodology)
 - [**Python package `traffic_light_classifier`**](#Python-package-`traffic_light_classifier`)
 - [**Package Usage**](#Package-Usage)
 - [**Results**](#Results)
