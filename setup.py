@@ -30,7 +30,8 @@ setup(
                                                       '__data_subpkg__/dataset_train/green/*',
                                                       '__data_subpkg__/dataset_test/red/*',
                                                       '__data_subpkg__/dataset_test/yellow/*',
-                                                      '__data_subpkg__/dataset_test/green/*']
+                                                      '__data_subpkg__/dataset_test/green/*',
+                                                      '__constants_subpkg__/*',]
                        },
     include_package_data = True,
     classifiers      = ['License :: OSI Approved :: MIT',
