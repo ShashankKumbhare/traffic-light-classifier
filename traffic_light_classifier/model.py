@@ -132,7 +132,7 @@ class Model:
         self.compilation.stg3_dataset_images_cropped_high_s_region.yellow = [ crop_image( image, self.compilation.stg2a_region_high_s.yellow[0], self.compilation.stg2a_region_high_s.yellow[1] ) for image in self.datasets.train.images_std.yellow ]
         self.compilation.stg3_dataset_images_cropped_high_s_region.green  = [ crop_image( image, self.compilation.stg2a_region_high_s.green[0],  self.compilation.stg2a_region_high_s.green[1] )  for image in self.datasets.train.images_std.green ]
         if show_analysis:
-            printmd(f"A few cropped lights:", color = "skyblue", is_bold = True)
+            print_heading(f"A few cropped lights:", heading_level = DEFAULT_SUBHEADING_LEVEL)
             images_red    = self.compilation.stg3_dataset_images_cropped_high_s_region.red[0:10]
             images_yellow = self.compilation.stg3_dataset_images_cropped_high_s_region.yellow[0:10]
             images_green  = self.compilation.stg3_dataset_images_cropped_high_s_region.green[0:10]
@@ -166,7 +166,7 @@ class Model:
         self.compilation.stg5_dataset_images_light.yellow = [ crop_image(image, loc[0], loc[1]) for image, loc in zip(self.compilation.stg3_dataset_images_cropped_high_s_region.yellow, self.compilation.stg4_locations_light.yellow) ]
         self.compilation.stg5_dataset_images_light.green  = [ crop_image(image, loc[0], loc[1]) for image, loc in zip(self.compilation.stg3_dataset_images_cropped_high_s_region.green,  self.compilation.stg4_locations_light.green) ]
         if show_analysis:
-            printmd(f"A few located lights:", color = "skyblue", is_bold = True)
+            print_heading(f"A few located lights:", heading_level = DEFAULT_SUBHEADING_LEVEL)
             images_red    = self.compilation.stg5_dataset_images_light.red[0:10]
             images_yellow = self.compilation.stg5_dataset_images_light.yellow[0:10]
             images_green  = self.compilation.stg5_dataset_images_light.green[0:10]
@@ -300,7 +300,7 @@ class Model:
         self.compilation.stg8_params_optimised = result_optimization.x
         
         if show_analysis:
-            printmd(f"Optimization complete !!\n", is_bold = True)
+            printmd(f"Optimization complete !!", is_bold = True)
             printmd(f"Optimized parameters: a = {self.compilation.stg8_params_optimised[0]:7.6f}, b = {self.compilation.stg8_params_optimised[1]:7.6f}", color = "green")
             update_user_done()
         
@@ -639,7 +639,7 @@ class Model:
             print(f"Predicted Red    = {n_pred_red}")
             print(f"Predicted Yellow = {n_pred_yellow}")
             print(f"Predicted Green  = {n_pred_green}")
-            printmd(f"Accuracy         = {accuracy*100:.2f}%", color = "green", is_bold = True)
+            printmd(f"Accuracy  {name_images} images= {accuracy*100:.2f}%", color = "green")
         
         return accuracy, analyses_pred, misclassified
     # <<

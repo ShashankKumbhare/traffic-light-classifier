@@ -57,7 +57,10 @@ __all__ = [ "printmd", "print_fail", "print_pass"
 def printmd(string, color = "default", is_bold = False):
     """Helper functions for printing Markdown text (text in color/bold/etc)"""
     format_bold = "**" if is_bold == True else ""
-    string = f"{format_bold}<span style='color: {color};'>{string}</span>{format_bold}"
+    if color == "default":
+        string = f"{format_bold}{string}{format_bold}"
+    else:
+        string = f"{format_bold}<span style='color: {color};'>{string}</span>{format_bold}"
     display(Markdown(string))
     return None
 
@@ -172,7 +175,7 @@ def update_user_done(color = DEFAULT_COLOR_UPDATE_USER_DONE):
     ================================================================================
     """
     
-    printmd(f"Done!", color, is_bold = True)
+    printmd(f"Done!", color)
     
     return None
 # <<
