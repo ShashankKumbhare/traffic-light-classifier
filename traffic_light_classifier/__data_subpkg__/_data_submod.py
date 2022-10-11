@@ -2,12 +2,12 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/_template_subpkg/_template_submod.py
+# File        : traffic_light_classifier/__data_subpkg__/_data_submod.py
 # Author      : Shashank Kumbhare
-# Date        : --/--/----
+# Date        : 09/30/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python submodule for python subpackage
-#               'traffic_light_classifier._template_subpkg'.
+#               'traffic_light_classifier.__data_subpkg__'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,7 +15,7 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier._template_subpkg._template_submod
+# START >> SUBMODULE >> traffic_light_classifier.__data_subpkg__._data_submod
 # ==================================================================================================================================
 # >>
 """
@@ -107,5 +107,5 @@ datasets.test.images_std.green      = [ image for image, label in zip(datasets.t
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier._template_subpkg._template_submod
+# END << SUBMODULE << traffic_light_classifier.__data_subpkg__._data_submod
 # ==================================================================================================================================

@@ -147,8 +147,6 @@ def get_average_channel_along_axis( im_rgb
             
             Calculates average value of channel requested from the input rgb image
             along the requested axis.
-            Channel can be r/g/b or h/s/v.
-            Axis can be 0 or 1.
         
         PARAMETERS
         ==========
@@ -214,7 +212,7 @@ def get_average_channel_along_axis( im_rgb
 # START >> FUNCTION >> get_region_high_avg_channel_along_axis
 # ==================================================================================================================================
 # >>
-def get_region_high_avg_channel_along_axis  ( im_rgb
+def get_region_high_avg_channel_along_axis  ( image_rgb
                                             , channel
                                             , axis
                                             , len_range
@@ -254,7 +252,12 @@ def get_region_high_avg_channel_along_axis  ( im_rgb
                 
                 Size of the range to be extracted.
             
-            plot_enabled <bool>
+            extra_channel <str> (optional)
+                
+                Extra channel used to extract from rgb image.
+                Possible values: "r", "g", "b" or "h", "s", "v".
+            
+            plot_enabled <bool> (optional)
                 
                 If enabled plot a bar chart of the average channel along an axis.
         
@@ -275,10 +278,10 @@ def get_region_high_avg_channel_along_axis  ( im_rgb
     ================================================================================
     """
     
-    avgs_channel_along_axis = get_average_channel_along_axis(im_rgb, channel, axis)
+    avgs_channel_along_axis = get_average_channel_along_axis(image_rgb, channel, axis)
     
     if extra_channel is not None:
-        avgs_extra_channel_along_axis = get_average_channel_along_axis(im_rgb, extra_channel, axis)
+        avgs_extra_channel_along_axis = get_average_channel_along_axis(image_rgb, extra_channel, axis)
         avgs_channel_along_axis       = np.array(avgs_channel_along_axis)**i * np.array(avgs_extra_channel_along_axis)**j
     
     sums_along_axis = []
@@ -337,13 +340,22 @@ def get_region_high_avg_channel ( image_rgb
                 Channel to extract from rgb image.
                 Possible values: "r", "g", "b" or "h", "s", "v".
             
-            len_range <int>
+            extra_channel <str> (optional)
                 
-                Size of the range to be extracted.
+                Extra channel used to extract from rgb image.
+                Possible values: "r", "g", "b" or "h", "s", "v".
             
-            plot_enabled <bool>
+            shape_area_search <tuple> (optional)
+                
+                A tuple of sizes of the ranges along X & Y to be extracted.
+            
+            plot_enabled <bool> (optional)
                 
                 If enabled plot a bar chart of the average channel along an axis.
+            
+            name_image <str> (optional)
+                
+                A string for name of the image.
         
         RETURNS
         =======
@@ -354,7 +366,8 @@ def get_region_high_avg_channel ( image_rgb
             
             image_masked_high_average_channel <list>
             
-                A maksed input image at region of high avg channel of dimension (size, size, 3).
+                A maksed input image at region of high avg channel of dimension
+                (size, size, 3).
     
     ================================================================================
     END << DOC << get_region_high_avg_channel
@@ -432,17 +445,17 @@ def get_average_image   ( images
                 A list of numpy array of images of shape (n_row, n_col, 3).
                 Default is "" for unknown.
             
-            plot_enabled <bool>
+            plot_enabled <bool> (optional)
                 
                 If enabled plot a bar chart of the average channel along an axis.
             
-            type_channels <str>
+            type_channels <str> (optional)
                 
                 A string indicating the type of channels either 'rgb' or 'hsv'.
             
-            cmap <str>
+            name_image <str> (optional)
                 
-                Colormap for plot. Possible value: "viridis", "gray", etc.
+                A string for name of the image.
         
         RETURNS
         =======
@@ -483,8 +496,6 @@ def get_average_image   ( images
 # >>
 def get_colors_from_image   ( image_rgb
                             , range_hue
-                            , range_sat = (0, 255)
-                            , range_brt = (0, 255)
                             , plot_enabled = False
                             , titles = (DEFAULT_NAME_IMAGE, "colors extracted from \n" + DEFAULT_NAME_IMAGE)
                             ) :
@@ -497,9 +508,7 @@ def get_colors_from_image   ( image_rgb
         GENERAL INFO
         ============
             
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
+            Masks input image with the input range of hues.
         
         PARAMETERS
         ==========
@@ -512,9 +521,14 @@ def get_colors_from_image   ( image_rgb
                 
                 A tuple of length 2 indicating lower and upper bound of hue.
             
-            plot_enabled <bool>
+            plot_enabled <bool> (optional)
                 
                 If enabled plot a bar chart of the average channel along an axis.
+            
+            titles <tuple<str>> (optional)
+                
+                A tuple of length 2 with names for the title of the plots before and
+                after masking.
         
         RETURNS
         =======
@@ -533,8 +547,8 @@ def get_colors_from_image   ( image_rgb
     image_hsv = convert_rgb_to_hsv(image_rgb)
     
     # Defining color selection boundaries in HSV values >>
-    lower = np.array([range_hue[0], range_sat[0], range_brt[0]])
-    upper = np.array([range_hue[1], range_sat[1], range_brt[1]])
+    lower = np.array([range_hue[0],   0,   0])
+    upper = np.array([range_hue[1], 255, 255])
     
     # Extracting colors from the input image >>
     mask_color_hsv                     = cv2.inRange(image_hsv, lower, upper)
@@ -558,61 +572,6 @@ def get_colors_from_image   ( image_rgb
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_colors_from_image
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
-# ==================================================================================================================================
-# >>
-def _template_submod_func   ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_submod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_submod_func
-    ================================================================================
-    """
-    
-    
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 

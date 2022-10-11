@@ -4,7 +4,7 @@
 # ==================================================================================================================================
 # File        : traffic_light_classifier/__data_subpkg__/__init__.py
 # Author      : Shashank Kumbhare
-# Date        : --/--/----
+# Date        : 09/30/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a __init__ file for python subpackage
 #               'traffic_light_classifier.__data_subpkg__'.

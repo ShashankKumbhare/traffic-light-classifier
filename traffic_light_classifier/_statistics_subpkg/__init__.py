@@ -19,7 +19,7 @@
 # ==================================================================================================================================
 # >>
 """
-This subpackage is created for calculating probabilities and likelihood values.
+This subpackage is created for calculating statistical properties.
 """
 
 

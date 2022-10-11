@@ -18,10 +18,7 @@
 # ==================================================================================================================================
 # >>
 """
-This module is created/used for/to.
-MODULE description MODULE description MODULE description MODULE description
-MODULE description MODULE description MODULE description MODULE description
-MODULE description MODULE description.
+This module is created for the main traffic-light-classifier model class `Model`.
 """
 
 _name_mod = __name__.partition(".")[-1]
@@ -31,7 +28,6 @@ print(f"  + Adding module '{_name_mod}'...", )
 # START >> IMPORTS
 # ==================================================================================
 # >>
-# from .__dependencies_subpkg__ import *
 from .__constants_subpkg__    import *
 from .__auxil_subpkg__        import *
 from .__data_subpkg__         import *
@@ -85,7 +81,37 @@ class Model:
     # START >> METHOD >> compile
     # ==============================================================================================================================
     # >>
-    def compile(self, show_analysis = False):
+    def compile ( self
+                , show_analysis = False
+                ) :
+        
+        """
+        ============================================================================
+        START >> DOC >> compile
+        ============================================================================
+            
+            GENERAL INFO
+            ============
+                
+                Compiles the model i.e. trains the model over training dataset.
+            
+            PARAMETERS
+            ==========
+                
+                show_analysis <bool> (optional)
+                    
+                    When enabled it prints a detailed analysis of the compilation
+                    process.
+            
+            RETURNS
+            =======
+                
+                None
+        
+        ============================================================================
+        END << DOC << compile
+        ============================================================================
+        """
         
         print("\nCompilation in progress... Please wait !!")
         plot_enabled = True if show_analysis else False
@@ -341,6 +367,63 @@ class Model:
                     , show_probabilities = False
                     ) :
         
+        """
+        ============================================================================
+        START >> DOC >> _predict
+        ============================================================================
+            
+            GENERAL INFO
+            ============
+                
+                Predicts the input traffic light image as either red, yellow or green.
+                This method shall be used for compilation stage only.
+            
+            PARAMETERS
+            ==========
+                
+                image_rgb <np.array>
+                
+                    Numpy array of rgb image of shape (n_row, n_col, 3).
+                
+                label_true <list> (optional)
+                    
+                    One hot encode label of rgb input image.
+                
+                params <tuple> (optional)
+                    
+                    A tuple of model's parameters a and b.
+                
+                is_optimization <bool> (optional)
+                
+                    When enabled it means the method is called for the optimization
+                    purpose and parameters has to be passed as input argument.
+                
+                show_analysis <bool> (optional)
+                    
+                    When enabled it prints a detailed analysis of the compilation
+                    process.
+                
+                show_probabilities <bool> (optional)
+                    
+                    When enabled it prints the probabilities of image being red,
+                    yellow or green.
+            
+            RETURNS
+            =======
+                
+                label_pred <list>
+                    
+                    One hot encode label of prediction.
+                
+                self.prediction <Struct>
+                    
+                    Prediction stages analysis of input image.
+        
+        ============================================================================
+        END << DOC << _predict
+        ============================================================================
+        """
+        
         self.prediction = Struct()
         self.prediction.image_input = image_rgb
         if label_true is not None: self.prediction.label_true  = label_true
@@ -527,6 +610,45 @@ class Model:
     # >>
     def predict(self, image_rgb, show_analysis = False, show_probabilities = False):
         
+        """
+        ============================================================================
+        START >> DOC >> predict
+        ============================================================================
+            
+            GENERAL INFO
+            ============
+                
+                Predicts the input traffic light image as either red, yellow or green.
+            
+            PARAMETERS
+            ==========
+                
+                image_rgb <np.array>
+                
+                    Numpy array of rgb image of shape (n_row, n_col, 3).
+                
+                show_analysis <bool> (optional)
+                    
+                    When enabled it prints a detailed analysis of the compilation
+                    process.
+                
+                show_probabilities <bool> (optional)
+                    
+                    When enabled it prints the probabilities of image being red,
+                    yellow or green.
+            
+            RETURNS
+            =======
+                
+                label_pred <list>
+                    
+                    One hot encode label of prediction.
+        
+        ============================================================================
+        END << DOC << predict
+        ============================================================================
+        """
+        
         label_pred, _ = self._predict(image_rgb, show_analysis = show_analysis, show_probabilities = show_probabilities)
         
         return label_pred
@@ -541,6 +663,48 @@ class Model:
     # ==============================================================================================================================
     # >>
     def predict_dataset(self, images_std, labels_true_std = None):
+        
+        """
+        ============================================================================
+        START >> DOC >> predict_dataset
+        ============================================================================
+            
+            GENERAL INFO
+            ============
+                
+                Predicts the entire dataset of input traffic light image as either
+                red, yellow or green.
+            
+            PARAMETERS
+            ==========
+                
+                images_std <list<np.array>>
+                
+                    A list of numpy array of rgb image of shape (n_row, n_col, 3).
+                
+                label_true <list<list>> (optional)
+                    
+                    One hot encode labels of dataset of rgb input images.
+            
+            RETURNS
+            =======
+                
+                accuracy <float>
+                    
+                    Accuracy of the prediction of input dataset.
+                
+                analyses_pred <list<Struct>>
+                    
+                    List of analysis of prediction stages of the input images.
+                
+                misclassified <list<Struct>>
+                    
+                    List of analysis of prediction stages of the misclassified images.
+        
+        ============================================================================
+        END << DOC << predict_dataset
+        ============================================================================
+        """
         
         #  Creating a struct object to store results >>
         self.prediction_dataset = Struct()
@@ -572,6 +736,55 @@ class Model:
     # >>
     def _get_neg_accuracy_dataset_train(self, params, is_optimization, images_std, labels_true_std, show_analysis = False):
         
+        """
+        ============================================================================
+        START >> DOC >> _get_neg_accuracy_dataset_train
+        ============================================================================
+            
+            GENERAL INFO
+            ============
+                
+                Calculated negative accuracy for the input paramteres and the input
+                images.
+            
+            PARAMETERS
+            ==========
+                
+                params <tuple>
+                
+                    A tuple of model's parameters a and b of the model.
+                
+                is_optimization <bool>
+                
+                    When enabled it means the method is called for the optimization
+                    purpose and parameters has to be passed as input argument.
+                
+                images_std <list<np.array>>
+                
+                    A list of numpy array of rgb image of shape (n_row, n_col, 3).
+                
+                labels_true_std <list>
+                    
+                    A list of one hot encode labels of input standard images.
+                
+                
+                show_analysis <bool> (optional)
+                    
+                    When enabled it prints a detailed analysis of the compilation
+                    process.
+            
+            RETURNS
+            =======
+                
+                -accuracy_overall <float>
+                    
+                    Negative accuracy of the prediction of input dataset.
+        
+        ============================================================================
+        END << DOC << _get_neg_accuracy_dataset_train
+        ============================================================================
+        """
+        
         labels_pred      = [ self._predict(image_std, params = params, is_optimization = is_optimization)[0] for image_std in images_std ]
         n_total_all      = len(labels_pred)
         n_pred_correct   = sum(a == b for a, b in zip(labels_pred, labels_true_std))
@@ -594,6 +807,57 @@ class Model:
     # ==============================================================================================================================
     # >>
     def _get_accuracy_dataset_train(self, images_std, label_true, show_analysis = False, name_images = ""):
+        
+        """
+        ============================================================================
+        START >> DOC >> _get_neg_accuracy_dataset_train
+        ============================================================================
+            
+            GENERAL INFO
+            ============
+                
+                Calculated accuracy for the input images having same true labels.
+                This method shall be used for compilation stage only.
+            
+            PARAMETERS
+            ==========
+                
+                images_std <list<np.array>>
+                
+                    A list of numpy array of rgb image of shape (n_row, n_col, 3).
+                
+                label_true_std <list>
+                    
+                    True one hot encode label of input standard images.
+                
+                show_analysis <bool> (optional)
+                    
+                    When enabled it prints a detailed analysis of the compilation
+                    process.
+                
+                name_images <str> (optional)
+                    
+                    Name of the input standard images.
+            
+            RETURNS
+            =======
+                
+                accuracy <float>
+                    
+                    Accuracy of the prediction of input dataset.
+                
+                analyses_pred <list<Struct>>
+                
+                    List of analyses of prediction stages of the input images.
+                
+                misclassified <list<Struct>>
+                    
+                    List of analysis of prediction stages of the misclassified images.
+        
+        ============================================================================
+        END << DOC << _get_neg_accuracy_dataset_train
+        ============================================================================
+        """
         
         results_pred     = [ self._predict(image_std, label_true) for image_std in images_std ]
         labels_pred      = [ result_pred[0] for result_pred in results_pred ]
@@ -647,78 +911,9 @@ class Model:
     # END << METHOD << _get_accuracy_dataset_train
     # ==============================================================================================================================
     
-    
-    # ==============================================================================================================================
-    # START >> METHOD >> _template_method
-    # ==============================================================================================================================
-    # >>
-    # def _template_method(self):
-    #
-    #     return None
-    # <<
-    # ==============================================================================================================================
-    # END << METHOD << _template_method
-    # ==============================================================================================================================
-    
 # <<
 # ==================================================================================================================================
 # END << CLASS << Model
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_mod_func
-# ==================================================================================================================================
-# >>
-def _template_mod_func  ( p_p_p_p_1 = ""
-                        , p_p_p_p_2 = ""
-                        ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_mod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_mod_func
-    ================================================================================
-    """
-    
-    _name_func = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_mod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_mod_func
 # ==================================================================================================================================
 
 print("  - Done!")

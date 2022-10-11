@@ -106,11 +106,11 @@ def print_heading   ( heading
                 
                 Title to be printed
             
-            heading_level <int>
+            heading_level <int> (optional)
                 
                 Heading level of heading.
             
-            color <str>
+            color <str> (optional)
                 
                 Color in which text to be printed.
         
@@ -161,7 +161,7 @@ def update_user_done(color = DEFAULT_COLOR_UPDATE_USER_DONE):
         PARAMETERS
         ==========
             
-            color <str>
+            color <str> (optional)
                 
                 Color in which text to be printed.
         
@@ -254,7 +254,7 @@ def load_dataset ( image_dir ) :
 # START >> FUNCTION >> one_hot_encode
 # ==================================================================================================================================
 # >>
-def one_hot_encode ( label ) :
+def one_hot_encode(label):
     
     """
     ================================================================================
@@ -315,7 +315,7 @@ def one_hot_encode ( label ) :
 # START >> FUNCTION >> one_hot_encode_reverse
 # ==================================================================================================================================
 # >>
-def one_hot_encode_reverse ( encode ) :
+def one_hot_encode_reverse(encode):
     
     """
     ================================================================================
@@ -370,7 +370,7 @@ def one_hot_encode_reverse ( encode ) :
 # START >> FUNCTION >> get_title
 # ==================================================================================================================================
 # >>
-def get_title( image ) :
+def get_title(image):
     
     """
     ================================================================================
@@ -480,61 +480,6 @@ def get_shape_params_truncnorm  ( xa
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_shape_params_truncnorm
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
-# ==================================================================================================================================
-# >>
-def template_submod_func    ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_submod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_submod_func
-    ================================================================================
-    """
-    
-    print(f"{p_p_p_p_1} {p_p_p_p_2}")
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 

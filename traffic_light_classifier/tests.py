@@ -4,7 +4,7 @@
 # ==================================================================================================================================
 # File        : traffic_light_classifier/tests.py
 # Author      : Shashank Kumbhare
-# Date        : --/--/----
+# Date        : 09/22/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python module for python package 'traffic_light_classifier'.
 # ==================================================================================================================================
@@ -18,10 +18,8 @@
 # ==================================================================================================================================
 # >>
 """
-This module is created/used for/to.
-MODULE description MODULE description MODULE description MODULE description
-MODULE description MODULE description MODULE description MODULE description
-MODULE description MODULE description.
+This module contains tools to perform unittests on the functionalities of the
+package.
 """
 
 _name_mod = __name__.partition(".")[-1]

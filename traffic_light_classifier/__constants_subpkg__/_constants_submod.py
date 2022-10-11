@@ -55,12 +55,7 @@ DEFAULT_DEFAULT_STR = "default"
 # ==================================================================================================================================
 # >>
 class Struct:
-    def _set_attributes(self, attributes):
-        if type(attributes) == "str":
-            self.__setattr__(attributes, None)
-        else:
-            for attribute in attributes:
-                self.__setattr__(attribute, None)
+    pass
 # <<
 # ==================================================================================================================================
 # END << CLASS << Struct

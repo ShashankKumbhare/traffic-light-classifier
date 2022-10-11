@@ -19,7 +19,7 @@
 # ==================================================================================================================================
 # >>
 """
-This submodule contains functionalities to calculate probabilities and likelihood values.
+This submodule contains functionalities to calculate statistical properties.
 """
 
 
@@ -42,7 +42,7 @@ from .._extract_feature_subpkg import *
 # ==================================================================================
 # START >> EXPORTS
 # ==================================================================================
-__all__ = [ "get_distribution_of_channel", "get_logLikelihood" ]
+__all__ = [ "get_distribution_of_channel" ]
 # ==================================================================================
 # END << EXPORTS
 # ==================================================================================
@@ -57,7 +57,7 @@ def get_distribution_of_channel ( image_rgb
                                 , ch
                                 , drop_zeros      = False
                                 , remove_outliers = False
-                                , plot_enabled = False
+                                , plot_enabled    = False
                                 ) :
     
     """
@@ -86,17 +86,17 @@ def get_distribution_of_channel ( image_rgb
                 
                 Channel number (0, 1, or 2).
             
-            rangeX <tuple>
-                
-                Range along x-axis.
+            drop_zeros <bool> (optional)
             
-            rangeY <tuple>
-                
-                Range along y-axis.
+                When enabled drops the zeros from the distribution.
             
-            cmap <str>
+            remove_outliers <bool> (optional)
+            
+                When enabled removes the outliers from the distribution.
+            
+            plot_enabled <bool> (optional)
                 
-                Possible value: None or "gray"
+                When enabled plots the image.
         
         RETURNS
         =======
@@ -156,183 +156,6 @@ def get_distribution_of_channel ( image_rgb
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << get_distribution_of_channel
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> get_logLikelihood
-# ==================================================================================================================================
-# >>
-def get_logLikelihood   ( mu
-                        , sigma
-                        , xa
-                        , xb
-                        , data_points
-                        ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> get_logLikelihood
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            Computes the log likelihood of the input distribution(mu, sigma) given
-            data points.
-        
-        PARAMETERS
-        ==========
-            
-            mu <float>
-                
-                Mean of the input distribution.
-            
-            sigma <float>
-                
-                Standard deviation of the input distribution.
-                
-            data_points <list<floats>>
-                
-                Data points.
-        
-        RETURNS
-        =======
-            
-            logLikelihood <float>
-                
-                Log likelihood of the input distribution(mu,sigma) given the data points.
-    
-    ================================================================================
-    END << DOC << get_logLikelihood
-    ================================================================================
-    """
-    
-    logLikelihood = 0
-    (a, b) = get_shape_params_truncnorm(xa, xb, mu, 0)
-    for data_point in data_points:
-        if data_point == 0:
-            llh = -100
-        else:
-            llh = truncnorm.logpdf(data_point, a, b, mu, sigma)
-        # llh = poisson.logpmf(data_point, mu)
-        logLikelihood = logLikelihood + llh
-    return logLikelihood
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << get_logLikelihood
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
-# ==================================================================================================================================
-# >>
-def _template_submod_func3    ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_submod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_submod_func
-    ================================================================================
-    """
-    
-    _name_func = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
-# ==================================================================================================================================
-# >>
-def _template_submod_func4  ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_submod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_submod_func
-    ================================================================================
-    """
-    
-    
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 

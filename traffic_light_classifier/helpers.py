@@ -6,8 +6,7 @@
 # Author      : Shashank Kumbhare
 # Date        : 09/20/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a python module for python subpackage
-#               'traffic_light_classifier'.
+# Description : This file is a python module for python package 'traffic_light_classifier'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,7 +14,7 @@
 
 
 # ==================================================================================================================================
-# START >> MODULE >> traffic_light_classifier.__auxil_subpkg__.helpers
+# START >> MODULE >> traffic_light_classifier.helpers
 # ==================================================================================================================================
 # >>
 """

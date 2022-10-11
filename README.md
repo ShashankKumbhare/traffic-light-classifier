@@ -123,7 +123,7 @@ Detailed analysis and visualization of each stage has been given in [Notebook Tr
 
 ## Python package `traffic_light_classifier`
 
-- This project utilizes a custom made package `traffic_light_classifier` which contains a classifier, plotting & feature extraction functionalities, and datasets for the project.
+- This project utilizes a custom-made package `traffic_light_classifier` which contains a classifier, plotting & feature extraction functionalities, and datasets for the project.
 - Libraries used: `OpenCV-Python`, `scipy`, `matplotlib`, `numpy`.
 - This library offers tools which enables to analyze and visualize the entire training and prediction process stages.
 

@@ -73,7 +73,7 @@ def standardize_image( image
                 
                 Numpy array of rgb image of shape (n_row, n_col, 3).
             
-            size <int>
+            size <int> (optional)
                 
                 The size of desired standardized image.
         
@@ -126,7 +126,7 @@ def standardize_images( images_and_labels
                 
                 A list of numpy array of rgb image of shape (n_row, n_col, 3).
                 
-            size <int>
+            size <int> (optional)
                 
                 The size of desired standardized image.
         
@@ -181,16 +181,15 @@ def convert_rgb_to_hsv( image_rgb
                 
                 Numpy array of rgb image of shape (n_row, n_col, 3).
             
-            plot_enabled <bool>
+            plot_enabled <bool> (optional)
                 
                 When enabled plots the image.
-                Default is "" for unknown.
             
-            name_image <str>
+            name_image <str> (optional)
                 
                 A string for name of the image.
             
-            cmap <str>
+            cmap <str> (optional)
                 
                 Colormap for plot. Possible value: "viridis", "gray", etc.
         
@@ -249,11 +248,11 @@ def convert_hsv_to_rgb( image_hsv
                 
                 Numpy array of hsv image of shape (n_row, n_col, 3).
             
-            plot_enabled <bool>
+            plot_enabled <bool> (optional)
                 
                 When enabled plots the image.
             
-            cmap <str>
+            cmap <str> (optional)
                 
                 Colormap for plot. Possible value: "viridis", "gray", etc.
         
@@ -295,7 +294,7 @@ def mask_image( image
               , range_mask_x
               , range_mask_y
               , plot_enabled = False
-              , name_image    = DEFAULT_NAME_IMAGE
+              , name_image   = DEFAULT_NAME_IMAGE
               ) :
     
     """
@@ -323,9 +322,13 @@ def mask_image( image
                 
                 Crop range along y-axis.
             
-            plot_enabled <bool>
+            plot_enabled <bool> (optional)
                 
                 When enabled plots the image.
+            
+            name_image <str> (optional)
+                
+                A string for name of the image.
         
         RETURNS
         =======
@@ -404,9 +407,14 @@ def crop_image( image
                 
                 Crop range along y-axis.
             
-            plot_enabled <bool>
+            plot_enabled <bool> (optional)
                 
                 When enabled plots the cropped image.
+            
+            titles <tuple<str>> (optional)
+                
+                A tuple of length 2 with names for the title of the plots before and
+                after cropping.
         
         RETURNS
         =======
@@ -443,61 +451,6 @@ def crop_image( image
 # <<
 # ==================================================================================================================================
 # END << FUNCTION << crop_image
-# ==================================================================================================================================
-
-
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
-# ==================================================================================================================================
-# >>
-def _template_submod_func   ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_submod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_submod_func
-    ================================================================================
-    """
-    
-    
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
 # ==================================================================================================================================
 
 
