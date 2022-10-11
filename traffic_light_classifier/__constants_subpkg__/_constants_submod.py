@@ -74,8 +74,8 @@ class Struct:
 DEFAULT_COLOR_PRINT_HEADING    = DEFAULT_DEFAULT_STR
 DEFAULT_HEADING_LEVEL          = 3
 DEFAULT_SUBHEADING_LEVEL       = 4
-DEFAULT_COLOR_HEADING          = "crimson" # "orange"
-DEFAULT_COLOR_SUBHEADING       = "SteelBlue" # "skyblue"
+DEFAULT_COLOR_HEADING          = "crimson"
+DEFAULT_COLOR_SUBHEADING       = "SteelBlue"
 DEFAULT_COLOR_UPDATE_USER_DONE = "green"
 # <<
 # ==================================================================================================================================

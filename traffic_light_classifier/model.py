@@ -320,8 +320,6 @@ class Model:
         if show_analysis:
             update_user_done()
         print_heading(f"Compilation complete !!", heading_level = DEFAULT_SUBHEADING_LEVEL, color = "green")
-        printmd(f"Compilation complete !!", is_bold = True, color = "green")
-        printmd(f"**Compilation complete !!**", color = "green")
         
         return None
     # <<

@@ -18,10 +18,11 @@
 ## Project Overview
 
 - Traffic light classification plays an important role in Advanced Driver Assist as well as self-driving vehicle systems which ensures timely and appropriate reaction to traffic lights in cross sections.  
-- In this project, a robust probabilistic approach based classifier has been implemented to classify traffic light signal's status using computer vision and machine learning techniques.
+- In this project, a robust probabilistic approach based classifier has been implemented from scratch to classify traffic light signal's status using computer vision and machine learning techniques.
 - Several data cleaning steps, features extraction and a probabilistic metric has been utilized.
 - The classifier has been validated on a testing dataset with a **accuracy of 99.66 %**.
-- The methodology utilized in this project can be applied to many other computer vision applications.
+- All training stages and prediction stages has been throughly visualized & analyzed and thus improvised.
+- The methodology utilized in this project can be generalized and applied to many other computer vision applications.
 
 ---
 
@@ -109,10 +110,12 @@ Detailed analysis and visualization of each stage has been given in [Notebook Tr
 
 ---
 
-
 ## Results
 
-
+- A custom made Python package `traffic_light_classifier` has been implemented for this project.
+- All training stages and prediction stages has been throughly visualized & analyzed and thus improvised.
+- The classifier has been validated on a testing dataset with a accuracy of 99.66 %.
+- The project results and package usage have been clearly demonstrated in the [Notebook Traffic_Light_Classifier](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).
 
 ---
 
@@ -120,7 +123,7 @@ Detailed analysis and visualization of each stage has been given in [Notebook Tr
 
 - This project utilizes a custom made package `traffic_light_classifier` which contains a classifier, plotting & feature extraction functionalities, and datasets for the project.
 - Libraries used: `OpenCV-Python`, `scipy`, `matplotlib`, `numpy`.
-- This library has offers tools which enables to analyze and visualize the entire training and prediction process stages.
+- This library offers tools which enables to analyze and visualize the entire training and prediction process stages.
 
 ---
 
@@ -183,7 +186,7 @@ accuracy   = model.predict_dataset(images_std, labels_std)
 print(accuracy)
 ```
 
-#### Analyzing/visualizing compilation process
+#### Analyzing & visualizing compilation/training process
 An ardent user might want to see what is happening in the compiling/training process. He might also want to revisit or play with them.
 ``` python 
 # After compilation/training, all the compilation stages are stored in `model.compilation` attribute >>
@@ -268,7 +271,7 @@ print( f"Accuracy green   = {model.compilation.stg9c_accuracy_train.yellow}" )
 print( f"Accuracy overall = {model.compilation.stg9c_accuracy_train.all}" )
 ```
 
-#### Analyzing/visualizing prediction process
+#### Analyzing & visualizing prediction process
 An ardent user might want to see what is happening behind the prediction process. Analyzing misclassified images might give user the understanding of the flaws of the classifier model and help improve the algorithm.
 ``` python 
 import random
@@ -332,5 +335,4 @@ print( model.prediction.stg6_probabilities.image_being_green )
 print( model.prediction.stg7_label_predicted )
 print( model.prediction.stg7_label_predicted_str )
 ```
-
 The package usage have been clearly demonstrated in the [Notebook Traffic_Light_Classifier](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).
