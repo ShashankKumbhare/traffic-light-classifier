@@ -132,7 +132,7 @@ class Model:
         self.compilation.stg3_dataset_images_cropped_high_s_region.yellow = [ crop_image( image, self.compilation.stg2a_region_high_s.yellow[0], self.compilation.stg2a_region_high_s.yellow[1] ) for image in self.datasets.train.images_std.yellow ]
         self.compilation.stg3_dataset_images_cropped_high_s_region.green  = [ crop_image( image, self.compilation.stg2a_region_high_s.green[0],  self.compilation.stg2a_region_high_s.green[1] )  for image in self.datasets.train.images_std.green ]
         if show_analysis:
-            printmd(f"**A few cropped lights:**", color = "skyblue")
+            printmd(f"A few cropped lights:", color = "skyblue", is_bold = True)
             images_red    = self.compilation.stg3_dataset_images_cropped_high_s_region.red[0:10]
             images_yellow = self.compilation.stg3_dataset_images_cropped_high_s_region.yellow[0:10]
             images_green  = self.compilation.stg3_dataset_images_cropped_high_s_region.green[0:10]
@@ -166,7 +166,7 @@ class Model:
         self.compilation.stg5_dataset_images_light.yellow = [ crop_image(image, loc[0], loc[1]) for image, loc in zip(self.compilation.stg3_dataset_images_cropped_high_s_region.yellow, self.compilation.stg4_locations_light.yellow) ]
         self.compilation.stg5_dataset_images_light.green  = [ crop_image(image, loc[0], loc[1]) for image, loc in zip(self.compilation.stg3_dataset_images_cropped_high_s_region.green,  self.compilation.stg4_locations_light.green) ]
         if show_analysis:
-            printmd(f"**A few located lights:**", color = "skyblue")
+            printmd(f"A few located lights:", color = "skyblue", is_bold = True)
             images_red    = self.compilation.stg5_dataset_images_light.red[0:10]
             images_yellow = self.compilation.stg5_dataset_images_light.yellow[0:10]
             images_green  = self.compilation.stg5_dataset_images_light.green[0:10]
@@ -292,7 +292,7 @@ class Model:
         if show_analysis:
             print_heading("Compilation Stage 8: Optimizing classifier's metric's parameters for red, yellow and green lights")
             printmd(DEFAULT_MODEL_PROBABILISTIC)
-            printmd("**The current compilation stage is optimizing the parameters $a$ & $b$ for maximum accuracy.**")
+            printmd("The current compilation stage is optimizing the parameters $a$ & $b$ for maximum accuracy.", is_bold = True)
             printmd("Please wait...")
         
         params_initial      = [1, 3]
@@ -300,7 +300,7 @@ class Model:
         self.compilation.stg8_params_optimised = result_optimization.x
         
         if show_analysis:
-            printmd(f"**Optimization complete !!**\n")
+            printmd(f"Optimization complete !!\n", is_bold = True)
             printmd(f"Optimized parameters: a = {self.compilation.stg8_params_optimised[0]:7.6f}, b = {self.compilation.stg8_params_optimised[1]:7.6f}", color = "green")
             update_user_done()
         
@@ -577,10 +577,10 @@ class Model:
         n_pred_correct   = sum(a == b for a, b in zip(labels_pred, labels_true_std))
         accuracy_overall = n_pred_correct / n_total_all
         if show_analysis:
-            printmd(f"Overall accuracy", color = "skyblue")
+            printmd(f"Overall accuracy", color = DEFAULT_COLOR_SUBHEADING)
             print(f"Total images     = {n_total_all}")
             print(f"Pred correctly   = {n_pred_correct}")
-            printmd(f"**Accuracy overall = {accuracy_overall*100:.2f}%**", color = "green")
+            printmd(f"Accuracy overall = {accuracy_overall*100:.2f}%", color = "green", is_bold = True)
         
         return -accuracy_overall
     # <<
@@ -619,27 +619,27 @@ class Model:
             
             labels_str_pred             = [ analysis_pred.stg7_label_predicted_str for analysis_pred in analyses_pred[0:10] ]
             
-            printmd(f"**{name_images.capitalize()} light training dataset (a few examples)**", color = "skyblue")
+            printmd(f"{name_images.capitalize()} light training dataset (a few examples)", color = "skyblue", is_bold = True)
             
-            printmd(f"**Model's red hues extracted from the red lights located in model's red light region:**")
+            printmd(f"Model's red hues extracted from the red lights located in model's red light region:", is_bold = True)
             plot_images(images_extracted_hue_red, figsizeScale = DEFAULT_FIGSIZESCALE_EXAMPLES)
             print(f"Probability of being red: {probabilities_being_red}")
             
-            printmd(f"**Model's yellow hues extracted from the yellow lights located in model's yellow light region:**")
+            printmd(f"Model's yellow hues extracted from the yellow lights located in model's yellow light region:", is_bold = True)
             plot_images(images_extracted_hue_yellow, figsizeScale = DEFAULT_FIGSIZESCALE_EXAMPLES)
             print(f"Probability of being yellow: {probabilities_being_yellow}")
             
-            printmd(f"**Model's green hues extracted from the yellow lights located in model's yellow light region:**")
+            printmd(f"Model's green hues extracted from the yellow lights located in model's yellow light region:", is_bold = True)
             plot_images(images_extracted_hue_green, figsizeScale = DEFAULT_FIGSIZESCALE_EXAMPLES)
             print(f"Probability of being green: {probabilities_being_green}")
             
-            printmd(f"**Predicted labels: {labels_str_pred}**")
+            print(f"Predicted labels: {labels_str_pred}")
 
             print(f"Total {name_images} images: {len(images_std)}")
             print(f"Predicted Red    = {n_pred_red}")
             print(f"Predicted Yellow = {n_pred_yellow}")
             print(f"Predicted Green  = {n_pred_green}")
-            printmd(f"**Accuracy         = {accuracy*100:.2f}%**", color = "green")
+            printmd(f"Accuracy         = {accuracy*100:.2f}%", color = "green", is_bold = True)
         
         return accuracy, analyses_pred, misclassified
     # <<

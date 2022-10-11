@@ -20,7 +20,8 @@
 - Traffic light classification plays an important role in Advanced Driver Assist as well as self-driving vehicle systems which ensures timely and appropriate reaction to traffic lights in cross sections.  
 - In this project, a robust probabilistic approach based classifier has been implemented to classify traffic light signal's status using computer vision and machine learning techniques.
 - Several data cleaning steps, features extraction and a probabilistic metric has been utilized.
-- The classifier has been validated on a testing dataset with a accuracy of 99.66 %.
+- The classifier has been validated on a testing dataset with a **accuracy of 99.66 %**.
+- The methodology utilized in this project can be applied to many other computer vision applications.
 
 ---
 
@@ -32,11 +33,11 @@ This traffic light dataset consists of 1484 number of color images in 3 categori
 - 536 green traffic light images
 - 44 yellow traffic light images
 
-Note: All images come from this MIT self-driving car course and are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+Note: All images come from this [MIT self-driving car course](https://selfdrivingcars.mit.edu/) and are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
-- Each image is a numpy array of shape (n_row, n_col, 3) i.e each image has a 3 channels of rgb (red, green, blue) values where n_col and n_row is the height and the width of the image.
+- Each image is a numpy array of shape (n_row, n_col, 3) i.e each image has a 3 channels (RGB - red, green, blue color space) where n_col and n_row is the height and the width of the image.
 - Each image gives information about its colors of the pixels and their location.
-- The rgb channels of the images can be converted to hsv channels (hue, saturation, value) i.e. we can have information about the hue, saturation and brightness of the pixels of the images.
+- The RGB color space of the images can be converted to HSV color space channels (hue, saturation, value) i.e. the information about the hue, saturation and brightness of the pixels of the images.
 
 ---
 
@@ -54,7 +55,7 @@ The features are in the form of either rgb values or hsv values of the pixels of
   - Extraction of average red light hues, average yellow light hues, average green light hues from each image.
   - Average s (saturation) of light located.
   - Average v (bright) of light located.
-  - etc
+  - etc.
 
 ### The classifier's training stages:
 1. Get average image for red, yellow and green training images.
@@ -68,6 +69,13 @@ The features are in the form of either rgb values or hsv values of the pixels of
 9. Predict & get accuracy of training dataset for classifier's optimized parameters.
 
 ### Probabilities calculations and prediction.
+
+#### <span style="color:skyblue"> Hues extraction </span>
+
+For a single image, the classifier extracts the following hues from the 3 regions:
+1. Model's red    hues extracted from the light located in model's red    light region.
+2. Model's yellow hues extracted from the light located in model's yellow light region.
+3. Model's green  hues extracted from the light located in model's green  light region.
 
 #### <span style="color:red"> Probabilistic model </span>
 
@@ -97,14 +105,14 @@ And propobilities are calculated by,
     - $\mu_{brightness_{green}}$ : mean brightness of model's green  hues extracted from the light located in model's green  light region
     - $a$ & $b$     : model's parameters
 
-#### <span style="color:skyblue"> Hues extraction </span>
+Detailed analysis and visualization of each stage has been given in [Notebook Traffic_Light_Classifier](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).
 
-For a single image, the classifier extracts the following hues from the 3 regions:
-1. Model's red    hues extracted from the light located in model's red    light region
-2. Model's yellow hues extracted from the light located in model's yellow light region
-3. Model's green  hues extracted from the light located in model's green  light region
+---
 
-Detailed analysis and visualization of each stage has been given in [Traffic_Light_Classifier Notebook](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).
+
+## Results
+
+
 
 ---
 
@@ -149,7 +157,7 @@ model.compile(show_analysis = True)
 
 #### Predict image
 ``` python
-# Load an red image from the test dataset provided in the package
+# Get a random red image from the test dataset provided in the package
 import random
 image_red = random.choice( tlc.datasets.train.images_std.red )
 tlc.plots.plot_images(image_red)
@@ -258,7 +266,6 @@ print( f"Accuracy red     = {model.compilation.stg9c_accuracy_train.red}" )
 print( f"Accuracy yellow  = {model.compilation.stg9c_accuracy_train.yellow}" )
 print( f"Accuracy green   = {model.compilation.stg9c_accuracy_train.yellow}" )
 print( f"Accuracy overall = {model.compilation.stg9c_accuracy_train.all}" )
-
 ```
 
 #### Analyzing/visualizing prediction process
@@ -326,6 +333,4 @@ print( model.prediction.stg7_label_predicted )
 print( model.prediction.stg7_label_predicted_str )
 ```
 
-## Results
-
-The presentation and results of the project have been clearly documented in the Jupyter Notebook. Please refer [Traffic_Light_Classifier.ipynb](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).
+The package usage have been clearly demonstrated in the [Notebook Traffic_Light_Classifier](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).

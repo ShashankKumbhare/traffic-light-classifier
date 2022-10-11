@@ -54,19 +54,22 @@ __all__ = [ "printmd", "print_fail", "print_pass"
 # START >> FUNCTIONS >>
 # ==================================================================================================================================
 # >>
-def printmd(string, color = "default"):
+def printmd(string, color = "default", is_bold = False):
     """Helper functions for printing Markdown text (text in color/bold/etc)"""
-    if color != "default":
-        string = f"<span style='color: {color};'>{string}</span>"
+    format_bold = "**" if is_bold == True else ""
+    string = f"{format_bold}<span style='color: {color};'>{string}</span>{format_bold}"
     display(Markdown(string))
+    return None
 
 def print_fail():
     """Print a test failed message, given an error"""
     printmd('**<span style="color: red;">TEST FAILED</span>**')
+    return None
     
 def print_pass():
     """Print a test passed message"""
     printmd('**<span style="color: green;">TEST PASSED</span>**')
+    return None
 # <<
 # ==================================================================================================================================
 # END << FUNCTIONS
@@ -126,7 +129,7 @@ def print_heading   ( heading
     
     format_heading = "#"*heading_level
     string = f"{format_heading} <span style='color: {color};'>{heading}</span>"
-    printmd(string)
+    display(Markdown(string))
     
     return None
 # <<
@@ -169,7 +172,7 @@ def update_user_done(color = DEFAULT_COLOR_UPDATE_USER_DONE):
     ================================================================================
     """
     
-    printmd(f"**Done!**", color)
+    printmd(f"Done!", color, is_bold = True)
     
     return None
 # <<

@@ -74,8 +74,8 @@ class Struct:
 DEFAULT_COLOR_PRINT_HEADING    = DEFAULT_DEFAULT_STR
 DEFAULT_HEADING_LEVEL          = 3
 DEFAULT_SUBHEADING_LEVEL       = 4
-DEFAULT_COLOR_HEADING    = "orange"
-DEFAULT_COLOR_SUBHEADING = "skyblue"
+DEFAULT_COLOR_HEADING          = "orange"
+DEFAULT_COLOR_SUBHEADING       = "skyblue"
 DEFAULT_COLOR_UPDATE_USER_DONE = "green"
 # <<
 # ==================================================================================================================================
@@ -137,7 +137,7 @@ DEFAULT_SHAPE_AREA_SEARCH_LIGHT     = (12,  9)
 DEFAULT_NAME_LOCATED_LIGHT    = "light located"
 DEFAULT_COLOR_RED             = "red"
 DEFAULT_COLOR_YELLOW          = "orange"
-DEFAULT_COLOR_GREEN           = "mediumspringgreen"
+DEFAULT_COLOR_GREEN           = "mediumseagreen" # "mediumspringgreen"
 DEFAULT_LABEL_LIGHTS_RED      = "red lights"
 DEFAULT_LABEL_LIGHTS_YELLOW   = "yellow lights"
 DEFAULT_LABEL_LIGHTS_GREEN    = "green lights"
