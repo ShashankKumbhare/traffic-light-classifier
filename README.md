@@ -73,9 +73,9 @@ The features are in the form of either rgb values or hsv values of the pixels of
 #### <span style="color:skyblue"> Hues extraction </span>
 
 For a single image, the classifier extracts the following hues from the 3 regions:
-1. Model's red    hues extracted from the light located in model's red    light region.
-2. Model's yellow hues extracted from the light located in model's yellow light region.
-3. Model's green  hues extracted from the light located in model's green  light region.
+1. Model's red    hues from the light located in model's red    light region.
+2. Model's yellow hues from the light located in model's yellow light region.
+3. Model's green  hues from the light located in model's green  light region.
 
 #### <span style="color:red"> Probabilistic model </span>
 
@@ -97,12 +97,12 @@ And propobilities are calculated by,
   - $strength_{green}  = \mu_{saturation_{green}}^a  \times \mu_{brightness_{green}}^b$
   
   and,  
-    - $\mu_{saturation_{red}}$   : mean saturation of model's red    hues extracted from the light located in model's red    light region
-    - $\mu_{brightness_{red}}$   : mean brightness of model's red    hues extracted from the light located in model's red    light region
-    - $\mu_{saturation_{yellow}}$: mean saturation of model's yellow hues extracted from the light located in model's yellow light region
-    - $\mu_{brightness_{yellow}}$: mean brightness of model's yellow hues extracted from the light located in model's yellow light region
-    - $\mu_{saturation_{green}}$ : mean saturation of model's green  hues extracted from the light located in model's green  light region
-    - $\mu_{brightness_{green}}$ : mean brightness of model's green  hues extracted from the light located in model's green  light region
+    - $\mu_{saturation_{red}}$   : mean saturation of the light located in model's red    light region
+    - $\mu_{brightness_{red}}$   : mean brightness of the light located in model's red    light region
+    - $\mu_{saturation_{yellow}}$: mean saturation of the light located in model's yellow light region
+    - $\mu_{brightness_{yellow}}$: mean brightness of the light located in model's yellow light region
+    - $\mu_{saturation_{green}}$ : mean saturation of the light located in model's green  light region
+    - $\mu_{brightness_{green}}$ : mean brightness of the light located in model's green  light region
     - $a$ & $b$     : model's parameters
 
 Detailed analysis and visualization of each stage has been given in [Notebook Traffic_Light_Classifier](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).

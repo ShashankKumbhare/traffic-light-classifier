@@ -319,7 +319,9 @@ class Model:
         
         if show_analysis:
             update_user_done()
-        print_heading(f"Compilation complete !!", heading_level = DEFAULT_HEADING_LEVEL, color = "green")
+        print_heading(f"Compilation complete !!", heading_level = DEFAULT_SUBHEADING_LEVEL, color = "green")
+        printmd(f"Compilation complete !!", is_bold = True, color = "green")
+        printmd(f"**Compilation complete !!**", color = "green")
         
         return None
     # <<
@@ -577,7 +579,7 @@ class Model:
         n_pred_correct   = sum(a == b for a, b in zip(labels_pred, labels_true_std))
         accuracy_overall = n_pred_correct / n_total_all
         if show_analysis:
-            printmd(f"Overall accuracy", color = DEFAULT_COLOR_SUBHEADING)
+            printmd(f"Overall accuracy", color = DEFAULT_COLOR_SUBHEADING, is_bold = True)
             print(f"Total images     = {n_total_all}")
             print(f"Pred correctly   = {n_pred_correct}")
             printmd(f"Accuracy overall = {accuracy_overall*100:.2f}%", color = "green", is_bold = True)
@@ -619,7 +621,7 @@ class Model:
             
             labels_str_pred             = [ analysis_pred.stg7_label_predicted_str for analysis_pred in analyses_pred[0:10] ]
             
-            printmd(f"{name_images.capitalize()} light training dataset (a few examples)", color = "skyblue", is_bold = True)
+            print_heading(f"{name_images.capitalize()} light training dataset (a few examples)", heading_level = DEFAULT_SUBHEADING_LEVEL)
             
             printmd(f"Model's red hues extracted from the red lights located in model's red light region:", is_bold = True)
             plot_images(images_extracted_hue_red, figsizeScale = DEFAULT_FIGSIZESCALE_EXAMPLES)
