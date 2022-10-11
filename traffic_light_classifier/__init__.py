@@ -52,7 +52,7 @@ from .                        import extract_feature
 from .                        import statistics
 # ELEMENTS >>
 from .datasets                import datasets
-from .Model                   import Model
+from .model                   import *
 # <<
 # ==================================================================================
 # END << IMPORTS
