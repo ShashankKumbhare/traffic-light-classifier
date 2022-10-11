@@ -137,7 +137,9 @@ DEFAULT_LABEL_LIGHTS_RED      = "red lights"
 DEFAULT_LABEL_LIGHTS_YELLOW   = "yellow lights"
 DEFAULT_LABEL_LIGHTS_GREEN    = "green lights"
 DEFAULT_FIGSIZESCALE_EXAMPLES = 0.6
-DEFAULT_MODEL_PROBABILISTIC   = open("./traffic_light_classifier/__constants_subpkg__/model_probabilistic.md", "r").read()
+path_file = os.path.abspath((inspect.stack()[0])[1])
+path_dir  = os.path.dirname(path_file)
+DEFAULT_MODEL_PROBABILISTIC   = open(f"{path_dir}/model_probabilistic.md", "r").read()
 # <<
 # ==================================================================================================================================
 # END << CONSTANTS << Model related
