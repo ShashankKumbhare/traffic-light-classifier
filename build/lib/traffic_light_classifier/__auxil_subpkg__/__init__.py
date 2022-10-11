@@ -23,9 +23,7 @@ This subpackage contains some auxiliary functionality useful for the package
 development.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -33,13 +31,12 @@ print(f" + Adding subpackage '{_name_subpkg}'...")
 # >>
 # SUBMODULES >>
 from ._auxil_submod   import *
-from ._helpers_submod import *
 # <<
 # ==================================================================================
 # END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+
 
 # <<
 # ==================================================================================================================================

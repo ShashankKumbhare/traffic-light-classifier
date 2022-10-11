@@ -22,9 +22,7 @@
 This submodule is created for the visualization and analyzsis of the image-dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -79,19 +77,23 @@ def plot_images( images
                 
                 A list of images or a single image to plot.
             
-            title_enabled <bool>
+            title_enabled <bool> (optional)
                 
                 When enabled sets title/s to the plot/s.
             
-            figsizeScale <float>
+            name_image <str> (optional)
+                
+                A string for name of the image.
+            
+            figsizeScale <float> (optional)
                 
                 A float to scale the size of the output image.
             
-            enable_grid <bool>
+            enable_grid <bool> (optional)
                 
                 When enabled draws mesh/grid on plot.
             
-            cmap <str>
+            cmap <str> (optional)
                 
                 Colormap for plot. Possible value: "viridis", "gray", etc.
         
@@ -210,20 +212,20 @@ def plot_channels   ( image_rgb
                 
                 Numpy array of rgb image of shape (n_row, n_col, 3).
             
-            type_channels <str>
+            type_channels <str> (optional)
                 
                 A string indicating the type of channels either 'rgb' or 'hsv'.
                 Default is "" for unknown.
             
-            name_image <str>
+            name_image <str> (optional)
                 
                 A string for name of the image.
             
-            cmap <str>
+            cmap <str> (optional)
                 
                 Colormap for plot. Possible value: "viridis", "gray", etc.
             
-            figsizeScale <float>
+            figsizeScale <float> (optional)
                 
                 A float to scale the size of the output image.
         
@@ -309,7 +311,7 @@ def plot_bar( Y
                 Data to be ploted.
                 Could ne np.array or list of np.array for multiple plot data.
             
-            n_row <int>
+            n_row <int> (optional)
                 
                 No. of rows for the plots.
         
@@ -366,62 +368,6 @@ def plot_bar( Y
 # ==================================================================================================================================
 
 
-
-# ==================================================================================================================================
-# START >> FUNCTION >> _template_submod_func
-# ==================================================================================================================================
-# >>
-def _template_submod_func   ( p_p_p_p_1 = ""
-                            , p_p_p_p_2 = ""
-                            ) :
-    
-    """
-    ================================================================================
-    START >> DOC >> _template_submod_func
-    ================================================================================
-        
-        GENERAL INFO
-        ============
-            
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-            t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t t_t t_t_t_t t_t_t t_t
-        
-        PARAMETERS
-        ==========
-            
-            p_p_p_p_1 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-            
-            p_p_p_p_2 <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-        
-        RETURNS
-        =======
-            
-            r_r_r_r <type>
-                
-                t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t_t t_t_t_t_t t_t t_t_t_t t_t
-    
-    ================================================================================
-    END << DOC << _template_submod_func
-    ================================================================================
-    """
-    
-    _name_func = inspect.stack()[0][3]
-    print(f"This is a print from '{_name_subpkg}.{_name_submod}.{_name_func}'{p_p_p_p_1}{p_p_p_p_2}.")
-    
-    return None
-# <<
-# ==================================================================================================================================
-# END << FUNCTION << _template_submod_func
-# ==================================================================================================================================
-
-print("   - Done!")
 
 # <<
 # ==================================================================================================================================

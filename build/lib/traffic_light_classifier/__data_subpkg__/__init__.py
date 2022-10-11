@@ -4,7 +4,7 @@
 # ==================================================================================================================================
 # File        : traffic_light_classifier/__data_subpkg__/__init__.py
 # Author      : Shashank Kumbhare
-# Date        : --/--/----
+# Date        : 09/30/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a __init__ file for python subpackage
 #               'traffic_light_classifier.__data_subpkg__'.
@@ -22,9 +22,7 @@
 This subpackage is created to store all the datasets for the package.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -37,7 +35,7 @@ from ._data_submod import *
 # END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+
 
 # <<
 # ==================================================================================================================================

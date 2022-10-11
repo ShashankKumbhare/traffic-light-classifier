@@ -26,8 +26,7 @@ dependencies are not to be imported in any module or submodule other than this
 submodule.
 """
 
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -51,7 +50,7 @@ from scipy.stats import norm, lognorm, truncnorm
 from scipy.stats import poisson
 from scipy.special import logsumexp
 from scipy import optimize
-from IPython.display import Markdown, display
+from IPython.display import Markdown, display, Latex
 from textwrap import wrap
 import random
 # <<
@@ -59,7 +58,7 @@ import random
 # END << IMPORTS
 # ==================================================================================
 
-print("   - Done!")
+
 
 # <<
 # ==================================================================================================================================

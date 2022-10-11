@@ -23,9 +23,7 @@ This subpackage is created to manupulate or modify traffic light training & test
 images for pre-processing of images.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -38,7 +36,7 @@ from ._modify_images_submod import *
 # END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+
 
 # <<
 # ==================================================================================================================================

@@ -2,9 +2,9 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/statistics.py
+# File        : traffic_light_classifier/datasets.py
 # Author      : Shashank Kumbhare
-# Date        : 09/24/2022
+# Date        : 10/01/2022
 # email       : shashankkumbhare8@gmail.com
 # Description : This file is a python module for python package 'traffic_light_classifier'.
 # ==================================================================================================================================
@@ -14,11 +14,11 @@
 
 
 # ==================================================================================================================================
-# START >> MODULE >> traffic_light_classifier.statistics
+# START >> MODULE >> traffic_light_classifier.datasets
 # ==================================================================================================================================
 # >>
 """
-This module contains functionalities to calculate statistical properties.
+This module is created to manage all the datasets.
 """
 
 _name_mod = __name__.partition(".")[-1]
@@ -28,7 +28,7 @@ print(f"  + Adding module '{_name_mod}'...", )
 # START >> IMPORTS
 # ==================================================================================
 # >>
-from ._statistics_subpkg._statistics_submod import *
+from .__data_subpkg__._data_submod import *
 # <<
 # ==================================================================================
 # END << IMPORTS
@@ -38,5 +38,5 @@ print("  - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << MODULE << traffic_light_classifier.statistics
+# END << MODULE << traffic_light_classifier.datasets
 # ==================================================================================================================================

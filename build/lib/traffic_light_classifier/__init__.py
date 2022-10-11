@@ -18,16 +18,22 @@
 # ==================================================================================================================================
 # >>
 """
-This package is a part of a computer vision project 'Traffic Light Classification'.
-The project was the final project of the online nanodegree program 'Intro to Self
-Driving Cars' offered by 'udacity.com'.
-This package has utilised the knowledge of computer vision and machine learning
-techniques to classify the traffic signal light images as either red, green, or
-yellow.
+- Traffic Light Classifier to classify traffic light signals as either red, yellow
+  or green.
+- This package is a part of a computer vision project 'Traffic Light Classification'.
+- A robust probabilistic approach based classifier has been implemented from scratch
+  to classify traffic light signal's status using computer vision and machine learning
+  techniques.
+- Several data cleaning steps, features extraction and a probabilistic metric has
+  been implemented.
+- All training stages and prediction stages can be throughly visualized & analyzed.
+- This package contains a classifier, plotting & feature extraction functionalities,
+  and datasets for the project.
+- Libraries used: OpenCV-Python, scipy, matplotlib, numpy.
 """
 
 __version__  = '1.0.0'
-_name_pkg = __name__.partition(".")[0]
+_name_pkg    = __name__.partition(".")[0]
 print("")
 print(f"==========================================================================")
 print(f"Importing package '{_name_pkg}'...")
@@ -37,26 +43,25 @@ print(f"========================================================================
 # START >> IMPORTS
 # ==================================================================================
 # >>
-# SUBPACKAGES >>
 # MODULES >>
 from .                        import helpers
+from .                        import tests
 from .                        import plots
 from .                        import modify_images
 from .                        import extract_feature
 from .                        import statistics
-from .Model                   import Model
 # ELEMENTS >>
-from .__data_subpkg__         import datasets
-from .__tests_subpkg__        import Tests
+from .datasets                import datasets
+from .Model                   import Model
 # <<
 # ==================================================================================
 # END << IMPORTS
 # ==================================================================================
 
-print("")
 print(f"==========================================================================")
 print(f"Package '{_name_pkg}' imported sucessfully !!")
 print(f"==========================================================================")
+print(f"version {__version__}")
 print("")
 
 # <<

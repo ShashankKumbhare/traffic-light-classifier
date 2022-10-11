@@ -22,9 +22,7 @@
 This subpackage contains the visualization tools for the image-dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -37,7 +35,7 @@ from ._plots_submod import *
 # END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+
 
 # <<
 # ==================================================================================================================================

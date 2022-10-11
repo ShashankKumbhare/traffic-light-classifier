@@ -2,12 +2,11 @@
 # ==================================================================================================================================
 # START >> FILE INFO
 # ==================================================================================================================================
-# File        : traffic_light_classifier/_extract_feature_subpkg/extract_feature.py
+# File        : traffic_light_classifier/extract_feature.py
 # Author      : Shashank Kumbhare
 # Date        : 09/23/2022
 # email       : shashankkumbhare8@gmail.com
-# Description : This file is a python submodule for python subpackage
-#               'traffic_light_classifier._extract_feature_subpkg'.
+# Description : This file is a python module for python package 'traffic_light_classifier'.
 # ==================================================================================================================================
 # END << FILE INFO
 # ==================================================================================================================================
@@ -15,29 +14,30 @@
 
 
 # ==================================================================================================================================
-# START >> SUBMODULE >> traffic_light_classifier._extract_feature_subpkg.extract_feature
+# START >> MODULE >> traffic_light_classifier.extract_feature
 # ==================================================================================================================================
 # >>
 """
-This submodule contains functionalities to extract features from traffic light
+This module contains functionalities to extract features from traffic light
 image dataset.
 """
 
-_name_subpkg = __name__.partition(".")[-2]
-_name_submod = __name__.partition(".")[-1]
-print(f"   + Adding submodule '{_name_submod}'...")
+_name_mod = __name__.partition(".")[-1]
+print(f"  + Adding module '{_name_mod}'...", )
 
 # ==================================================================================
 # START >> IMPORTS
 # ==================================================================================
+# >>
 from ._extract_feature_subpkg._extract_feature_submod import *
+# <<
 # ==================================================================================
 # END << IMPORTS
 # ==================================================================================
 
-print("   - Done!")
+print("  - Done!")
 
 # <<
 # ==================================================================================================================================
-# END << SUBMODULE << traffic_light_classifier._extract_feature_subpkg.extract_feature
+# END << MODULE << traffic_light_classifier.extract_feature
 # ==================================================================================================================================

@@ -24,9 +24,7 @@ packages/libraries for the package at one place which will then be shared across
 the package modules & submodules.
 """
 
-_name_subpkg = __name__.partition(".")[-1]
-print("")
-print(f" + Adding subpackage '{_name_subpkg}'...")
+
 
 # ==================================================================================
 # START >> IMPORTS
@@ -39,7 +37,7 @@ from ._dependencies_submod import *
 # END << IMPORTS
 # ==================================================================================
 
-print(" - Done!")
+
 
 # <<
 # ==================================================================================================================================
