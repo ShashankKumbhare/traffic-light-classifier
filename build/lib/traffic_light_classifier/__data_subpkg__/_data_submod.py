@@ -58,8 +58,10 @@ datasets.train = Struct()
 datasets.test  = Struct()
 
 # Assigning dataset directories >>
-datasets.train._dir = "traffic_light_classifier/__data_subpkg__/dataset_train"
-datasets.test._dir  = "traffic_light_classifier/__data_subpkg__/dataset_test"
+path_file = os.path.abspath((inspect.stack()[0])[1])
+path_dir  = os.path.dirname(path_file)
+datasets.train._dir = f"{path_dir}/dataset_train"
+datasets.test._dir  = f"{path_dir}/dataset_test"
 
 # Loading datasets >>
 datasets.train.images_and_labels = load_dataset(datasets.train._dir)
