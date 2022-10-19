@@ -18,11 +18,18 @@ setup(
     keywords         = ['python', 'opencv', 'computer vision', 'ML', 'machine learning', 'traffic-light-classifier',
                         'self driving cars', 'AI', 'artificial intelligence'],
     install_requires = [
+<<<<<<< HEAD
                         'opencv-python',
                         'numpy==1.21.5',
                         'matplotlib==3.5.1',
                         'scipy==1.7.3',
                         'IPython==8.2.0',
+=======
+                        'numpy',
+                        'matplotlib',
+                        'scipy',
+                        'IPython',
+>>>>>>> ae4bc2c5bdc4e4b8285943d07d16032ce341e10c
                        ],
     packages         = find_packages(),
     package_data     = {
