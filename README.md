@@ -2,7 +2,7 @@
 # Traffic Light Classification
 
 ### A computer vision project 'Traffic Light Classifier' to classify traffic light signals as either red, yellow or green.
-<p align="center"><img src=images/all_lights.png  width="400"></p>
+<p align="center"><img src=traffic_light_classifier/__auxil_subpkg__/images/all_lights.png  width="400"></p>
 
 ## Table of Contents
 

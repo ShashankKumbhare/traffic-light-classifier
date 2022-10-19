@@ -32,12 +32,13 @@ setup(
                                                       '__data_subpkg__/dataset_test/red/*',
                                                       '__data_subpkg__/dataset_test/yellow/*',
                                                       '__data_subpkg__/dataset_test/green/*',
+                                                      '__auxil_subpkg__/images/*',
                                                       '__constants_subpkg__/*',]
                        },
     include_package_data = True,
-    classifiers      = ['License :: OSI Approved :: MIT',
+    classifiers      = ['License :: OSI Approved :: MIT License',
                         'Natural Language :: English',
-                        'Operating Syayerm :: OS Independent'
-                        'Programming Labguage :: Python :: 3'
+                        'Operating System :: OS Independent',
+                        'Programming Language :: Python :: 3'
                        ]
 )
