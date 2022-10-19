@@ -18,6 +18,7 @@ setup(
     keywords         = ['python', 'opencv', 'computer vision', 'ML', 'machine learning', 'traffic-light-classifier',
                         'self driving cars', 'AI', 'artificial intelligence'],
     install_requires = [
+                        'opencv-python',
                         'numpy==1.21.5',
                         'matplotlib==3.5.1',
                         'scipy==1.7.3',
