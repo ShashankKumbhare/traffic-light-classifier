@@ -132,6 +132,9 @@ Detailed analysis and visualization of each stage has been given in [Notebook Tr
 ### Installation
 
 ``` python 
+# Install package from PyPI >>
+!pip install traffic_light_classifier
+# or
 # Install package from GitHub >>
 !pip install git+https://github.com/ShashankKumbhare/traffic-light-classifier.git#egg=traffic-light-classifier
 ```
