@@ -1,4 +1,15 @@
 
-To build the python package run the following in git-bash:
+1. To build the python package run the following in git-bash:
 
-    'python setup.py sdist bdist_wheel'
+    - 'python setup.py sdist bdist_wheel'
+
+2. To publish on PyPI:
+
+    - Git bash
+    
+        - 'python setup.py sdist'
+    
+    - Windows PowerShell
+        
+        - cd "Github Repositories\traffic-light-classifier"
+        - 'twine upload dist/*'
