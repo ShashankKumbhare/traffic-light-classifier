@@ -19,7 +19,7 @@
 # ==================================================================================================================================
 # >>
 """
-This submodule is created for the visualization and analyzsis of the image-dataset.
+This submodule is created for the visualization and analyzsis of the dataset.
 """
 
 
