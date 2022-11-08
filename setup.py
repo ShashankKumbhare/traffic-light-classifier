@@ -11,7 +11,7 @@ setup(
     author           = 'Shashank Kumbhare',
     author_email     = 'shashankkumbhare8@gmail.com',
     url              = 'https://github.com/ShashankKumbhare/traffic-light-classifier',
-    description      = 'A computer vision & probabilistic approach based traffic light classifier',
+    description      = 'A computer vision & probabilistic approach based traffic light classifier.',
     long_description = long_description,
     long_description_content_type = "text/markdown",
     license          = 'MIT',
