@@ -37,6 +37,8 @@ This traffic light dataset consists of 1484 number of color images in 3 categori
 - 536 green traffic light images
 - 44 yellow traffic light images
 
+<p align="center"><img src="https://raw.githubusercontent.com/ShashankKumbhare/traffic-light-classifier/main/auxil/images/data_examples.png"  width="600"></p>
+
 Note: All images come from this [MIT self-driving car course](https://selfdrivingcars.mit.edu/) and are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
 - Each image is a numpy array of shape (n_row, n_col, 3) i.e each image has a 3 channels (RGB - red, green, blue color space) where n_col and n_row is the height and the width of the image.
@@ -119,6 +121,10 @@ Detailed analysis and visualization of each stage has been given in [Notebook Tr
 - All training stages and prediction stages has been throughly visualized & analyzed and thus improvised.
 - The classifier has been validated on a testing dataset with a accuracy of 99.66 %.
 - The project results and package usage have been clearly demonstrated in the [Notebook Traffic_Light_Classifier](https://github.com/ShashankKumbhare/traffic-light-classifier/blob/main/Traffic_Light_Classifier.ipynb).
+
+<p align="center"><img src="https://raw.githubusercontent.com/ShashankKumbhare/traffic-light-classifier/main/auxil/images/analysis_ex.png"  width="600"></p>
+
+
 
 ---
 
