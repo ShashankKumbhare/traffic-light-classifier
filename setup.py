@@ -7,7 +7,7 @@ with open(file = "README.md", mode = "r") as readme_handle:
 
 setup(
     name             = 'traffic_light_classifier',
-    version          = '1.0.0',
+    version          = '1.0.1',
     author           = 'Shashank Kumbhare',
     author_email     = 'shashankkumbhare8@gmail.com',
     url              = 'https://github.com/ShashankKumbhare/traffic-light-classifier',
