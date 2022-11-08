@@ -11,5 +11,5 @@
     
     - Windows PowerShell
         
-        - 'cd "Github Repositories\traffic-light-classifier"'
+        - 'cd "C:\Users\shash\My Drive\Github Repositories\ traffic-light-classifier"'
         - 'twine upload dist/*'

@@ -18,7 +18,7 @@
 # ==================================================================================================================================
 # >>
 """
-This module is created for the visualization and analyzsis of the image-dataset.
+This submodule is created for the visualization and analyzsis of the dataset.
 """
 
 _name_mod = __name__.partition(".")[-1]

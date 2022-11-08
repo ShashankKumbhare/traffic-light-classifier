@@ -19,7 +19,7 @@
 # ==================================================================================================================================
 # >>
 """
-This submodule is created for the visualization and analyzsis of the image-dataset.
+This submodule is created for the visualization and analyzsis of the dataset.
 """
 
 
@@ -133,12 +133,12 @@ def plot_images( images
         else:
             n_col = int( np.ceil(np.sqrt(len_images)) )
         n_row     = int( np.ceil(len_images/n_col) )
-
+        
         # Creating plot axes >>
-        figsize    = (n_col*3.33*figsizeScale, n_row*3.33*figsizeScale)
+        figsize    = (figsizeScale*n_col*DEFAULT_FIGSIZE, figsizeScale*n_row*DEFAULT_FIGSIZE)
         f, axes    = plt.subplots(n_row, n_col, figsize = figsize)
         
-        # Loop for all images along a grid >>
+        # Loop for all images along the grid >>
         i_image = 0
         for i in range(n_row):
             

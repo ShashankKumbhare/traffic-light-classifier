@@ -19,7 +19,7 @@
 # ==================================================================================================================================
 # >>
 """
-This subpackage contains the visualization tools for the image-dataset.
+This subpackage contains the visualization tools.
 """
 
 
