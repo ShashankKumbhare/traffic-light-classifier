@@ -124,7 +124,7 @@ Detailed analysis and visualization of each stage has been given in [Notebook Tr
 
 <p align="center"><img src="https://raw.githubusercontent.com/ShashankKumbhare/traffic-light-classifier/main/auxil/images/analysis_ex.png"  width="600"></p>
 
-
+<p align="center"><img src="https://raw.githubusercontent.com/ShashankKumbhare/traffic-light-classifier/main/auxil/images/predict_ex.png"  width="400"></p>
 
 ---
 
